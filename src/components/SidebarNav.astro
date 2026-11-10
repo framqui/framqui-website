@@ -1,0 +1,169 @@
+---
+import { themes, languages } from "../config/control.ts";
+
+const links = [
+  { name: "BIO", url: "/" },
+];
+
+const currentPath = Astro.url.pathname;
+
+const controls = [
+  {
+    id: "lang-toggle",
+    textId: "lang-toggle-text",
+    aria: "Cambiar idioma",
+    default: languages.en,
+  },
+  {
+    id: "theme-toggle",
+    textId: "theme-toggle-text",
+    aria: "Cambiar tema",
+    default: themes.light.text,
+  }
+];
+---
+
+<!-- OVERLAY ON MOBILE -->
+<div id="overlay" class="fixed inset-0 z-40 hidden bg-black/70 backdrop-blur-sm md:hidden"></div>
+
+<!-- HEADER ON MOBILE -->
+<header class="flex items-center justify-between py-4 px-6 md:hidden">
+  <a href="/" class="whitespace-nowrap text-xl font-bold no-underline">
+    <span class="text-[var(--accent)]">[</span>Framqui<span class="text-[var(--accent)]">]</span>
+  </a>
+
+  <button
+      type="button"
+      id="menu-open"
+      aria-label="Abrir menú"
+      aria-controls="sidebar-menu"
+      class="text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer bg-transparent border-none p-0"
+  >
+    <span class="text-[var(--fg)] font-bold px-1 text-xl leading-none">☰</span>
+  </button>
+</header>
+
+<!-- SIDEBAR -->
+<aside
+    id="sidebar-menu"
+    class="fixed top-0 bottom-0 left-0 z-50 flex w-64 -translate-x-full flex-col justify-between bg-[var(--bg)] p-6 pb-6 transition-transform duration-200 md:top-4 md:bottom-8 md:left-4 md:z-auto md:w-[160px] md:translate-x-0 md:bg-transparent md:p-0"
+>
+  <div>
+    <!-- CLOSE BUTTON ON MOBILE -->
+    <button
+        type="button"
+        id="menu-close"
+        aria-label="Cerrar menú"
+        class="mb-6 ml-auto block text-xl text-[var(--muted)] hover:text-[var(--accent)] font-bold md:hidden"
+    >
+      <span class="text-[var(--fg)] font-bold text-xl">✕</span>
+    </button>
+
+    <!-- SIDEBAR HEADER -->
+    <div class="mb-4 hidden md:block">
+      <a href="/" class="inline-block whitespace-nowrap text-xl font-bold no-underline text-[var(--fg)] tracking-tight group">
+        <span class="text-[var(--accent)]">[</span>
+        <span class="group-hover:underline decoration-[var(--accent)] decoration-2 underline-offset-4">Framqui</span>
+        <span class="text-[var(--accent)]">]</span>
+      </a>
+    </div>
+
+    <!-- NAVIGATION MENU -->
+    <nav class="flex flex-col gap-2 font-mono">
+      {links.map((link) => {
+        const isActive = currentPath === link.url;
+        return (
+            <a
+                href={link.url}
+                class:list={[
+                  "text-xs tracking-widest transition-colors duration-200 no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4",
+                  isActive ? "text-[var(--accent)] font-bold" : "text-[var(--fg)]"
+                ]}
+            >
+              {isActive ? (
+                  <span>{link.name}</span>
+              ) : (
+                  link.name
+              )}
+            </a>
+        );
+      })}
+    </nav>
+  </div>
+
+  <!-- VISUAL SETTING CONTROL -->
+  <div class="flex flex-col gap-2 text-xs font-mono">
+    {controls.map((control) => (
+        <button
+            type="button"
+            id={control.id}
+            aria-label={control.aria}
+            class="text-left bg-transparent border-none cursor-pointer p-0 text-xs tracking-widest text-[var(--fg)] no-underline hover:underline transition-colors duration-200"
+        >
+          <span class="inline-block whitespace-nowrap">
+            <span class="text-[var(--accent)] font-bold">[</span>
+            <span
+                id={`${control.id}-text`}
+                class="text-[var(--fg)] hover:underline decoration-[var(--accent)] decoration-2 underline-offset-2">
+              {control.default}
+            </span>
+            <span class="text-[var(--accent)] font-bold">]</span>
+          </span>
+        </button>
+    ))}
+  </div>
+</aside>
+
+<script>
+  import { themes, languages } from "../config/control.ts";
+
+  function initHeader() {
+    const sidebar = document.getElementById("sidebar-menu");
+    const overlay = document.getElementById("overlay");
+
+    const toggleMenu = (open: boolean) => {
+      sidebar?.classList.toggle("-translate-x-full", !open);
+      overlay?.classList.toggle("hidden", !open);
+    };
+
+    if (overlay) overlay.onclick = () => toggleMenu(false);
+
+    const menuOpenBtn = document.getElementById("menu-open");
+    const menuCloseBtn = document.getElementById("menu-close");
+
+    if (menuOpenBtn) menuOpenBtn.onclick = () => toggleMenu(true);
+    if (menuCloseBtn) menuCloseBtn.onclick = () => toggleMenu(false);
+
+    // THEME TOGGLE
+    const themeButton = document.getElementById("theme-toggle");
+
+    if (themeButton) {
+      themeButton.onclick = () => {
+        const themeText = document.getElementById("theme-toggle-text");
+        if (!themeText) return;
+
+        const currentTheme = themeText.textContent?.trim();
+        const nextTheme = currentTheme === themes.dark.text ? themes.light.text : themes.dark.text;
+
+        themeText.textContent = nextTheme;
+        document.body.classList.toggle(themes.light.key, nextTheme === themes.light.text)
+      };
+    }
+
+    // LANGUAGE TOGGLE
+    const langButton = document.getElementById("lang-toggle");
+
+    if (langButton) {
+      langButton.onclick = () => {
+        const langText = document.getElementById("lang-toggle-text");
+        if (!langText) return;
+
+        const currentLang = langText.textContent?.trim();
+        langText.textContent = currentLang === languages.es ? languages.en : languages.es;
+      };
+    }
+  }
+
+  initHeader();
+  document.addEventListener("astro:page-load", initHeader);
+</script>
