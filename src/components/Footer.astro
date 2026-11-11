@@ -4,28 +4,28 @@ import { SOCIAL_LINKS } from "../constants/social.ts";
 const year = new Date().getFullYear();
 ---
 
-<hr class="mt-12 w-full border-t border-[var(--muted)]/30" />
+<footer class="mt-12 px-4 py-7 font-mono text-xs uppercase tracking-[1px] text-[var(--muted)] md:text-sm md:px-8">
+  <div class="border-t border-[var(--muted)]/20 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div>© {year} ANDRES RAMOS (FRAMQUI)</div>
 
-<footer class="mt-auto px-4 py-7 font-mono text-xs uppercase tracking-[1px] text-[var(--muted)] md:text-sm md:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-  <div>© {year} ANDRES RAMOS (FRAMQUI)</div>
+    <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+      <span>CONECTA:</span>
 
-  <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
-    <span>CONECTA:</span>
-
-    {SOCIAL_LINKS.map((link, index) => (
-        <>
-          <a
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4 text-[var(--fg)]"
-          >
-            {link.name}
-          </a>
-          {index < SOCIAL_LINKS.length - 1 && (
-              <span class="text-[var(--muted)] select-none">|</span>
-          )}
-        </>
-    ))}
+      {SOCIAL_LINKS.map((link, index) => (
+          <>
+            <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4 text-[var(--fg)]"
+            >
+              {link.name}
+            </a>
+            {index < SOCIAL_LINKS.length - 1 && (
+                <span class="text-[var(--muted)] select-none">|</span>
+            )}
+          </>
+      ))}
+    </div>
   </div>
 </footer>

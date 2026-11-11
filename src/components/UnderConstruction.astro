@@ -1,0 +1,137 @@
+---
+const POPS = [
+  { char: "1", x: 206 },
+  { char: "0", x: 216 },
+  { char: "1", x: 210 },
+  { char: "0", x: 220 },
+];
+const SEEDS = ["1", "0", "1", "1"];
+---
+
+<section class="flex min-h-[60vh] w-full flex-col items-center justify-center text-center py-4">
+  <svg
+      viewBox="0 0 320 185"
+      class="w-full max-w-md"
+      role="img"
+      aria-label="Un pollo picoteando unos y ceros"
+  >
+    <!-- Línea de piso más larga y extendida de extremo a extremo -->
+    <line x1="20" y1="172" x2="300" y2="172" class="stroke-mu" stroke-width="1.5" stroke-linecap="round" opacity="0.45" />
+
+    <!-- Patas -->
+    <g class="stroke-fg" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M98 158 V172 M98 172 L88 172 M98 172 L108 172 M98 172 L92 168" />
+      <path d="M120 160 V172 M120 172 L110 172 M120 172 L130 172 M120 172 L114 168" />
+    </g>
+
+    <g transform="translate(0 12)">
+      <g class="tilt">
+        <!-- Cola -->
+        <path d="M70 102 C44 96 28 70 34 40 C52 54 66 76 74 98 Z" class="fill-fg" opacity="0.95" />
+        <path d="M68 108 C40 110 20 94 18 68 C38 76 58 92 70 104 Z" class="fill-fg" opacity="0.8" />
+        <path d="M68 114 C46 124 24 116 16 98 C36 100 54 106 68 110 Z" class="fill-fg" opacity="0.62" />
+
+        <!-- Cuerpo y ala -->
+        <path d="M70 104 C74 82 104 74 128 82 C144 87 152 100 150 114 C148 136 126 150 100 150 C76 150 62 134 62 118 C62 111 65 107 70 104 Z" class="fill-fg" />
+        <path d="M82 108 C96 98 116 100 126 112 C116 126 94 128 82 118" class="stroke-bg" fill="none" stroke-width="2" stroke-linecap="round" opacity="0.55" />
+        <path d="M92 112 C102 106 114 108 118 114" class="stroke-bg" fill="none" stroke-width="1.6" stroke-linecap="round" opacity="0.45" />
+
+        <!-- Cuello y cabeza -->
+        <g class="head">
+          <path d="M122 98 C130 72 142 54 156 40 L172 50 C168 70 160 88 152 106 Z" class="fill-fg" />
+          <circle cx="164" cy="36" r="14" class="fill-fg" />
+          <!-- Cresta -->
+          <path d="M155 28 C152 17 161 14 163 21 C165 12 174 12 174 21 C181 19 183 28 176 30 Z" class="fill-ac" />
+          <!-- Pico (azul) -->
+          <path d="M176 32 L194 38 L176 43 Z" class="fill-ac" />
+          <!-- Barbilla -->
+          <path d="M173 44 C169 58 180 60 180 47 Z" class="fill-fg" />
+          <circle cx="168" cy="34" r="2.4" class="fill-bg" />
+        </g>
+      </g>
+    </g>
+
+    <g class="fill-mu mono" font-size="13" opacity="0.45">
+      {SEEDS.map((char, i) => (
+          <text x={232 + i * 16} y="168">{char}</text>
+      ))}
+    </g>
+
+    <g class="fill-fg mono" font-size="13" font-weight="700">
+      {POPS.map(({ char, x }, i) => (
+          <text
+              class="pop"
+              x={x}
+              y="166"
+              style={`animation-delay: ${(i * 1.4 + 0.22).toFixed(2)}s`}
+          >
+            {char}
+          </text>
+      ))}
+    </g>
+  </svg>
+
+  <h1 class="mt-2 inline-block font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+    Sección en construcción
+  </h1>
+
+  <p class="mt-2 max-w-md font-sans text-sm leading-relaxed text-[var(--muted)]">
+    Se está picoteando código para la construcción de esta página. Vuelve pronto... Cloc cloc
+  </p>
+</section>
+
+<style>
+  .fill-fg { fill: var(--fg); }
+  .fill-bg { fill: var(--bg); }
+  .fill-ac { fill: var(--accent); }
+  .fill-mu { fill: var(--muted); }
+  .stroke-fg { stroke: var(--fg); }
+  .stroke-ac { stroke: var(--accent); }
+  .stroke-bg { stroke: var(--bg); }
+  .stroke-mu { stroke: var(--muted); }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  .tilt,
+  .head {
+    transform-box: view-box;
+  }
+
+  .tilt {
+    transform-origin: 108px 150px;
+    animation: tilt 1.4s ease-in-out infinite;
+  }
+
+  .head {
+    transform-origin: 136px 98px;
+    animation: head 1.4s ease-in-out infinite;
+  }
+
+  .pop {
+    opacity: 0;
+    animation: pop 5.6s ease-out infinite both;
+  }
+
+  @keyframes tilt {
+    0%, 34%, 100% { transform: rotate(0deg); }
+    16% { transform: rotate(12deg); }
+  }
+
+  @keyframes head {
+    0%, 34%, 100% { transform: rotate(0deg); }
+    16% { transform: rotate(70deg); }
+  }
+
+  @keyframes pop {
+    0% { opacity: 0; transform: translateY(0); }
+    4% { opacity: 1; transform: translateY(0); }
+    40%, 100% { opacity: 0; transform: translateY(-28px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tilt,
+    .head,
+    .pop {
+      animation: none;
+    }
+  }
+</style>
