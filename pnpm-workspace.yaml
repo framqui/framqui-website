@@ -1,3 +1,6 @@
+packages:
+  - "."
+
 minimumReleaseAgeExclude:
   - '@tailwindcss/node@4.3.5'
   - '@tailwindcss/oxide-android-arm64@4.3.5'
@@ -14,4 +17,4 @@ minimumReleaseAgeExclude:
   - '@tailwindcss/oxide-win32-x64-msvc@4.3.5'
   - '@tailwindcss/oxide@4.3.5'
   - '@tailwindcss/vite@4.3.5'
-  - tailwindcss@4.3.5
+  - 'tailwindcss@4.3.5'
