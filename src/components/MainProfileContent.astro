@@ -1,35 +1,191 @@
 ---
+import { Icon } from "astro-icon/components";
+import { SOCIAL_LINKS } from "../constants/social.ts";
 
-import {SOCIAL_LINKS} from "../constants/social.ts";---
+const INTERESTS = [
+  {
+    title: "Desarrollo de software",
+    description: "Construir soluciones modulares, mantenibles y bien estructuradas, prestando atención a la calidad del código, la organización de los componentes y las decisiones técnicas que facilitan la evolución de los sistemas."
+  },
+  {
+    title: "Inteligencia artificial",
+    description: "Explorar cómo la IA puede ampliar las capacidades del software, ayudar a resolver problemas, mejorar los procesos de desarrollo y abrir nuevas posibilidades para la creación de productos."
+  },
+  {
+    title: "Desarrollo de productos",
+    description: "Participar en la evolución de ideas, desde la identificación de un problema y la comprensión de sus necesidades hasta el diseño y la construcción de soluciones útiles que aporten valor."
+  },
+  {
+    title: "Aprendizaje continuo",
+    description: "Profundizar en nuevas tecnologías, investigar cómo funcionan las cosas, experimentar con diferentes herramientas y convertir el conocimiento adquirido en experiencia práctica."
+  }
+];
+
+const EXPERIENCES = [
+  {
+    company: "R5",
+    role: "Fintech · Área de seguros",
+    description: "Durante mis primeros años trabajé en el área de seguros de R5, donde participé en el desarrollo de automatizaciones, scripts e integraciones. También brindé soporte técnico interno y externo a diferentes áreas y entidades, entre ellas Bancolombia y AXA Seguros, apoyando la operación de venta de SOAT desde la plataforma.",
+    sectionTitle: "Responsabilidades y proyectos",
+    items: [
+      "Soporte técnico interno y externo: atención de requerimientos, análisis de errores y resolución de incidentes relacionados con la operación.",
+      "Venta de SOAT: soporte al funcionamiento de los procesos de venta desde el sistema de R5.",
+      "Integraciones con terceros: desarrollo y mantenimiento de conexiones con entidades financieras, aseguradoras y otros proveedores.",
+      "Integración de servicios: incorporación de nuevas aseguradoras y pasarelas de pago.",
+      "Automatización de procesos: desarrollo de scripts y herramientas para optimizar tareas operativas.",
+      "Prevención de fraude: participación en herramientas para la gestión de fraudes y listas de clientes restringidos."
+    ],
+    linkText: "Conocer R5 ↗",
+    linkUrl: "https://www.grupor5.com/comprar-soat-en-linea"
+  },
+  {
+    company: "Novadynamics",
+    role: "Desarrollo de productos de software",
+    description: "Actualmente trabajo en Novadynamics, participando en el desarrollo de una solución tecnológica para contact centers virtuales. La plataforma integra chat, telefonía, herramientas de gestión e inteligencia artificial para centralizar la operación en un mismo entorno.",
+    sectionTitle: "Áreas de trabajo",
+    items: [
+      "Análisis de requerimientos: identificación de necesidades y definición de soluciones técnicas.",
+      "Bases de datos: diseño, estructuración y gestión de modelos de datos.",
+      "Desarrollo de software: implementación y evolución de funcionalidades de la plataforma.",
+      "Inteligencia artificial: desarrollo e implementación de capacidades de IA dentro de las soluciones de software.",
+      "Arquitectura: participación en decisiones técnicas sobre el diseño y la organización de las soluciones.",
+      "Despliegue: puesta en funcionamiento de aplicaciones y nuevas funcionalidades.",
+      "Herramientas y procesos: desarrollo de utilidades internas y optimización de los procesos de trabajo del equipo."
+    ],
+    linkText: "Visitar Novadynamics ↗",
+    linkUrl: "https://nova-dynamics.net/"
+  }
+];
+
+interface TechItem {
+  name: string;
+  icon: string;
+  color?: string;
+}
+
+interface TechGroup {
+  title: string;
+  items: TechItem[];
+}
+
+const ACCENT = "var(--accent)";
+
+const TECH_GROUPS: TechGroup[] = [
+  {
+    title: "Lenguajes",
+    items: [
+      { name: "Python", icon: "simple-icons:python", color: "#3776AB" },
+      { name: "JavaScript", icon: "simple-icons:javascript", color: "#F7DF1E" },
+      { name: "TypeScript", icon: "simple-icons:typescript", color: "#3178C6" },
+      { name: "SQL", icon: "mdi:database", color: "#4479A1" },
+      { name: "Bash", icon: "simple-icons:gnubash", color: "#4EAA25" },
+    ],
+  },
+  {
+    title: "Backend & APIs",
+    items: [
+      { name: "Node.js", icon: "simple-icons:nodedotjs", color: "#339933" },
+      { name: "NestJS", icon: "simple-icons:nestjs", color: "#E0234E" },
+      { name: "REST API", icon: "mdi:api", color: ACCENT },
+      { name: "GraphQL", icon: "simple-icons:graphql", color: "#E10098" },
+    ],
+  },
+  {
+    title: "Frontend",
+    items: [
+      { name: "React", icon: "simple-icons:react", color: "#61DAFB" },
+      { name: "Next.js", icon: "simple-icons:nextdotjs" },
+      { name: "HTML5", icon: "simple-icons:html5", color: "#E34F26" },
+      { name: "CSS3", icon: "simple-icons:css3", color: "#1572B6" },
+    ],
+  },
+  {
+    title: "Bases de datos",
+    items: [
+      { name: "PostgreSQL", icon: "simple-icons:postgresql", color: "#4169E1" },
+      { name: "MongoDB", icon: "simple-icons:mongodb", color: "#47A248" },
+      { name: "Redis", icon: "simple-icons:redis", color: "#DC382D" },
+    ],
+  },
+  {
+    title: "Nube & DevOps",
+    items: [
+      { name: "AWS", icon: "simple-icons:amazonwebservices", color: "#FF9900" },
+      { name: "Docker", icon: "simple-icons:docker", color: "#2496ED" },
+      { name: "Linux", icon: "simple-icons:linux", color: "#FCC624" },
+      { name: "Git", icon: "simple-icons:git", color: "#F05032" },
+      { name: "GitHub", icon: "simple-icons:github" },
+    ],
+  },
+  {
+    title: "Servicios de AWS",
+    items: [
+      { name: "S3", icon: "simple-icons:amazons3", color: "#569A31" },
+      { name: "EC2", icon: "simple-icons:amazonec2", color: "#FF9900" },
+      { name: "Lambda", icon: "simple-icons:awslambda", color: "#FF9900" },
+      { name: "RDS", icon: "simple-icons:amazonrds", color: "#527FFF" },
+      { name: "IAM", icon: "simple-icons:amazoniam", color: "#DD344C" },
+      { name: "CloudWatch", icon: "simple-icons:amazoncloudwatch", color: "#FF4F8B" },
+      { name: "API Gateway", icon: "simple-icons:amazonapigateway", color: "#FF4F8B" },
+      { name: "SQS", icon: "simple-icons:amazonsqs", color: "#FF4F8B" },
+    ],
+  },
+  {
+    title: "Herramientas de desarrollo",
+    items: [
+      { name: "VS Code", icon: "simple-icons:visualstudiocode", color: "#007ACC" },
+      { name: "WebStorm", icon: "simple-icons:webstorm" },
+      { name: "PyCharm", icon: "simple-icons:pycharm" },
+      { name: "Markdown", icon: "simple-icons:markdown" },
+      { name: "Cursor", icon: "simple-icons:cursor" },
+    ],
+  },
+  {
+    title: "Áreas de interés",
+    items: [
+      { name: "AI for Development", icon: "mdi:robot-outline", color: ACCENT },
+      { name: "Software Architecture", icon: "mdi:sitemap", color: ACCENT },
+      { name: "CI/CD", icon: "mdi:source-branch-sync", color: ACCENT },
+      { name: "Automation", icon: "mdi:lightning-bolt", color: ACCENT },
+      { name: "Scalable Systems", icon: "mdi:chart-line", color: ACCENT },
+      { name: "Cloud Computing", icon: "mdi:cloud-outline", color: ACCENT },
+      { name: "Testing", icon: "mdi:test-tube", color: ACCENT },
+    ],
+  },
+];
+---
 
 <div class="min-w-0 flex-1 lg:order-1">
   <h1 class="font-sans text-4xl font-bold leading-[1.00] tracking-tight text-[var(--fg)] sm:text-5xl">
     Andres Felipe Ramos Quintero
   </h1>
 
-  <p class="mt-4 max-w-xl font-sans text-lg leading-relaxed text-[var(--muted)] sm:text-lg md:text-xl">
+  <p class="mt-4 max-w-xl font-sans text-lg leading-relaxed text-[var(--muted)]">
     Desarrollador de software mid level
   </p>
 
   <!-- SECTION FOR VISIBLE NETWORKS ON MOBILE -->
   <div class="lg:hidden mb-4">
-    <ul class="flex flex-wrap gap-x-2 font-mono text-xs uppercase tracking-widest">
-      {SOCIAL_LINKS.map((link, index) => (
-          <>
-            <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4 text-[var(--fg)]"
-            >
-              {link.name}
-            </a>
-            {index < SOCIAL_LINKS.length - 1 && (
-                <span class="text-[var(--muted)] select-none">|</span>
-            )}
-          </>
-      ))}
-    </ul>
+    <div class="flex flex-wrap gap-x-2 font-mono text-sm uppercase tracking-widest">
+      {SOCIAL_LINKS.map((link, index) => {
+        const external = link.url.startsWith("http");
+        return (
+            <>
+              <a
+                  href={link.url}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  class="no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4 text-[var(--fg)]"
+              >
+                {link.name}
+              </a>
+              {index < SOCIAL_LINKS.length - 1 && (
+                  <span class="text-[var(--muted)] select-none">|</span>
+              )}
+            </>
+        );
+      })}
+    </div>
   </div>
 
   <hr class="mt-6 w-full border-t-2 border-[var(--accent)]" />
@@ -52,44 +208,137 @@ import {SOCIAL_LINKS} from "../constants/social.ts";---
             class="block h-auto w-full"
         />
       </div>
-      <figcaption class="mt-4 max-w-[200px] font-mono text-xs font-bold uppercase leading-relaxed tracking-wider text-[var(--fg)]">
+      <figcaption class="mt-4 max-w-[200px] font-sans text-sm font-bold leading-relaxed text-[var(--fg)]">
         Transformando el desarrollo de software con inteligencia artificial
       </figcaption>
     </figure>
 
-    <div class="flex max-w-3xl flex-col gap-7 font-sans text-sm leading-relaxed text-[var(--muted)] sm:text-base">
+    <div class="flex max-w-3xl flex-col gap-7 font-sans text-sm leading-relaxed text-[var(--muted)]">
       <div class="flex flex-col gap-4">
-        <p class="text-[var(--muted)]">
+        <p>
           Hola, soy <strong class="font-bold text-[var(--fg)]">Andres Ramos, </strong>desarrollador de software con más de 5 años de experiencia enfocados principalmente en el desarrollo backend. A inicios de 2026 inicié una transición hacia la <strong class="font-bold text-[var(--fg)]">creación de productos de software </strong>integrando <strong class="font-bold text-[var(--fg)]">Inteligencia Artificial </strong>en mis desarrollos y compartiendo activamente lo que aprendo con la comunidad.
         </p>
-        <p class="text-[var(--muted)]">
+        <p>
           Nací en un pueblo muy pequeño y actualmente vivo en <strong class="font-bold text-[var(--fg)]">Pitalito, Huila, </strong>un lugar reconocido por su café de alta calidad y su cultura cafetera. Fuera de la tecnología, disfruto levantar pesas, escuchar rock y leer sobre filosofía.
         </p>
-
-        <p class="text-[var(--muted)]">
-        A lo largo de mi trayectoria he pasado de construir e integrar componentes de software a involucrarme en el ciclo de vida completo de los productos: desde el análisis de problemas y el diseño de soluciones hasta la implementación, arquitectura, despliegue y coordinación técnica.
+        <p>
+          A lo largo de mi trayectoria he pasado de construir e integrar componentes de software a involucrarme en el ciclo de vida completo de los productos: desde el análisis de problemas y el diseño de soluciones hasta la implementación, arquitectura, despliegue y coordinación técnica.
         </p>
       </div>
 
       <div>
-        <h3 class="font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
+        <h3 class="font-sans text-sm font-bold text-[var(--fg)]">
           Este sitio
         </h3>
         <p class="mt-2">
           Esta página funciona como mi <strong class="font-bold text-[var(--fg)]">bitácora pública y espacio personal.</strong> Aquí iré compartiendo notas técnicas, reflexiones sobre desarrollo de productos, guías, cursos, proyectos e imágenes en los que me encuentre trabajando. Es un entorno vivo que irá evolucionando a la par de mi crecimiento profesional y personal.
         </p>
-
-        <div class="mt-4 pt-4 border-t border-[var(--muted)]/15 font-mono text-xs uppercase tracking-wider text-[var(--fg)] font-semibold flex flex-wrap items-center gap-x-2 gap-y-1">
-          <span>Desarrollo de software</span>
-          <span class="text-[var(--muted)]">|</span>
-          <span>Creación de productos digitales</span>
-          <span class="text-[var(--muted)]">|</span>
-          <span>Inteligencia artificial</span>
-        </div>
       </div>
     </div>
   </div>
 
-  <hr class="mt-8 w-full border-t border-[var(--muted)]/30" />
+  <!-- INTERESTS SECTION -->
+  <div class="mt-14 mb-10">
+    <h2 class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+      Intereses
+    </h2>
+    <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
+  </div>
 
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+    {INTERESTS.map((item) => (
+        <div class="flex flex-col rounded-sm border border-[var(--muted)]/20 bg-transparent p-5">
+          <h3 class="mb-3 font-sans text-lg font-bold text-[var(--fg)]">
+            {item.title}
+          </h3>
+          <p class="font-sans text-sm leading-relaxed text-[var(--muted)]">
+            {item.description}
+          </p>
+        </div>
+    ))}
+  </div>
+
+  <!-- EXPERIENCE SECTION -->
+  <div class="mt-10 mb-10">
+    <h2 class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+      Experiencia profesional
+    </h2>
+    <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+    {EXPERIENCES.map((exp) => (
+        <div class="flex flex-col gap-4 rounded-sm border border-[var(--muted)]/20 bg-transparent p-6 font-sans">
+          <div>
+            <h3 class="font-sans text-lg font-bold text-[var(--fg)]">
+              {exp.company}
+            </h3>
+            <p class="mt-1 font-sans text-sm text-[var(--muted)]">
+              {exp.role}
+            </p>
+          </div>
+
+          <p class="text-sm leading-relaxed text-[var(--muted)]">
+            {exp.description}
+          </p>
+
+          <div>
+            <h4 class="mb-2 font-sans text-sm font-bold text-[var(--fg)]">
+              {exp.sectionTitle}
+            </h4>
+            <ul class="list-inside list-disc space-y-1.5 text-sm leading-relaxed text-[var(--muted)]">
+              {exp.items.map((item) => (
+                  <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="mt-2 border-t border-[var(--muted)]/15 pt-4">
+            <a
+                href={exp.linkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-sans text-sm font-bold text-[var(--fg)] no-underline hover:underline hover:decoration-[var(--accent)] hover:underline-offset-4"
+            >
+              {exp.linkText}
+            </a>
+          </div>
+        </div>
+    ))}
+  </div>
+
+  <!-- TECH STACK SECTION -->
+  <div class="mt-10 mb-10">
+    <h2 class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+      Stack tecnológico
+    </h2>
+    <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
+  </div>
+
+  <p class="mb-8 font-sans text-sm leading-relaxed text-[var(--muted)]">
+    Tecnologías y herramientas que me interesa aprender, explorar y seguir incorporando a mi desarrollo profesional.
+  </p>
+
+  <div class="flex flex-col gap-6 font-sans">
+    {TECH_GROUPS.map((group) => (
+        <div>
+          <h3 class="mb-3 font-sans text-sm font-bold text-[var(--fg)]">
+            {group.title}
+          </h3>
+          <ul class="flex flex-wrap gap-2">
+            {group.items.map(({ name, icon, color }) => (
+                <li class="inline-flex items-center gap-2 rounded-sm border border-[var(--muted)]/20 px-3 py-1.5 font-sans text-sm text-[var(--fg)]">
+                  <Icon
+                      name={icon}
+                      class="h-4 w-4 shrink-0"
+                      style={color ? `color: ${color}` : undefined}
+                      aria-hidden="true"
+                  />
+                  {name}
+                </li>
+            ))}
+          </ul>
+        </div>
+    ))}
+  </div>
 </div>

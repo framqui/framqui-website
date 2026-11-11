@@ -1,5 +1,20 @@
 ---
+import { Icon } from "astro-icon/components";
 import { SOCIAL_LINKS } from "../constants/social.ts";
+
+const TECH_STACK = [
+  { name: "Python", icons: [{ icon: "simple-icons:python", color: "#3776AB" }] },
+  { name: "TypeScript", icons: [{ icon: "simple-icons:typescript", color: "#3178C6" }] },
+  { name: "PostgreSQL", icons: [{ icon: "simple-icons:postgresql", color: "#4169E1" }] },
+  { name: "AWS", icons: [{ icon: "simple-icons:amazonwebservices", color: "#FF9900" }] },
+  {
+    name: "Linux / Bash",
+    icons: [
+      { icon: "simple-icons:linux", color: "#FCC624" },
+      { icon: "simple-icons:gnubash", color: "#4EAA25" },
+    ],
+  },
+];
 ---
 
 <aside
@@ -29,67 +44,104 @@ import { SOCIAL_LINKS } from "../constants/social.ts";
       </button>
     </div>
 
-    <div id="side-list" class="hidden lg:block space-y-6">
-      <section>
-        <h3 class="font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
-          Rol
-        </h3>
-        <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-          Desarrollador de software - Mid level
-        </div>
-      </section>
+    <div id="side-list" class="hidden lg:block">
+      <div class="divide-y divide-[var(--muted)]/40 border-b border-[var(--muted)]/40">
+        <section class="pb-6">
+          <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+            Redes y contacto
+          </h3>
+          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+            <ul class="flex flex-col items-start gap-3 font-mono text-xs uppercase tracking-widest">
+              {SOCIAL_LINKS.map((link) => {
+                const external = link.url.startsWith("http");
+                return (
+                    <li>
+                      <a
+                          href={link.url}
+                          target={external ? "_blank" : undefined}
+                          rel={external ? "noopener noreferrer" : undefined}
+                          class="inline-flex items-center gap-1.5 border-b-2 border-transparent pb-1 text-[var(--fg)] no-underline hover:border-[var(--accent)]"
+                      >
+                        <Icon
+                            name={link.icon}
+                            class="h-4 w-4 shrink-0"
+                            style={link.color ? `color: ${link.color}` : undefined}
+                            aria-hidden="true"
+                        />
+                        {link.name}
+                      </a>
+                    </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
 
-      <hr class="mt-4 w-full border-t border-[var(--muted)]/30" />
+        <section class="py-6">
+          <h3 class="font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
+            Rol
+          </h3>
+          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+            Desarrollador de software - Mid level
+          </div>
+        </section>
 
-      <section>
-        <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-          Experiencia
-        </h3>
-        <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-          Más de 5 años
-        </div>
-      </section>
+        <section class="py-6">
+          <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+            Experiencia
+          </h3>
+          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+            Más de 5 años
+          </div>
+        </section>
 
-      <hr class="w-full border-t border-[var(--muted)]/30" />
-
-      <section>
-        <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-          Ubicación
-        </h3>
-        <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-          Pitalito, Huila, Colombia
-        </div>
-      </section>
-
-      <hr class="w-full border-t border-[var(--muted)]/30" />
-
-      <section>
-        <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-          Redes y contacto
-        </h3>
-        <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-          <ul class="flex flex-wrap items-center gap-x-5 gap-y-3 font-mono text-xs uppercase tracking-widest lg:flex-col lg:items-start">
-            {SOCIAL_LINKS.map((link) => {
-              const external = link.url.startsWith("http");
-              return (
-                  <li>
-                    <a
-                        href={link.url}
-                        target={external ? "_blank" : undefined}
-                        rel={external ? "noopener noreferrer" : undefined}
-                        class="inline-flex items-center gap-1.5 border-b-2 border-transparent pb-1 text-[var(--fg)] no-underline hover:border-[var(--accent)]"
-                    >
-                      <Fragment set:html={link.icon} />
-                      {link.name}
-                    </a>
-                  </li>
-              );
-            })}
+        <section class="py-6">
+          <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+            Tecnologías principales
+          </h3>
+          <ul class="space-y-2.5 font-sans text-sm text-[var(--fg)]">
+            {TECH_STACK.map(({ name, icons }) => (
+                <li class="flex items-center gap-2.5">
+                  <span class="flex items-center gap-1.5">
+                    {icons.map(({ icon, color }) => (
+                        <Icon
+                            name={icon}
+                            class="h-4 w-4 shrink-0"
+                            style={`color: ${color}`}
+                            aria-hidden="true"
+                        />
+                    ))}
+                  </span>
+                  {name}
+                </li>
+            ))}
           </ul>
-        </div>
-      </section>
+        </section>
 
-      <hr class="w-full border-t border-[var(--muted)]/30" />
+        <section class="py-6">
+          <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+            Intereses
+          </h3>
+          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+            Desarrollo de software
+          </div>
+          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+            Creación de productos digitales
+          </div>
+          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+            Inteligencia artificial
+          </div>
+        </section>
+
+        <section class="py-6">
+          <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+            Ubicación
+          </h3>
+          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+            Pitalito, Huila, Colombia
+          </div>
+        </section>
+      </div>
 
       <!-- CLOSE BOTTOM ON MOBILE -->
       <div class="mt-4 flex justify-end lg:hidden">
