@@ -175,12 +175,12 @@ const TECH_GROUPS: TechGroup[] = [
                   href={link.url}
                   target={external ? "_blank" : undefined}
                   rel={external ? "noopener noreferrer" : undefined}
-                  class="no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4 text-[var(--fg)]"
+                  class="no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4 text-[var(--fg)] font-mono"
               >
                 {link.name}
               </a>
               {index < SOCIAL_LINKS.length - 1 && (
-                  <span class="text-[var(--muted)] select-none">|</span>
+                  <span class="text-[var(--muted)] select-none font-mono">|</span>
               )}
             </>
         );
@@ -215,13 +215,13 @@ const TECH_GROUPS: TechGroup[] = [
 
     <div class="flex max-w-3xl flex-col gap-7 font-sans text-sm leading-relaxed text-[var(--muted)]">
       <div class="flex flex-col gap-4">
-        <p>
-          Hola, soy <strong class="font-bold text-[var(--fg)]">Andres Ramos, </strong>desarrollador de software con más de 5 años de experiencia enfocados principalmente en el desarrollo backend. A inicios de 2026 inicié una transición hacia la <strong class="font-bold text-[var(--fg)]">creación de productos de software </strong>integrando <strong class="font-bold text-[var(--fg)]">Inteligencia Artificial </strong>en mis desarrollos y compartiendo activamente lo que aprendo con la comunidad.
+        <p class="font-sans">
+          Hola, soy <strong class="font-bold text-[var(--fg)] font-sans">Andres Ramos, </strong>desarrollador de software con más de 5 años de experiencia enfocados principalmente en el desarrollo backend. A inicios de 2026 inicié una transición hacia la <strong class="font-bold text-[var(--fg)] font-sans">creación de productos de software </strong>integrando <strong class="font-bold text-[var(--fg)] font-sans">Inteligencia Artificial </strong>en mis desarrollos y compartiendo activamente lo que aprendo con la comunidad.
         </p>
-        <p>
-          Nací en un pueblo muy pequeño y actualmente vivo en <strong class="font-bold text-[var(--fg)]">Pitalito, Huila, </strong>un lugar reconocido por su café de alta calidad y su cultura cafetera. Fuera de la tecnología, disfruto levantar pesas, escuchar rock y leer sobre filosofía.
+        <p class="font-sans">
+          Nací en un pueblo muy pequeño y actualmente vivo en <strong class="font-bold text-[var(--fg)] font-sans">Pitalito, Huila, </strong>un lugar reconocido por su café de alta calidad y su cultura cafetera. Fuera de la tecnología, disfruto levantar pesas, escuchar rock y leer sobre filosofía.
         </p>
-        <p>
+        <p class="font-sans">
           A lo largo de mi trayectoria he pasado de construir e integrar componentes de software a involucrarme en el ciclo de vida completo de los productos: desde el análisis de problemas y el diseño de soluciones hasta la implementación, arquitectura, despliegue y coordinación técnica.
         </p>
       </div>
@@ -230,15 +230,15 @@ const TECH_GROUPS: TechGroup[] = [
         <h3 class="font-sans text-sm font-bold text-[var(--fg)]">
           Este sitio
         </h3>
-        <p class="mt-2">
-          Esta página funciona como mi <strong class="font-bold text-[var(--fg)]">bitácora pública y espacio personal.</strong> Aquí iré compartiendo notas técnicas, reflexiones sobre desarrollo de productos, guías, cursos, proyectos e imágenes en los que me encuentre trabajando. Es un entorno vivo que irá evolucionando a la par de mi crecimiento profesional y personal.
+        <p class="mt-2 font-sans">
+          Esta página funciona como mi <strong class="font-bold text-[var(--fg)] font-sans">bitácora pública y espacio personal.</strong> Aquí iré compartiendo notas técnicas, reflexiones sobre desarrollo de productos, guías, cursos, proyectos e imágenes en los que me encuentre trabajando. Es un entorno vivo que irá evolucionando a la par de mi crecimiento profesional y personal.
         </p>
       </div>
     </div>
   </div>
 
   <!-- INTERESTS SECTION -->
-  <div class="mt-14 mb-10">
+  <div class="mt-10 mb-10">
     <h2 class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
       Intereses
     </h2>
@@ -278,7 +278,7 @@ const TECH_GROUPS: TechGroup[] = [
             </p>
           </div>
 
-          <p class="text-sm leading-relaxed text-[var(--muted)]">
+          <p class="font-sans text-sm leading-relaxed text-[var(--muted)]">
             {exp.description}
           </p>
 
@@ -286,9 +286,9 @@ const TECH_GROUPS: TechGroup[] = [
             <h4 class="mb-2 font-sans text-sm font-bold text-[var(--fg)]">
               {exp.sectionTitle}
             </h4>
-            <ul class="list-inside list-disc space-y-1.5 text-sm leading-relaxed text-[var(--muted)]">
+            <ul class="font-sans list-inside list-disc space-y-1.5 text-sm leading-relaxed text-[var(--muted)]">
               {exp.items.map((item) => (
-                  <li>{item}</li>
+                  <li class="font-sans">{item}</li>
               ))}
             </ul>
           </div>
@@ -325,7 +325,7 @@ const TECH_GROUPS: TechGroup[] = [
           <h3 class="mb-3 font-sans text-sm font-bold text-[var(--fg)]">
             {group.title}
           </h3>
-          <ul class="flex flex-wrap gap-2">
+          <ul class="flex flex-wrap gap-2 font-sans">
             {group.items.map(({ name, icon, color }) => (
                 <li class="inline-flex items-center gap-2 rounded-sm border border-[var(--muted)]/20 px-3 py-1.5 font-sans text-sm text-[var(--fg)]">
                   <Icon
