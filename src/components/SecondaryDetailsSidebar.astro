@@ -1,0 +1,128 @@
+---
+import { SOCIAL_LINKS } from "../constants/social.ts";
+---
+
+<aside
+    class="mb-8 w-full text-left lg:order-2 lg:mb-0 lg:w-64 lg:shrink-0"
+    aria-label="Detalles secundarios"
+>
+  <div class="flex flex-col gap-6 lg:gap-8">
+    <div class="flex items-center justify-between">
+      <h2 class="font-mono text-md font-bold uppercase tracking-widest text-[var(--muted)]">
+        DETALLES
+      </h2>
+      <!-- COLLAPSIBLE ON MOBILE -->
+      <button
+          type="button"
+          data-side-toggle="top"
+          aria-expanded="false"
+          aria-controls="side-list"
+          aria-label="Mostrar u ocultar información"
+          class="mr-2 cursor-pointer text-[var(--fg)] lg:hidden"
+      >
+        <svg data-icon-plus class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 12h16M12 4v16" />
+        </svg>
+        <svg data-icon-minus class="hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 12h16" />
+        </svg>
+      </button>
+    </div>
+
+    <div id="side-list" class="hidden lg:block space-y-6">
+      <section>
+        <h3 class="font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
+          Rol
+        </h3>
+        <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+          Desarrollador de software - Mid level
+        </div>
+      </section>
+
+      <hr class="mt-4 w-full border-t border-[var(--muted)]/30" />
+
+      <section>
+        <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+          Experiencia
+        </h3>
+        <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+          Más de 5 años
+        </div>
+      </section>
+
+      <hr class="w-full border-t border-[var(--muted)]/30" />
+
+      <section>
+        <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+          Ubicación
+        </h3>
+        <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+          Pitalito, Huila, Colombia
+        </div>
+      </section>
+
+      <hr class="w-full border-t border-[var(--muted)]/30" />
+
+      <section>
+        <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+          Redes y contacto
+        </h3>
+        <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+          <ul class="flex flex-wrap items-center gap-x-5 gap-y-3 font-mono text-xs uppercase tracking-widest lg:flex-col lg:items-start">
+            {SOCIAL_LINKS.map((link) => {
+              const external = link.url.startsWith("http");
+              return (
+                  <li>
+                    <a
+                        href={link.url}
+                        target={external ? "_blank" : undefined}
+                        rel={external ? "noopener noreferrer" : undefined}
+                        class="inline-flex items-center gap-1.5 border-b-2 border-transparent pb-1 text-[var(--fg)] no-underline hover:border-[var(--accent)]"
+                    >
+                      <Fragment set:html={link.icon} />
+                      {link.name}
+                    </a>
+                  </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
+      <hr class="w-full border-t border-[var(--muted)]/30" />
+
+      <!-- CLOSE BOTTOM ON MOBILE -->
+      <div class="mt-4 flex justify-end lg:hidden">
+        <button
+            type="button"
+            data-side-toggle="bottom"
+            aria-controls="side-list"
+            aria-label="Ocultar información"
+            class="mr-2 cursor-pointer text-[var(--fg)]"
+        >
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 12h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script>
+  const list = document.getElementById('side-list');
+  const topBtn = document.querySelector<HTMLButtonElement>('[data-side-toggle="top"]');
+  const iconPlus = topBtn?.querySelector('[data-icon-plus]');
+  const iconMinus = topBtn?.querySelector('[data-icon-minus]');
+
+  const setOpen = (open: boolean) => {
+    list?.classList.toggle('hidden', !open);
+    topBtn?.setAttribute('aria-expanded', String(open));
+    iconPlus?.classList.toggle('hidden', open);
+    iconMinus?.classList.toggle('hidden', !open);
+  };
+
+  document.querySelectorAll('[data-side-toggle]').forEach((btn) =>
+      btn.addEventListener('click', () => setOpen(list?.classList.contains('hidden') ?? false))
+  );
+</script>

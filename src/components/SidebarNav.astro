@@ -1,26 +1,27 @@
 ---
-import { themes, languages } from "../config/control.ts";
+import { THEMES, LANGUAGES } from "../constants/ui.ts";
+import { ROUTES } from "../constants/routes.ts";
 
 const links = [
-  { name: "BIO", url: "/" },
+  { name: "BIO", url: ROUTES.ABOUT },
 ];
-
-const currentPath = Astro.url.pathname;
 
 const controls = [
   {
     id: "lang-toggle",
     textId: "lang-toggle-text",
     aria: "Cambiar idioma",
-    default: languages.en,
+    default: LANGUAGES.en,
   },
   {
     id: "theme-toggle",
     textId: "theme-toggle-text",
     aria: "Cambiar tema",
-    default: themes.light.text,
+    default: THEMES.light.text,
   }
 ];
+
+const currentPath = Astro.url.pathname;
 ---
 
 <!-- OVERLAY ON MOBILE -->
@@ -28,8 +29,10 @@ const controls = [
 
 <!-- HEADER ON MOBILE -->
 <header class="flex items-center justify-between py-4 px-6 md:hidden">
-  <a href="/" class="whitespace-nowrap text-xl font-bold no-underline">
-    <span class="text-[var(--accent)]">[</span>Framqui<span class="text-[var(--accent)]">]</span>
+  <a href={ROUTES.HOME} class="whitespace-nowrap text-xl font-bold no-underline">
+    <span class="text-[var(--accent)]">[</span>
+    Framqui
+    <span class="text-[var(--accent)]">]</span>
   </a>
 
   <button
@@ -60,8 +63,8 @@ const controls = [
     </button>
 
     <!-- SIDEBAR HEADER -->
-    <div class="mb-4 hidden md:block">
-      <a href="/" class="inline-block whitespace-nowrap text-xl font-bold no-underline text-[var(--fg)] tracking-tight group">
+    <div class="mb-4 pt-2 hidden md:block">
+      <a href={ROUTES.HOME} class="inline-block whitespace-nowrap text-xl font-bold no-underline text-[var(--fg)] tracking-tight group">
         <span class="text-[var(--accent)]">[</span>
         <span class="group-hover:underline decoration-[var(--accent)] decoration-2 underline-offset-4">Framqui</span>
         <span class="text-[var(--accent)]">]</span>
@@ -115,7 +118,7 @@ const controls = [
 </aside>
 
 <script>
-  import { themes, languages } from "../config/control.ts";
+  import { THEMES, LANGUAGES } from "../constants/ui.ts";
 
   function initHeader() {
     const sidebar = document.getElementById("sidebar-menu");
@@ -143,10 +146,10 @@ const controls = [
         if (!themeText) return;
 
         const currentTheme = themeText.textContent?.trim();
-        const nextTheme = currentTheme === themes.dark.text ? themes.light.text : themes.dark.text;
+        const nextTheme = currentTheme === THEMES.dark.text ? THEMES.light.text : THEMES.dark.text;
 
         themeText.textContent = nextTheme;
-        document.body.classList.toggle(themes.light.key, nextTheme === themes.light.text)
+        document.body.classList.toggle(THEMES.light.key, nextTheme === THEMES.light.text)
       };
     }
 
@@ -159,7 +162,7 @@ const controls = [
         if (!langText) return;
 
         const currentLang = langText.textContent?.trim();
-        langText.textContent = currentLang === languages.es ? languages.en : languages.es;
+        langText.textContent = currentLang === LANGUAGES.es ? LANGUAGES.en : LANGUAGES.es;
       };
     }
   }

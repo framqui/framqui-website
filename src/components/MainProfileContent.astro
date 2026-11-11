@@ -1,0 +1,95 @@
+---
+
+import {SOCIAL_LINKS} from "../constants/social.ts";---
+
+<div class="min-w-0 flex-1 lg:order-1">
+  <h1 class="font-sans text-4xl font-bold leading-[1.00] tracking-tight text-[var(--fg)] sm:text-5xl">
+    Andres Felipe Ramos Quintero
+  </h1>
+
+  <p class="mt-4 max-w-xl font-sans text-lg leading-relaxed text-[var(--muted)] sm:text-lg md:text-xl">
+    Desarrollador de software mid level
+  </p>
+
+  <!-- SECTION FOR VISIBLE NETWORKS ON MOBILE -->
+  <div class="lg:hidden mb-4">
+    <ul class="flex flex-wrap gap-x-2 font-mono text-xs uppercase tracking-widest">
+      {SOCIAL_LINKS.map((link, index) => (
+          <>
+            <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4 text-[var(--fg)]"
+            >
+              {link.name}
+            </a>
+            {index < SOCIAL_LINKS.length - 1 && (
+                <span class="text-[var(--muted)] select-none">|</span>
+            )}
+          </>
+      ))}
+    </ul>
+  </div>
+
+  <hr class="mt-6 w-full border-t-2 border-[var(--accent)]" />
+
+  <!-- ABOUT ME -->
+  <div class="mt-10 mb-10">
+    <h2 class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+      Sobre mí
+    </h2>
+    <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
+  </div>
+
+  <div class="grid grid-cols-1 items-start gap-8 xl:grid-cols-[220px_minmax(0,1fr)] xl:gap-12 2xl:grid-cols-[260px_minmax(0,1fr)]">
+    <figure class="flex flex-col items-center text-center">
+      <div class="w-40 overflow-hidden rounded-sm border border-[var(--muted)]/20 sm:w-48 xl:w-full max-w-[200px]">
+        <img
+            src="./src/assets/me.png"
+            alt="Andres Ramos"
+            decoding="async"
+            class="block h-auto w-full"
+        />
+      </div>
+      <figcaption class="mt-4 max-w-[200px] font-mono text-xs font-bold uppercase leading-relaxed tracking-wider text-[var(--fg)]">
+        Transformando el desarrollo de software con inteligencia artificial
+      </figcaption>
+    </figure>
+
+    <div class="flex max-w-3xl flex-col gap-7 font-sans text-sm leading-relaxed text-[var(--muted)] sm:text-base">
+      <div class="flex flex-col gap-4">
+        <p class="text-[var(--muted)]">
+          Hola, soy <strong class="font-bold text-[var(--fg)]">Andres Ramos, </strong>desarrollador de software con más de 5 años de experiencia enfocados principalmente en el desarrollo backend. A inicios de 2026 inicié una transición hacia la <strong class="font-bold text-[var(--fg)]">creación de productos de software </strong>integrando <strong class="font-bold text-[var(--fg)]">Inteligencia Artificial </strong>en mis desarrollos y compartiendo activamente lo que aprendo con la comunidad.
+        </p>
+        <p class="text-[var(--muted)]">
+          Nací en un pueblo muy pequeño y actualmente vivo en <strong class="font-bold text-[var(--fg)]">Pitalito, Huila, </strong>un lugar reconocido por su café de alta calidad y su cultura cafetera. Fuera de la tecnología, disfruto levantar pesas, escuchar rock y leer sobre filosofía.
+        </p>
+
+        <p class="text-[var(--muted)]">
+        A lo largo de mi trayectoria he pasado de construir e integrar componentes de software a involucrarme en el ciclo de vida completo de los productos: desde el análisis de problemas y el diseño de soluciones hasta la implementación, arquitectura, despliegue y coordinación técnica.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
+          Este sitio
+        </h3>
+        <p class="mt-2">
+          Esta página funciona como mi <strong class="font-bold text-[var(--fg)]">bitácora pública y espacio personal.</strong> Aquí iré compartiendo notas técnicas, reflexiones sobre desarrollo de productos, guías, cursos, proyectos e imágenes en los que me encuentre trabajando. Es un entorno vivo que irá evolucionando a la par de mi crecimiento profesional y personal.
+        </p>
+
+        <div class="mt-4 pt-4 border-t border-[var(--muted)]/15 font-mono text-xs uppercase tracking-wider text-[var(--fg)] font-semibold flex flex-wrap items-center gap-x-2 gap-y-1">
+          <span>Desarrollo de software</span>
+          <span class="text-[var(--muted)]">|</span>
+          <span>Creación de productos digitales</span>
+          <span class="text-[var(--muted)]">|</span>
+          <span>Inteligencia artificial</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="mt-8 w-full border-t border-[var(--muted)]/30" />
+
+</div>

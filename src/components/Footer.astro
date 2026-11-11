@@ -1,22 +1,16 @@
 ---
-const year = new Date().getFullYear();
+import { SOCIAL_LINKS } from "../constants/social.ts";
 
-const socialLinks = [
-  { name: "GITHUB", url: "https://github.com/framqui" },
-  { name: "LINKEDIN", url: "https://linkedin.com/in/framqui" },
-  { name: "CORREO", url: "mailto:andfera201@gmail.com" },
-  { name: "WHATSAPP", url: "https://wa.me/3172116762" }
-];
+const year = new Date().getFullYear();
 ---
 
 <footer class="mt-auto px-4 py-7 font-mono text-xs uppercase tracking-[1px] text-[var(--muted)] md:text-sm md:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-  <div>
-    © {year} ANDRES RAMOS (FRAMQUI)
-  </div>
+  <div>© {year} ANDRES RAMOS (FRAMQUI)</div>
 
   <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
     <span>CONECTA:</span>
-    {socialLinks.map((link, index) => (
+
+    {SOCIAL_LINKS.map((link, index) => (
         <>
           <a
               href={link.url}
@@ -26,7 +20,7 @@ const socialLinks = [
           >
             {link.name}
           </a>
-          {index < socialLinks.length - 1 && (
+          {index < SOCIAL_LINKS.length - 1 && (
               <span class="text-[var(--muted)] select-none">|</span>
           )}
         </>

@@ -1,4 +1,4 @@
-export const themes = {
+export const THEMES = {
   dark: {
     key: "dark",
     text: "OSCURO",
@@ -7,9 +7,9 @@ export const themes = {
     key: "light",
     text: "CLARO",
   },
-};
+} as const;
 
-export const languages = {
+export const LANGUAGES = {
   es: "ESPAÑOL",
   en: "INGLÉS",
-};
+} as const;
