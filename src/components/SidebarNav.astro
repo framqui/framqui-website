@@ -87,11 +87,7 @@ const currentPath = Astro.url.pathname.endsWith("/") && Astro.url.pathname.lengt
                   isActive ? "text-[var(--accent)] font-bold" : "text-[var(--fg)]"
                 ]}
             >
-              {isActive ? (
-                  <span>{link.name}</span>
-              ) : (
-                  link.name
-              )}
+              {link.name}
             </a>
         );
       })}
@@ -123,6 +119,18 @@ const currentPath = Astro.url.pathname.endsWith("/") && Astro.url.pathname.lengt
 
 <script>
   import { THEMES, LANGUAGES } from "../constants/ui.ts";
+  import { storage } from "../lib/storage.ts";
+
+  const THEME_KEY = "theme";
+
+  function applyTheme(themeKey: string) {
+    const isLight = themeKey === THEMES.light.key;
+    document.documentElement.classList.toggle(THEMES.light.key, isLight);
+    const themeText = document.getElementById("theme-toggle-text");
+    if (themeText) {
+      themeText.textContent = isLight ? THEMES.light.text : THEMES.dark.text;
+    }
+  }
 
   function initHeader() {
     const sidebar = document.getElementById("sidebar-menu");
@@ -142,18 +150,25 @@ const currentPath = Astro.url.pathname.endsWith("/") && Astro.url.pathname.lengt
     if (menuCloseBtn) menuCloseBtn.onclick = () => toggleMenu(false);
 
     // THEME TOGGLE
-    const themeButton = document.getElementById("theme-toggle");
+    const initialTheme = storage.getWithSystemFallback(
+        THEME_KEY,
+        THEMES.light.key,
+        THEMES.dark.key
+    );
+    applyTheme(initialTheme);
 
+    const themeButton = document.getElementById("theme-toggle");
     if (themeButton) {
       themeButton.onclick = () => {
         const themeText = document.getElementById("theme-toggle-text");
         if (!themeText) return;
 
-        const currentTheme = themeText.textContent?.trim();
-        const nextTheme = currentTheme === THEMES.dark.text ? THEMES.light.text : THEMES.dark.text;
+        const currentText = themeText.textContent?.trim();
+        const isCurrentlyLight = currentText === THEMES.light.text;
+        const nextThemeKey = isCurrentlyLight ? THEMES.dark.key : THEMES.light.key;
 
-        themeText.textContent = nextTheme;
-        document.body.classList.toggle(THEMES.light.key, nextTheme === THEMES.light.text)
+        storage.set(THEME_KEY, nextThemeKey);
+        applyTheme(nextThemeKey);
       };
     }
 

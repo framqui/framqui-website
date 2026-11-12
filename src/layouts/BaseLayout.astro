@@ -11,6 +11,16 @@ import SidebarNav from "../components/SidebarNav.astro";
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Andres Ramos - Framqui</title>
+  <script is:inline>
+    (function() {
+      const stored = localStorage.getItem('framqui-theme');
+      if (stored === 'light') {
+        document.documentElement.classList.add('light');
+      } else if (!stored && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        document.documentElement.classList.add('light');
+      }
+    })();
+  </script>
 </head>
 
 <body class="bg-[var(--bg)] text-[var(--fg)] font-sans transition-colors duration-300">

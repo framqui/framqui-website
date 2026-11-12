@@ -15,14 +15,13 @@ body {
 @layer base {
   :root {
     --accent: #2563eb;
-  }
-
-  body {
     --bg: #161616;
     --fg: #f2efe9;
     --muted: #bdb8ae;
     --line: #383838;
   }
+
+  html.light,
   body.light {
     --bg: #f2efe9;
     --fg: #161616;
