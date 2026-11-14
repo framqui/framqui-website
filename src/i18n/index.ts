@@ -61,5 +61,11 @@ export function applyLocale(locale: Locale) {
     });
   });
 
+  document.querySelectorAll<HTMLElement>("[data-i18n-content]").forEach((element) => {
+    applyKey(locale, element.dataset.i18nContent, (value) => {
+      element.setAttribute("content", value);
+    });
+  });
+
   document.documentElement.classList.remove("i18n-pending");
 }

@@ -4,13 +4,56 @@ import MainProfileContent from "../components/MainProfileContent.astro";
 import SecondaryDetailsSidebar from "../components/SecondaryDetailsSidebar.astro";
 import Footer from "../components/Footer.astro";
 import SidebarNav from "../components/SidebarNav.astro";
+import es from "../i18n/es.json";
+
+interface Props {
+  title: string;
+  description: string;
+  titleKey: string;
+  descriptionKey: string;
+  image?: string;
+  robots?: string;
+}
+
+const {
+  title,
+  description,
+  titleKey,
+  descriptionKey,
+  image = "/me.png",
+  robots = "index, follow",
+} = Astro.props;
+
+const origin = Astro.site?.href ?? Astro.url.origin;
+const canonical = new URL(Astro.url.pathname, origin).href;
+const imageUrl = new URL(image, origin).href;
+const { locale, imageAlt } = es.meta;
 ---
 
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Andres Ramos - Framqui</title>
+  <title data-i18n={titleKey}>{title}</title>
+  <meta name="description" content={description} data-i18n-content={descriptionKey} />
+  <meta name="robots" content={robots} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content={locale} data-i18n-content="meta.locale" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={title} data-i18n-content={titleKey} />
+  <meta property="og:description" content={description} data-i18n-content={descriptionKey} />
+  <meta property="og:image" content={imageUrl} />
+  <meta property="og:image:alt" content={imageAlt} data-i18n-content="meta.imageAlt" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} data-i18n-content={titleKey} />
+  <meta name="twitter:description" content={description} data-i18n-content={descriptionKey} />
+  <meta name="twitter:image" content={imageUrl} />
+  <meta name="twitter:image:alt" content={imageAlt} data-i18n-content="meta.imageAlt" />
   <script is:inline>
     (function() {
       try {

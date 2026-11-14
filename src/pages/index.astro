@@ -2,9 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SecondaryDetailsSidebar from "../components/SecondaryDetailsSidebar.astro";
 import MainProfileContent from "../components/MainProfileContent.astro";
+import es from "../i18n/es.json";
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={es.meta.home.title}
+  description={es.meta.home.description}
+  titleKey="meta.home.title"
+  descriptionKey="meta.home.description"
+>
   <SecondaryDetailsSidebar />
   <MainProfileContent />
 </BaseLayout>

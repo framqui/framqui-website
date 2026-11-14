@@ -109,6 +109,22 @@
       }
     }
   },
+  "meta": {
+    "locale": "es_ES",
+    "imageAlt": "Retrato de Andres Ramos",
+    "home": {
+      "title": "Andres Ramos - Framqui",
+      "description": "Desarrollador de software mid level en Pitalito, Huila. Bitácora sobre backend, productos de software e inteligencia artificial."
+    },
+    "notes": {
+      "title": "Notas | Andres Ramos - Framqui",
+      "description": "Notas técnicas de Andres Ramos sobre desarrollo de software, productos e inteligencia artificial."
+    },
+    "posts": {
+      "title": "Escritos | Andres Ramos - Framqui",
+      "description": "Escritos de Andres Ramos sobre desarrollo de productos, software e inteligencia artificial."
+    }
+  },
   "techGroups": {
     "languages": "Lenguajes",
     "backend": "Backend & APIs",
