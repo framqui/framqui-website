@@ -1,0 +1,56 @@
+order: 6
+explore: false
+title:
+  es: |-
+    Servicios de AWS
+  en: |-
+    AWS services
+items:
+  - name: |-
+      S3
+    icon: |-
+      simple-icons:amazons3
+    color: |-
+      #569A31
+  - name: |-
+      EC2
+    icon: |-
+      simple-icons:amazonec2
+    color: |-
+      #FF9900
+  - name: |-
+      Lambda
+    icon: |-
+      simple-icons:awslambda
+    color: |-
+      #FF9900
+  - name: |-
+      RDS
+    icon: |-
+      simple-icons:amazonrds
+    color: |-
+      #527FFF
+  - name: |-
+      IAM
+    icon: |-
+      simple-icons:amazoniam
+    color: |-
+      #DD344C
+  - name: |-
+      CloudWatch
+    icon: |-
+      simple-icons:amazoncloudwatch
+    color: |-
+      #FF4F8B
+  - name: |-
+      API Gateway
+    icon: |-
+      simple-icons:amazonapigateway
+    color: |-
+      #FF4F8B
+  - name: |-
+      SQS
+    icon: |-
+      simple-icons:amazonsqs
+    color: |-
+      #FF4F8B

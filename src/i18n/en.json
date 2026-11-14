@@ -11,7 +11,9 @@
     "secondaryDetails": "Secondary details",
     "toggleDetails": "Show or hide information",
     "hideDetails": "Hide information",
-    "construction": "A chicken pecking ones and zeros"
+    "construction": "A chicken pecking ones and zeros",
+    "skipToContent": "Skip to content",
+    "profilePhoto": "Profile photo of Andres Ramos"
   },
   "lang": {
     "current": "ENGLISH"
@@ -30,83 +32,14 @@
     "title": "DETAILS",
     "networks": "Networks and contact",
     "role": "Role",
-    "roleValue": "Software developer — mid level",
     "experience": "Experience",
-    "experienceValue": "More than 5 years",
     "tech": "Core technologies",
     "interests": "Interests",
-    "interestSoftware": "Software development",
-    "interestProducts": "Building digital products",
-    "interestAi": "Artificial intelligence",
-    "location": "Location",
-    "locationValue": "Pitalito, Huila, Colombia"
+    "location": "Location"
   },
   "construction": {
     "title": "Section under construction",
     "body": "Code is being pecked together to build this page. Come back soon... Cluck cluck"
-  },
-  "profile": {
-    "role": "Mid-level software developer",
-    "aboutTitle": "About me",
-    "caption": "Transforming software development with artificial intelligence",
-    "bio1": "Hi, I'm <strong class=\"font-bold text-[var(--fg)] font-sans\">Andres Ramos, </strong>a software developer with more than 5 years of experience, focused mainly on backend development. In early 2026 I started moving toward <strong class=\"font-bold text-[var(--fg)] font-sans\">building software products</strong>, integrating <strong class=\"font-bold text-[var(--fg)] font-sans\">artificial intelligence</strong> into my work and actively sharing what I learn with the community.",
-    "bio2": "I was born in a very small town and currently live in <strong class=\"font-bold text-[var(--fg)] font-sans\">Pitalito, Huila, </strong>a place known for its high-quality coffee and its coffee culture. Outside of technology, I enjoy lifting weights, listening to rock, and reading about philosophy.",
-    "bio3": "Throughout my career I have moved from building and integrating software components to taking part in the full product lifecycle: from analyzing problems and designing solutions to implementation, architecture, deployment, and technical coordination.",
-    "siteTitle": "This site",
-    "siteBody": "This page is my <strong class=\"font-bold text-[var(--fg)] font-sans\">public log and personal space.</strong> Here I will share technical notes, reflections on product development, guides, courses, projects, and images of what I am working on. It is a living space that will evolve alongside my professional and personal growth.",
-    "interestsTitle": "Interests",
-    "experienceTitle": "Professional experience",
-    "stackTitle": "Tech stack",
-    "stackIntro": "Technologies and tools I want to learn, explore, and keep adding to my professional work."
-  },
-  "interests": {
-    "software": {
-      "title": "Software development",
-      "description": "Building modular, maintainable, and well-structured solutions, with attention to code quality, how components are organized, and the technical decisions that make systems easier to evolve."
-    },
-    "ai": {
-      "title": "Artificial intelligence",
-      "description": "Exploring how AI can extend what software can do, help solve problems, improve development processes, and open new possibilities for building products."
-    },
-    "products": {
-      "title": "Product development",
-      "description": "Taking part in how ideas evolve, from identifying a problem and understanding its needs to designing and building useful solutions that create value."
-    },
-    "learning": {
-      "title": "Continuous learning",
-      "description": "Going deeper into new technologies, investigating how things work, experimenting with different tools, and turning what I learn into practical experience."
-    }
-  },
-  "experience": {
-    "r5": {
-      "role": "Fintech · Insurance",
-      "description": "During my first years I worked in R5's insurance area, where I took part in building automations, scripts, and integrations. I also provided internal and external technical support to different teams and organizations, including Bancolombia and AXA Seguros, supporting SOAT sales on the platform.",
-      "sectionTitle": "Responsibilities and projects",
-      "linkText": "Explore R5 ↗",
-      "items": {
-        "support": "Internal and external technical support: handling requests, analyzing errors, and resolving incidents related to operations.",
-        "soat": "SOAT sales: supporting the sales processes running on R5's system.",
-        "integrations": "Third-party integrations: building and maintaining connections with financial institutions, insurers, and other providers.",
-        "services": "Service integration: adding new insurers and payment gateways.",
-        "automation": "Process automation: writing scripts and tools to streamline operational tasks.",
-        "fraud": "Fraud prevention: contributing to tools for fraud management and restricted-customer lists."
-      }
-    },
-    "nova": {
-      "role": "Software product development",
-      "description": "I currently work at Novadynamics, helping build a technology solution for virtual contact centers. The platform brings together chat, telephony, management tools, and artificial intelligence so the operation lives in one place.",
-      "sectionTitle": "Areas of work",
-      "linkText": "Visit Novadynamics ↗",
-      "items": {
-        "requirements": "Requirements analysis: identifying needs and defining technical solutions.",
-        "databases": "Databases: designing, structuring, and managing data models.",
-        "development": "Software development: implementing and evolving platform features.",
-        "ai": "Artificial intelligence: building and implementing AI capabilities inside the software.",
-        "architecture": "Architecture: taking part in technical decisions about how solutions are designed and organized.",
-        "deployment": "Deployment: putting applications and new features into operation.",
-        "tooling": "Tools and processes: building internal utilities and improving the team's workflows."
-      }
-    }
   },
   "meta": {
     "locale": "en_US",
@@ -123,15 +56,5 @@
       "title": "Andres Ramos - Writing",
       "description": "Writing by Andres Ramos on product development, software, and artificial intelligence."
     }
-  },
-  "techGroups": {
-    "languages": "Languages",
-    "backend": "Backend & APIs",
-    "frontend": "Frontend",
-    "databases": "Databases",
-    "cloud": "Cloud & DevOps",
-    "aws": "AWS services",
-    "tools": "Development tools",
-    "areas": "Areas of interest"
   }
 }

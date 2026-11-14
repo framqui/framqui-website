@@ -1,0 +1,30 @@
+order: 7
+explore: false
+title:
+  es: |-
+    Herramientas de desarrollo
+  en: |-
+    Development tools
+items:
+  - name: |-
+      VS Code
+    icon: |-
+      simple-icons:visualstudiocode
+    color: |-
+      #007ACC
+  - name: |-
+      WebStorm
+    icon: |-
+      simple-icons:webstorm
+  - name: |-
+      PyCharm
+    icon: |-
+      simple-icons:pycharm
+  - name: |-
+      Markdown
+    icon: |-
+      simple-icons:markdown
+  - name: |-
+      Cursor
+    icon: |-
+      simple-icons:cursor

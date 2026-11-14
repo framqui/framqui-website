@@ -1,0 +1,26 @@
+order: 4
+explore: false
+title:
+  es: |-
+    Bases de datos
+  en: |-
+    Databases
+items:
+  - name: |-
+      PostgreSQL
+    icon: |-
+      simple-icons:postgresql
+    color: |-
+      #4169E1
+  - name: |-
+      MongoDB
+    icon: |-
+      simple-icons:mongodb
+    color: |-
+      #47A248
+  - name: |-
+      Redis
+    icon: |-
+      simple-icons:redis
+    color: |-
+      #DC382D

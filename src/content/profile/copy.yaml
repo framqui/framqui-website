@@ -1,0 +1,108 @@
+role:
+  es: |-
+    Desarrollador de software de nivel medio
+  en: |-
+    Mid-level software developer
+years:
+  es: |-
+    Más de 5 años
+  en: |-
+    More than 5 years
+location:
+  es: |-
+    Pitalito, Huila, Colombia
+  en: |-
+    Pitalito, Huila, Colombia
+aboutTitle:
+  es: |-
+    Sobre mí
+  en: |-
+    About me
+caption:
+  es: |-
+    Transformando el desarrollo de software con inteligencia artificial
+  en: |-
+    Transforming software development with artificial intelligence
+bio:
+  - html: true
+    es: |-
+      Hola, soy <strong class="font-bold text-[var(--fg)] font-sans">Andres Ramos, </strong>desarrollador de software con más de 5 años de experiencia enfocados principalmente en el desarrollo backend. A inicios de 2026 inicié una transición hacia la <strong class="font-bold text-[var(--fg)] font-sans">creación de productos de software </strong>integrando <strong class="font-bold text-[var(--fg)] font-sans">Inteligencia Artificial </strong>en mis desarrollos y compartiendo activamente lo que aprendo con la comunidad.
+    en: |-
+      Hi, I'm <strong class="font-bold text-[var(--fg)] font-sans">Andres Ramos, </strong>a software developer with more than 5 years of experience, focused mainly on backend development. In early 2026 I started moving toward <strong class="font-bold text-[var(--fg)] font-sans">building software products</strong>, integrating <strong class="font-bold text-[var(--fg)] font-sans">artificial intelligence</strong> into my work and actively sharing what I learn with the community.
+  - html: true
+    es: |-
+      Nací en un pueblo muy pequeño y actualmente vivo en <strong class="font-bold text-[var(--fg)] font-sans">Pitalito, Huila, </strong>un lugar reconocido por su café de alta calidad y su cultura cafetera. Fuera de la tecnología, disfruto levantar pesas, escuchar rock y leer sobre filosofía.
+    en: |-
+      I was born in a very small town and currently live in <strong class="font-bold text-[var(--fg)] font-sans">Pitalito, Huila, </strong>a place known for its high-quality coffee and its coffee culture. Outside of technology, I enjoy lifting weights, listening to rock, and reading about philosophy.
+  - html: false
+    es: |-
+      A lo largo de mi trayectoria he pasado de construir e integrar componentes de software a involucrarme en el ciclo de vida completo de los productos: desde el análisis de problemas y el diseño de soluciones hasta la implementación, arquitectura, despliegue y coordinación técnica.
+    en: |-
+      Throughout my career I have moved from building and integrating software components to taking part in the full product lifecycle: from analyzing problems and designing solutions to implementation, architecture, deployment, and technical coordination.
+siteTitle:
+  es: |-
+    Este sitio
+  en: |-
+    This site
+siteBody:
+  html: true
+  es: |-
+    Esta página funciona como mi <strong class="font-bold text-[var(--fg)] font-sans">bitácora pública y espacio personal.</strong> Aquí iré compartiendo notas técnicas, reflexiones sobre desarrollo de productos, guías, cursos, proyectos e imágenes en los que me encuentre trabajando. Es un entorno vivo que irá evolucionando a la par de mi crecimiento profesional y personal.
+  en: |-
+    This page is my <strong class="font-bold text-[var(--fg)] font-sans">public log and personal space.</strong> Here I will share technical notes, reflections on product development, guides, courses, projects, and images of what I am working on. It is a living space that will evolve alongside my professional and personal growth.
+interestsTitle:
+  es: |-
+    Intereses
+  en: |-
+    Interests
+experienceTitle:
+  es: |-
+    Experiencia profesional
+  en: |-
+    Professional experience
+stackTitle:
+  es: |-
+    Stack tecnológico
+  en: |-
+    Tech stack
+stackIntro:
+  es: |-
+    Tecnologías que uso para construir software. El último grupo reúne las áreas que quiero seguir explorando.
+  en: |-
+    Technologies I use to build software. The last group lists the areas I want to keep exploring.
+sidebarInterests:
+  - id: |-
+      software
+    es: |-
+      Desarrollo de software
+    en: |-
+      Software development
+  - id: |-
+      products
+    es: |-
+      Creación de productos digitales
+    en: |-
+      Building digital products
+  - id: |-
+      ai
+    es: |-
+      Inteligencia artificial
+    en: |-
+      Artificial intelligence
+core:
+  - name: Python
+    icons:
+      - Python
+  - name: TypeScript
+    icons:
+      - TypeScript
+  - name: PostgreSQL
+    icons:
+      - PostgreSQL
+  - name: AWS
+    icons:
+      - AWS
+  - name: Linux / Bash
+    icons:
+      - Linux
+      - Bash

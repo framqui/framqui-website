@@ -1,0 +1,11 @@
+order: 1
+title:
+  es: |-
+    Desarrollo de software
+  en: |-
+    Software development
+description:
+  es: |-
+    Construir soluciones modulares, mantenibles y bien estructuradas, prestando atención a la calidad del código, la organización de los componentes y las decisiones técnicas que facilitan la evolución de los sistemas.
+  en: |-
+    Building modular, maintainable, and well-structured solutions, with attention to code quality, how components are organized, and the technical decisions that make systems easier to evolve.

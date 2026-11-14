@@ -25,10 +25,4 @@ export const SOCIAL_LINKS: SocialLink[] = [
     icon: "simple-icons:gmail",
     color: "#EA4335",
   },
-  {
-    name: "WHATSAPP",
-    url: "https://wa.me/573172116762",
-    icon: "fa6-brands:whatsapp",
-    color: "#25D366",
-  },
 ];

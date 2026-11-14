@@ -1,0 +1,85 @@
+order: 8
+explore: true
+title:
+  es: |-
+    Áreas de interés
+  en: |-
+    Areas of interest
+items:
+  - id: |-
+      ai
+    icon: |-
+      mdi:robot-outline
+    color: |-
+      var(--accent)
+    name:
+      es: |-
+        IA para el desarrollo
+      en: |-
+        AI for development
+  - id: |-
+      architecture
+    icon: |-
+      mdi:sitemap
+    color: |-
+      var(--accent)
+    name:
+      es: |-
+        Arquitectura de software
+      en: |-
+        Software architecture
+  - id: |-
+      cicd
+    icon: |-
+      mdi:source-branch-sync
+    color: |-
+      var(--accent)
+    name:
+      es: |-
+        CI/CD
+      en: |-
+        CI/CD
+  - id: |-
+      automation
+    icon: |-
+      mdi:lightning-bolt
+    color: |-
+      var(--accent)
+    name:
+      es: |-
+        Automatización
+      en: |-
+        Automation
+  - id: |-
+      scalable
+    icon: |-
+      mdi:chart-line
+    color: |-
+      var(--accent)
+    name:
+      es: |-
+        Sistemas escalables
+      en: |-
+        Scalable systems
+  - id: |-
+      cloud
+    icon: |-
+      mdi:cloud-outline
+    color: |-
+      var(--accent)
+    name:
+      es: |-
+        Computación en la nube
+      en: |-
+        Cloud computing
+  - id: |-
+      testing
+    icon: |-
+      mdi:test-tube
+    color: |-
+      var(--accent)
+    name:
+      es: |-
+        Pruebas
+      en: |-
+        Testing

@@ -1,0 +1,38 @@
+order: 1
+explore: false
+title:
+  es: |-
+    Lenguajes
+  en: |-
+    Languages
+items:
+  - name: |-
+      Python
+    icon: |-
+      simple-icons:python
+    color: |-
+      #3776AB
+  - name: |-
+      JavaScript
+    icon: |-
+      simple-icons:javascript
+    color: |-
+      #F7DF1E
+  - name: |-
+      TypeScript
+    icon: |-
+      simple-icons:typescript
+    color: |-
+      #3178C6
+  - name: |-
+      SQL
+    icon: |-
+      mdi:database
+    color: |-
+      #4479A1
+  - name: |-
+      Bash
+    icon: |-
+      simple-icons:gnubash
+    color: |-
+      #4EAA25

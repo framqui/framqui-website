@@ -1,8 +1,23 @@
 ---
 import { Icon } from "astro-icon/components";
-import { CORE_TECH, PROFILE_FACTS, PROFILE_LOCATION, SIDEBAR_INTERESTS } from "../constants/profile.ts";
 import { SOCIAL_LINKS } from "../constants/social.ts";
 import es from "../i18n/es.json";
+import { loadProfile, techIcons } from "../lib/profile.ts";
+
+const { profile, stack } = await loadProfile();
+const icons = techIcons(stack);
+const facts = [
+  { labelKey: "details.role", label: es.details.role, valueKey: "profile.role", value: profile.role.es, spaced: false },
+  { labelKey: "details.experience", label: es.details.experience, valueKey: "profile.years", value: profile.years.es, spaced: true },
+];
+const coreTech = profile.core.map((entry) => ({
+  name: entry.name,
+  icons: entry.icons.map((id) => {
+    const icon = icons.get(id);
+    if (!icon) throw new Error(`No existe el icono de ${id}`);
+    return icon;
+  }),
+}));
 ---
 
 <aside
@@ -67,9 +82,9 @@ import es from "../i18n/es.json";
           </div>
         </section>
 
-        {PROFILE_FACTS.map((fact) => (
+        {facts.map((fact) => (
             <section class="py-6">
-              <h3 class:list={["font-mono text-xs uppercase tracking-widest text-[var(--muted)]", fact.labelKey === "details.experience" && "mb-3"]}>
+              <h3 class:list={["font-mono text-xs uppercase tracking-widest text-[var(--muted)]", fact.spaced && "mb-3"]}>
                 <span data-i18n={fact.labelKey}>{fact.label}</span>
               </h3>
               <div data-i18n={fact.valueKey} class="mt-0.5 font-sans text-sm text-[var(--fg)]">
@@ -83,10 +98,10 @@ import es from "../i18n/es.json";
             <span data-i18n="details.tech">{es.details.tech}</span>
           </h3>
           <ul class="space-y-2.5 font-sans text-sm text-[var(--fg)]">
-            {CORE_TECH.map(({ name, icons }) => (
+            {coreTech.map(({ name, icons: tech }) => (
                 <li class="flex items-center gap-2.5">
                   <span class="flex items-center gap-1.5">
-                    {icons.map(({ icon, color }) => (
+                    {tech.map(({ icon, color }) => (
                         <Icon
                             name={icon}
                             class="h-4 w-4 shrink-0"
@@ -105,19 +120,19 @@ import es from "../i18n/es.json";
           <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
             <span data-i18n="details.interests">{es.details.interests}</span>
           </h3>
-          {SIDEBAR_INTERESTS.map((interest) => (
-              <div data-i18n={interest.key} class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-                {interest.text}
+          {profile.sidebarInterests.map((interest) => (
+              <div data-i18n={`profile.sidebar.${interest.id}`} class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+                {interest.es}
               </div>
           ))}
         </section>
 
         <section class="py-6">
           <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-            <span data-i18n={PROFILE_LOCATION.labelKey}>{PROFILE_LOCATION.label}</span>
+            <span data-i18n="details.location">{es.details.location}</span>
           </h3>
-          <div data-i18n={PROFILE_LOCATION.valueKey} class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-            {PROFILE_LOCATION.value}
+          <div data-i18n="profile.location" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+            {profile.location.es}
           </div>
         </section>
       </div>

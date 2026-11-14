@@ -11,6 +11,23 @@ html.i18n-pending body {
   visibility: hidden;
 }
 
+.skip-link:focus {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 80;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+  background: var(--bg);
+  color: var(--fg);
+  outline: 2px solid var(--accent);
+}
+
 @theme {
   --font-sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;

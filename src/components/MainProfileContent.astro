@@ -1,8 +1,10 @@
 ---
 import { Icon } from "astro-icon/components";
-import { EXPERIENCES, INTEREST_KEYS, TECH_GROUPS } from "../constants/profile.ts";
 import { SOCIAL_LINKS } from "../constants/social.ts";
 import es from "../i18n/es.json";
+import { loadProfile } from "../lib/profile.ts";
+
+const { profile, interests, experience, stack } = await loadProfile();
 ---
 
 <div class="min-w-0 flex-1 lg:order-1">
@@ -11,7 +13,7 @@ import es from "../i18n/es.json";
   </h1>
 
   <p data-i18n="profile.role" class="mt-4 max-w-xl font-sans text-lg leading-relaxed text-[var(--muted)]">
-    {es.profile.role}
+    {profile.role.es}
   </p>
 
   <!-- SECTION FOR VISIBLE NETWORKS ON MOBILE -->
@@ -43,7 +45,7 @@ import es from "../i18n/es.json";
   <!-- ABOUT ME -->
   <div class="mt-10 mb-10">
     <h2 data-i18n="profile.aboutTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
-      {es.profile.aboutTitle}
+      {profile.aboutTitle.es}
     </h2>
     <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
   </div>
@@ -53,7 +55,8 @@ import es from "../i18n/es.json";
       <div class="w-40 overflow-hidden rounded-sm border border-[var(--muted)]/20 sm:w-48 xl:w-full max-w-[200px]">
         <img
             src="/me.webp"
-            alt="Andres Ramos"
+            alt={es.a11y.profilePhoto}
+            data-i18n-alt="a11y.profilePhoto"
             width="400"
             height="532"
             loading="lazy"
@@ -62,22 +65,24 @@ import es from "../i18n/es.json";
         />
       </div>
       <figcaption data-i18n="profile.caption" class="mt-4 max-w-[200px] font-sans text-sm font-bold leading-relaxed text-[var(--fg)]">
-        {es.profile.caption}
+        {profile.caption.es}
       </figcaption>
     </figure>
 
     <div class="flex max-w-3xl flex-col gap-7 font-sans text-sm leading-relaxed text-[var(--muted)]">
       <div class="flex flex-col gap-4">
-        <p class="font-sans" data-i18n-html="profile.bio1" set:html={es.profile.bio1} />
-        <p class="font-sans" data-i18n-html="profile.bio2" set:html={es.profile.bio2} />
-        <p class="font-sans" data-i18n="profile.bio3">{es.profile.bio3}</p>
+        {profile.bio.map((paragraph, index) => (
+            paragraph.html
+                ? <p class="font-sans" data-i18n-html={`profile.bio.${index}`} set:html={paragraph.es} />
+                : <p class="font-sans" data-i18n={`profile.bio.${index}`}>{paragraph.es}</p>
+        ))}
       </div>
 
       <div>
         <h3 data-i18n="profile.siteTitle" class="font-sans text-sm font-bold text-[var(--fg)]">
-          {es.profile.siteTitle}
+          {profile.siteTitle.es}
         </h3>
-        <p class="mt-2 font-sans" data-i18n-html="profile.siteBody" set:html={es.profile.siteBody} />
+        <p class="mt-2 font-sans" data-i18n-html="profile.siteBody" set:html={profile.siteBody.es} />
       </div>
     </div>
   </div>
@@ -85,19 +90,19 @@ import es from "../i18n/es.json";
   <!-- INTERESTS SECTION -->
   <div class="mt-10 mb-10">
     <h2 data-i18n="profile.interestsTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
-      {es.profile.interestsTitle}
+      {profile.interestsTitle.es}
     </h2>
     <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-    {INTEREST_KEYS.map((key) => (
+    {interests.map((entry) => (
         <div class="flex flex-col rounded-sm border border-[var(--muted)]/20 bg-transparent p-5">
-          <h3 data-i18n={`interests.${key}.title`} class="mb-3 font-sans text-lg font-bold text-[var(--fg)]">
-            {es.interests[key].title}
+          <h3 data-i18n={`interests.${entry.id}.title`} class="mb-3 font-sans text-lg font-bold text-[var(--fg)]">
+            {entry.data.title.es}
           </h3>
-          <p data-i18n={`interests.${key}.description`} class="font-sans text-sm leading-relaxed text-[var(--muted)]">
-            {es.interests[key].description}
+          <p data-i18n={`interests.${entry.id}.description`} class="font-sans text-sm leading-relaxed text-[var(--muted)]">
+            {entry.data.description.es}
           </p>
         </div>
     ))}
@@ -106,84 +111,86 @@ import es from "../i18n/es.json";
   <!-- EXPERIENCE SECTION -->
   <div class="mt-10 mb-10">
     <h2 data-i18n="profile.experienceTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
-      {es.profile.experienceTitle}
+      {profile.experienceTitle.es}
     </h2>
     <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-    {EXPERIENCES.map((exp) => {
-      const copy = es.experience[exp.id];
-      return (
+    {experience.map((entry) => (
         <div class="flex flex-col gap-4 rounded-sm border border-[var(--muted)]/20 bg-transparent p-6 font-sans">
           <div>
             <h3 class="font-sans text-lg font-bold text-[var(--fg)]">
-              {exp.company}
+              {entry.data.company}
             </h3>
-            <p data-i18n={`experience.${exp.id}.role`} class="mt-1 font-sans text-sm text-[var(--muted)]">
-              {copy.role}
+            <p data-i18n={`experience.${entry.id}.role`} class="mt-1 font-sans text-sm text-[var(--muted)]">
+              {entry.data.role.es}
+            </p>
+            <p data-i18n={`experience.${entry.id}.period`} class="mt-1 font-mono text-xs tracking-wide text-[var(--fg)]">
+              {entry.data.period.es}
             </p>
           </div>
 
-          <p data-i18n={`experience.${exp.id}.description`} class="font-sans text-sm leading-relaxed text-[var(--muted)]">
-            {copy.description}
+          <p data-i18n={`experience.${entry.id}.description`} class="font-sans text-sm leading-relaxed text-[var(--muted)]">
+            {entry.data.description.es}
           </p>
 
           <div>
-            <h4 data-i18n={`experience.${exp.id}.sectionTitle`} class="mb-2 font-sans text-sm font-bold text-[var(--fg)]">
-              {copy.sectionTitle}
+            <h4 data-i18n={`experience.${entry.id}.sectionTitle`} class="mb-2 font-sans text-sm font-bold text-[var(--fg)]">
+              {entry.data.sectionTitle.es}
             </h4>
             <ul class="font-sans list-inside list-disc space-y-1.5 text-sm leading-relaxed text-[var(--muted)]">
-              {Object.entries(copy.items).map(([itemKey, item]) => (
-                  <li data-i18n={`experience.${exp.id}.items.${itemKey}`} class="font-sans">{item}</li>
+              {entry.data.items.map((item) => (
+                  <li data-i18n={`experience.${entry.id}.items.${item.id}`} class="font-sans">{item.es}</li>
               ))}
             </ul>
           </div>
 
           <div class="mt-2 border-t border-[var(--muted)]/15 pt-4">
             <a
-                href={exp.linkUrl}
+                href={entry.data.linkUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-i18n={`experience.${exp.id}.linkText`}
+                data-i18n={`experience.${entry.id}.linkText`}
                 class="font-sans text-sm font-bold text-[var(--fg)] no-underline hover:underline hover:decoration-[var(--accent)] hover:underline-offset-4"
             >
-              {copy.linkText}
+              {entry.data.linkText.es}
             </a>
           </div>
         </div>
-      );
-    })}
+    ))}
   </div>
 
   <!-- TECH STACK SECTION -->
   <div class="mt-10 mb-10">
     <h2 data-i18n="profile.stackTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
-      {es.profile.stackTitle}
+      {profile.stackTitle.es}
     </h2>
     <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
   </div>
 
   <p data-i18n="profile.stackIntro" class="mb-8 font-sans text-sm leading-relaxed text-[var(--muted)]">
-    {es.profile.stackIntro}
+    {profile.stackIntro.es}
   </p>
 
   <div class="flex flex-col gap-6 font-sans">
-    {TECH_GROUPS.map((group) => (
+    {stack.map((group) => (
         <div>
-          <h3 data-i18n={`techGroups.${group.key}`} class="mb-3 font-sans text-sm font-bold text-[var(--fg)]">
-            {group.title}
+          <h3 data-i18n={`techGroups.${group.id}`} class="mb-3 font-sans text-sm font-bold text-[var(--fg)]">
+            {group.data.title.es}
           </h3>
           <ul class="flex flex-wrap gap-2 font-sans">
-            {group.items.map(({ name, icon, color }) => (
+            {group.data.items.map((item) => (
                 <li class="inline-flex items-center gap-2 rounded-sm border border-[var(--muted)]/20 px-3 py-1.5 font-sans text-sm text-[var(--fg)]">
                   <Icon
-                      name={icon}
+                      name={item.icon}
                       class="h-4 w-4 shrink-0"
-                      style={color ? `color: ${color}` : undefined}
+                      style={item.color ? `color: ${item.color}` : undefined}
                       aria-hidden="true"
                   />
-                  {name}
+                  {typeof item.name === "string"
+                      ? item.name
+                      : <span data-i18n={`stackItems.${group.id}.${item.id}`}>{item.name.es}</span>}
                 </li>
             ))}
           </ul>

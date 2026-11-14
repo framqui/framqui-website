@@ -1,0 +1,67 @@
+order: 1
+company: |-
+  R5
+linkUrl: |-
+  https://www.grupor5.com/comprar-soat-en-linea
+role:
+  es: |-
+    Fintech · Área de seguros
+  en: |-
+    Fintech · Insurance
+period:
+  es: |-
+    octubre 2020 – julio 2024
+  en: |-
+    October 2020 – July 2024
+description:
+  es: |-
+    Durante mis primeros años trabajé en el área de seguros de R5, donde participé en el desarrollo de automatizaciones, scripts e integraciones. También brindé soporte técnico interno y externo a diferentes áreas y entidades, entre ellas Bancolombia y AXA Seguros, apoyando la operación de venta de SOAT desde la plataforma.
+  en: |-
+    During my first years I worked in R5's insurance area, where I took part in building automations, scripts, and integrations. I also provided internal and external technical support to different teams and organizations, including Bancolombia and AXA Seguros, supporting SOAT sales on the platform.
+sectionTitle:
+  es: |-
+    Responsabilidades y proyectos
+  en: |-
+    Responsibilities and projects
+linkText:
+  es: |-
+    Conocer R5 ↗
+  en: |-
+    Explore R5 ↗
+items:
+  - id: |-
+      support
+    es: |-
+      Soporte técnico interno y externo: atención de requerimientos, análisis de errores y resolución de incidentes relacionados con la operación.
+    en: |-
+      Internal and external technical support: handling requests, analyzing errors, and resolving incidents related to operations.
+  - id: |-
+      soat
+    es: |-
+      Venta de SOAT: soporte al funcionamiento de los procesos de venta desde el sistema de R5.
+    en: |-
+      SOAT sales: supporting the sales processes running on R5's system.
+  - id: |-
+      integrations
+    es: |-
+      Integraciones con terceros: desarrollo y mantenimiento de conexiones con entidades financieras, aseguradoras y otros proveedores.
+    en: |-
+      Third-party integrations: building and maintaining connections with financial institutions, insurers, and other providers.
+  - id: |-
+      services
+    es: |-
+      Integración de servicios: incorporación de nuevas aseguradoras y pasarelas de pago.
+    en: |-
+      Service integration: adding new insurers and payment gateways.
+  - id: |-
+      automation
+    es: |-
+      Automatización de procesos: desarrollo de scripts y herramientas para optimizar tareas operativas.
+    en: |-
+      Process automation: writing scripts and tools to streamline operational tasks.
+  - id: |-
+      fraud
+    es: |-
+      Prevención de fraude: participación en herramientas para la gestión de fraudes y listas de clientes restringidos.
+    en: |-
+      Fraud prevention: contributing to tools for fraud management and restricted-customer lists.

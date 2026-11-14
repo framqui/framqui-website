@@ -1,0 +1,36 @@
+order: 5
+explore: false
+title:
+  es: |-
+    Nube y DevOps
+  en: |-
+    Cloud and DevOps
+items:
+  - name: |-
+      AWS
+    icon: |-
+      simple-icons:amazonwebservices
+    color: |-
+      #FF9900
+  - name: |-
+      Docker
+    icon: |-
+      simple-icons:docker
+    color: |-
+      #2496ED
+  - name: |-
+      Linux
+    icon: |-
+      simple-icons:linux
+    color: |-
+      #FCC624
+  - name: |-
+      Git
+    icon: |-
+      simple-icons:git
+    color: |-
+      #F05032
+  - name: |-
+      GitHub
+    icon: |-
+      simple-icons:github

@@ -1,0 +1,73 @@
+order: 2
+company: |-
+  Novadynamics
+linkUrl: |-
+  https://nova-dynamics.net/
+role:
+  es: |-
+    Desarrollo de productos de software
+  en: |-
+    Software product development
+period:
+  es: |-
+    agosto 2025 – Actual
+  en: |-
+    August 2025 – Present
+description:
+  es: |-
+    Actualmente trabajo en Novadynamics, participando en el desarrollo de una solución tecnológica para contact centers virtuales. La plataforma integra chat, telefonía, herramientas de gestión e inteligencia artificial para centralizar la operación en un mismo entorno.
+  en: |-
+    I currently work at Novadynamics, helping build a technology solution for virtual contact centers. The platform brings together chat, telephony, management tools, and artificial intelligence so the operation lives in one place.
+sectionTitle:
+  es: |-
+    Áreas de trabajo
+  en: |-
+    Areas of work
+linkText:
+  es: |-
+    Visitar Novadynamics ↗
+  en: |-
+    Visit Novadynamics ↗
+items:
+  - id: |-
+      requirements
+    es: |-
+      Análisis de requerimientos: identificación de necesidades y definición de soluciones técnicas.
+    en: |-
+      Requirements analysis: identifying needs and defining technical solutions.
+  - id: |-
+      databases
+    es: |-
+      Bases de datos: diseño, estructuración y gestión de modelos de datos.
+    en: |-
+      Databases: designing, structuring, and managing data models.
+  - id: |-
+      development
+    es: |-
+      Desarrollo de software: implementación y evolución de funcionalidades de la plataforma.
+    en: |-
+      Software development: implementing and evolving platform features.
+  - id: |-
+      ai
+    es: |-
+      Inteligencia artificial: desarrollo e implementación de capacidades de IA dentro de las soluciones de software.
+    en: |-
+      Artificial intelligence: building and implementing AI capabilities inside the software.
+  - id: |-
+      architecture
+    es: |-
+      Arquitectura: participación en decisiones técnicas sobre el diseño y la organización de las soluciones.
+    en: |-
+      Architecture: taking part in technical decisions about how solutions are designed and organized.
+  - id: |-
+      deployment
+    es: |-
+      Despliegue: puesta en funcionamiento de aplicaciones y nuevas funcionalidades.
+    en: |-
+      Deployment: putting applications and new features into operation.
+  - id: |-
+      tooling
+    es: |-
+      Herramientas y procesos: desarrollo de utilidades internas y optimización de los procesos de trabajo del equipo.
+    en: |-
+      Tools and processes: building internal utilities and improving the team's workflows.

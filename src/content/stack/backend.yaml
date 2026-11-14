@@ -1,0 +1,32 @@
+order: 2
+explore: false
+title:
+  es: |-
+    Backend y APIs
+  en: |-
+    Backend and APIs
+items:
+  - name: |-
+      Node.js
+    icon: |-
+      simple-icons:nodedotjs
+    color: |-
+      #339933
+  - name: |-
+      NestJS
+    icon: |-
+      simple-icons:nestjs
+    color: |-
+      #E0234E
+  - name: |-
+      REST API
+    icon: |-
+      mdi:api
+    color: |-
+      var(--accent)
+  - name: |-
+      GraphQL
+    icon: |-
+      simple-icons:graphql
+    color: |-
+      #E10098
