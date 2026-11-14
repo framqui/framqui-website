@@ -1,6 +1,5 @@
 {
   "nav": {
-    "bio": "BIO",
     "posts": "ESCRITOS",
     "notes": "NOTAS"
   },
@@ -117,11 +116,11 @@
       "description": "Desarrollador de software mid level en Pitalito, Huila. Bitácora sobre backend, productos de software e inteligencia artificial."
     },
     "notes": {
-      "title": "Notas | Andres Ramos - Framqui",
+      "title": "Andres Ramos - Notas",
       "description": "Notas técnicas de Andres Ramos sobre desarrollo de software, productos e inteligencia artificial."
     },
     "posts": {
-      "title": "Escritos | Andres Ramos - Framqui",
+      "title": "Andres Ramos - Escritos",
       "description": "Escritos de Andres Ramos sobre desarrollo de productos, software e inteligencia artificial."
     }
   },

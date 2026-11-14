@@ -1,46 +1,36 @@
-# Astro Starter Kit: Basics
+# Framqui
+
+Sitio personal de Andres Felipe Ramos Quintero (Framqui): perfil, experiencia y un espacio para escritos y notas técnicas. El idioma por defecto es español y el contenido se puede leer también en inglés.
+
+## Desarrollo
 
 ```sh
-pnpm create astro@latest -- --template basics
+pnpm install
+pnpm dev
+pnpm build
+pnpm preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+El servidor de desarrollo queda en `http://localhost:4321`. También se puede dejar en segundo plano con `pnpm exec astro dev --background`, y gestionarlo con `astro dev status`, `astro dev logs` y `astro dev stop`.
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+public/                 favicon, retrato, robots.txt
+src/components/         navegación, perfil, pie y páginas en construcción
+src/constants/          rutas, redes, tema y datos del perfil
+src/i18n/               traducciones es.json y en.json
+src/layouts/            BaseLayout.astro
+src/lib/                localStorage
+src/pages/              /, /notes, /posts y sitemap.xml
+src/styles/global.css   Tailwind y variables de color
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Convenciones
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Los textos visibles viven en `src/i18n/`. El HTML se renderiza en español y el botón de idioma aplica la otra traducción en el cliente.
+- Tecnologías, experiencia, rol, intereses y ubicación se editan en `src/constants/profile.ts`. El perfil y la barra lateral importan ese archivo.
+- Cada página pasa `title` y `description` a `BaseLayout`.
+- El tema y el idioma se guardan en `localStorage` con el prefijo `framqui-`.
+- Los `<script>` que importan módulos los procesa Astro. `is:inline` se usa solo en el script de arranque del layout, que tiene que correr antes de pintar la página.
+- Cuando exista el dominio público, define `site` en `astro.config.mjs`. Las URLs canónicas y el sitemap usan ese origen.

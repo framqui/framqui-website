@@ -1,20 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
+import { CORE_TECH, PROFILE_FACTS, PROFILE_LOCATION, SIDEBAR_INTERESTS } from "../constants/profile.ts";
 import { SOCIAL_LINKS } from "../constants/social.ts";
-
-const TECH_STACK = [
-  { name: "Python", icons: [{ icon: "simple-icons:python", color: "#3776AB" }] },
-  { name: "TypeScript", icons: [{ icon: "simple-icons:typescript", color: "#3178C6" }] },
-  { name: "PostgreSQL", icons: [{ icon: "simple-icons:postgresql", color: "#4169E1" }] },
-  { name: "AWS", icons: [{ icon: "simple-icons:amazonwebservices", color: "#FF9900" }] },
-  {
-    name: "Linux / Bash",
-    icons: [
-      { icon: "simple-icons:linux", color: "#FCC624" },
-      { icon: "simple-icons:gnubash", color: "#4EAA25" },
-    ],
-  },
-];
+import es from "../i18n/es.json";
 ---
 
 <aside
@@ -79,30 +67,23 @@ const TECH_STACK = [
           </div>
         </section>
 
-        <section class="py-6">
-          <h3 class="font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
-            <span data-i18n="details.role">Rol</span>
-          </h3>
-          <div data-i18n="details.roleValue" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-            Desarrollador de software - Mid level
-          </div>
-        </section>
+        {PROFILE_FACTS.map((fact) => (
+            <section class="py-6">
+              <h3 class:list={["font-mono text-xs uppercase tracking-widest text-[var(--muted)]", fact.labelKey === "details.experience" && "mb-3"]}>
+                <span data-i18n={fact.labelKey}>{fact.label}</span>
+              </h3>
+              <div data-i18n={fact.valueKey} class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+                {fact.value}
+              </div>
+            </section>
+        ))}
 
         <section class="py-6">
           <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-            <span data-i18n="details.experience">Experiencia</span>
-          </h3>
-          <div data-i18n="details.experienceValue" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-            Más de 5 años
-          </div>
-        </section>
-
-        <section class="py-6">
-          <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-            <span data-i18n="details.tech">Tecnologías principales</span>
+            <span data-i18n="details.tech">{es.details.tech}</span>
           </h3>
           <ul class="space-y-2.5 font-sans text-sm text-[var(--fg)]">
-            {TECH_STACK.map(({ name, icons }) => (
+            {CORE_TECH.map(({ name, icons }) => (
                 <li class="flex items-center gap-2.5">
                   <span class="flex items-center gap-1.5">
                     {icons.map(({ icon, color }) => (
@@ -122,25 +103,21 @@ const TECH_STACK = [
 
         <section class="py-6">
           <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-            <span data-i18n="details.interests">Intereses</span>
+            <span data-i18n="details.interests">{es.details.interests}</span>
           </h3>
-          <div data-i18n="details.interestSoftware" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-            Desarrollo de software
-          </div>
-          <div data-i18n="details.interestProducts" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-            Creación de productos digitales
-          </div>
-          <div data-i18n="details.interestAi" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-            Inteligencia artificial
-          </div>
+          {SIDEBAR_INTERESTS.map((interest) => (
+              <div data-i18n={interest.key} class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+                {interest.text}
+              </div>
+          ))}
         </section>
 
         <section class="py-6">
           <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-            <span data-i18n="details.location">Ubicación</span>
+            <span data-i18n={PROFILE_LOCATION.labelKey}>{PROFILE_LOCATION.label}</span>
           </h3>
-          <div data-i18n="details.locationValue" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-            Pitalito, Huila, Colombia
+          <div data-i18n={PROFILE_LOCATION.valueKey} class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+            {PROFILE_LOCATION.value}
           </div>
         </section>
       </div>
@@ -164,13 +141,13 @@ const TECH_STACK = [
   </div>
 </aside>
 
-<script>
+<script is:inline>
   const list = document.getElementById('side-list');
-  const topBtn = document.querySelector<HTMLButtonElement>('[data-side-toggle="top"]');
+  const topBtn = document.querySelector('[data-side-toggle="top"]');
   const iconPlus = topBtn?.querySelector('[data-icon-plus]');
   const iconMinus = topBtn?.querySelector('[data-icon-minus]');
 
-  const setOpen = (open: boolean) => {
+  const setOpen = (open) => {
     list?.classList.toggle('hidden', !open);
     topBtn?.setAttribute('aria-expanded', String(open));
     iconPlus?.classList.toggle('hidden', open);
