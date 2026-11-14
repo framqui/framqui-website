@@ -8,12 +8,12 @@ export interface SocialLink {
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    name: "GITHUB",
+    name: "GitHub",
     url: "https://github.com/framqui",
     icon: "simple-icons:github",
   },
   {
-    name: "LINKEDIN",
+    name: "LinkedIn",
     url: "https://linkedin.com/in/framqui",
     icon: "fa6-brands:linkedin",
     color: "#0A66C2",

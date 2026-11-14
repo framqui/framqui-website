@@ -20,25 +20,25 @@ aboutTitle:
     About me
 caption:
   es: |-
-    Transformando el desarrollo de software con inteligencia artificial
+    Desarrollo backend, productos de software e inteligencia artificial.
   en: |-
-    Transforming software development with artificial intelligence
+    Backend development, software products, and artificial intelligence.
 bio:
   - html: true
     es: |-
-      Hola, soy <strong class="font-bold text-[var(--fg)] font-sans">Andres Ramos, </strong>desarrollador de software con más de 5 años de experiencia enfocados principalmente en el desarrollo backend. A inicios de 2026 inicié una transición hacia la <strong class="font-bold text-[var(--fg)] font-sans">creación de productos de software </strong>integrando <strong class="font-bold text-[var(--fg)] font-sans">Inteligencia Artificial </strong>en mis desarrollos y compartiendo activamente lo que aprendo con la comunidad.
+      Hola, soy <strong class="font-semibold text-[var(--fg)]">Andres Ramos</strong>. Llevo más de cinco años desarrollando software, sobre todo en backend. Desde inicios de 2026 me dedico a <strong class="font-semibold text-[var(--fg)]">crear productos</strong> y a integrar <strong class="font-semibold text-[var(--fg)]">inteligencia artificial</strong> en el trabajo. También comparto lo que voy aprendiendo.
     en: |-
-      Hi, I'm <strong class="font-bold text-[var(--fg)] font-sans">Andres Ramos, </strong>a software developer with more than 5 years of experience, focused mainly on backend development. In early 2026 I started moving toward <strong class="font-bold text-[var(--fg)] font-sans">building software products</strong>, integrating <strong class="font-bold text-[var(--fg)] font-sans">artificial intelligence</strong> into my work and actively sharing what I learn with the community.
+      Hi, I'm <strong class="font-semibold text-[var(--fg)]">Andres Ramos</strong>. I have spent more than five years building software, mostly on the backend. Since early 2026 I have focused on <strong class="font-semibold text-[var(--fg)]">building products</strong> and bringing <strong class="font-semibold text-[var(--fg)]">artificial intelligence</strong> into the work. I also share what I learn.
   - html: true
     es: |-
-      Nací en un pueblo muy pequeño y actualmente vivo en <strong class="font-bold text-[var(--fg)] font-sans">Pitalito, Huila, </strong>un lugar reconocido por su café de alta calidad y su cultura cafetera. Fuera de la tecnología, disfruto levantar pesas, escuchar rock y leer sobre filosofía.
+      Nací en un pueblo pequeño y vivo en <strong class="font-semibold text-[var(--fg)]">Pitalito, Huila</strong>, un lugar conocido por su café. Fuera del trabajo levanto pesas, escucho rock y leo filosofía.
     en: |-
-      I was born in a very small town and currently live in <strong class="font-bold text-[var(--fg)] font-sans">Pitalito, Huila, </strong>a place known for its high-quality coffee and its coffee culture. Outside of technology, I enjoy lifting weights, listening to rock, and reading about philosophy.
+      I was born in a small town and I live in <strong class="font-semibold text-[var(--fg)]">Pitalito, Huila</strong>, a place known for its coffee. Outside of work I lift weights, listen to rock, and read philosophy.
   - html: false
     es: |-
-      A lo largo de mi trayectoria he pasado de construir e integrar componentes de software a involucrarme en el ciclo de vida completo de los productos: desde el análisis de problemas y el diseño de soluciones hasta la implementación, arquitectura, despliegue y coordinación técnica.
+      Pasé de construir e integrar piezas de software a acompañar el producto completo: entender el problema, diseñar la solución, implementarla, definir la arquitectura, desplegarla y coordinar el trabajo técnico.
     en: |-
-      Throughout my career I have moved from building and integrating software components to taking part in the full product lifecycle: from analyzing problems and designing solutions to implementation, architecture, deployment, and technical coordination.
+      I moved from building and integrating pieces of software to following a product through its whole life: understanding the problem, designing the solution, implementing it, shaping the architecture, deploying it, and coordinating the technical work.
 siteTitle:
   es: |-
     Este sitio
@@ -47,9 +47,9 @@ siteTitle:
 siteBody:
   html: true
   es: |-
-    Esta página funciona como mi <strong class="font-bold text-[var(--fg)] font-sans">bitácora pública y espacio personal.</strong> Aquí iré compartiendo notas técnicas, reflexiones sobre desarrollo de productos, guías, cursos, proyectos e imágenes en los que me encuentre trabajando. Es un entorno vivo que irá evolucionando a la par de mi crecimiento profesional y personal.
+    Este sitio es mi <strong class="font-semibold text-[var(--fg)]">bitácora pública</strong>. Aquí publicaré notas técnicas, reflexiones sobre productos, guías y el avance de los proyectos en los que trabajo.
   en: |-
-    This page is my <strong class="font-bold text-[var(--fg)] font-sans">public log and personal space.</strong> Here I will share technical notes, reflections on product development, guides, courses, projects, and images of what I am working on. It is a living space that will evolve alongside my professional and personal growth.
+    This site is my <strong class="font-semibold text-[var(--fg)]">public log</strong>. I will publish technical notes, reflections on products, guides, and progress on the projects I am working on.
 interestsTitle:
   es: |-
     Intereses
@@ -67,9 +67,9 @@ stackTitle:
     Tech stack
 stackIntro:
   es: |-
-    Tecnologías que uso para construir software. El último grupo reúne las áreas que quiero seguir explorando.
+    Herramientas con las que construyo software. El último grupo reúne las áreas que quiero seguir explorando.
   en: |-
-    Technologies I use to build software. The last group lists the areas I want to keep exploring.
+    Tools I use to build software. The last group lists the areas I want to keep exploring.
 sidebarInterests:
   - id: |-
       software

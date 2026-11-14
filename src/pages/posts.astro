@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 import UnderConstruction from '../components/UnderConstruction.astro';
 import es from "../i18n/es.json";
 ---
@@ -9,5 +10,13 @@ import es from "../i18n/es.json";
   titleKey="meta.posts.title"
   descriptionKey="meta.posts.description"
 >
-  <UnderConstruction />
+  <div class="min-w-0 flex-1">
+    <PageHeader
+        title={es.pages.postsTitle}
+        description={es.meta.posts.description}
+        titleKey="pages.postsTitle"
+        descriptionKey="meta.posts.description"
+    />
+    <UnderConstruction />
+  </div>
 </BaseLayout>

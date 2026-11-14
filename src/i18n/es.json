@@ -1,7 +1,11 @@
 {
   "nav": {
-    "posts": "ESCRITOS",
-    "notes": "NOTAS"
+    "posts": "Escritos",
+    "notes": "Notas"
+  },
+  "pages": {
+    "postsTitle": "Escritos",
+    "notesTitle": "Notas"
   },
   "a11y": {
     "openMenu": "Abrir menú",
@@ -16,20 +20,20 @@
     "profilePhoto": "Foto de perfil de Andres Ramos"
   },
   "lang": {
-    "current": "ESPAÑOL"
+    "current": "Español"
   },
   "theme": {
-    "light": "CLARO",
-    "dark": "OSCURO"
+    "light": "Claro",
+    "dark": "Oscuro"
   },
   "footer": {
-    "connect": "CONECTA:"
+    "connect": "Contacto"
   },
   "social": {
     "email": "CORREO"
   },
   "details": {
-    "title": "DETALLES",
+    "title": "Detalles",
     "networks": "Redes y contacto",
     "role": "Rol",
     "experience": "Experiencia",
@@ -38,23 +42,23 @@
     "location": "Ubicación"
   },
   "construction": {
-    "title": "Sección en construcción",
-    "body": "Se está picoteando código para la construcción de esta página. Vuelve pronto... Cloc cloc"
+    "title": "En construcción",
+    "body": "Esta sección todavía no tiene contenido. La estoy preparando."
   },
   "meta": {
     "locale": "es_ES",
     "imageAlt": "Retrato de Andres Ramos",
     "home": {
       "title": "Andres Ramos - Framqui",
-      "description": "Desarrollador de software de nivel medio en Pitalito, Huila. Bitácora sobre backend, productos de software e inteligencia artificial."
+      "description": "Desarrollador de software en Pitalito, Huila. Escribo sobre backend, productos e inteligencia artificial."
     },
     "notes": {
       "title": "Andres Ramos - Notas",
-      "description": "Notas técnicas de Andres Ramos sobre desarrollo de software, productos e inteligencia artificial."
+      "description": "Notas técnicas de Andres Ramos sobre software, productos e inteligencia artificial."
     },
     "posts": {
       "title": "Andres Ramos - Escritos",
-      "description": "Escritos de Andres Ramos sobre desarrollo de productos, software e inteligencia artificial."
+      "description": "Escritos de Andres Ramos sobre productos, software e inteligencia artificial."
     }
   }
 }

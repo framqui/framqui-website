@@ -15,59 +15,59 @@ period:
     August 2025 – Present
 description:
   es: |-
-    Actualmente trabajo en Novadynamics, participando en el desarrollo de una solución tecnológica para contact centers virtuales. La plataforma integra chat, telefonía, herramientas de gestión e inteligencia artificial para centralizar la operación en un mismo entorno.
+    Trabajo en Novadynamics en una plataforma para centros de contacto virtuales. Reúne chat, telefonía, herramientas de gestión e inteligencia artificial en un solo lugar.
   en: |-
-    I currently work at Novadynamics, helping build a technology solution for virtual contact centers. The platform brings together chat, telephony, management tools, and artificial intelligence so the operation lives in one place.
+    I work at Novadynamics on a platform for virtual contact centers. It brings chat, telephony, management tools, and artificial intelligence into one place.
 sectionTitle:
   es: |-
-    Áreas de trabajo
+    Qué hago
   en: |-
-    Areas of work
+    What I do
 linkText:
   es: |-
-    Visitar Novadynamics ↗
+    Sitio de Novadynamics
   en: |-
-    Visit Novadynamics ↗
+    Novadynamics website
 items:
   - id: |-
       requirements
     es: |-
-      Análisis de requerimientos: identificación de necesidades y definición de soluciones técnicas.
+      Requerimientos: identificar necesidades y definir la solución técnica.
     en: |-
-      Requirements analysis: identifying needs and defining technical solutions.
+      Requirements: identifying needs and defining the technical solution.
   - id: |-
       databases
     es: |-
-      Bases de datos: diseño, estructuración y gestión de modelos de datos.
+      Bases de datos: diseñar y mantener los modelos de datos.
     en: |-
-      Databases: designing, structuring, and managing data models.
+      Databases: designing and maintaining data models.
   - id: |-
       development
     es: |-
-      Desarrollo de software: implementación y evolución de funcionalidades de la plataforma.
+      Desarrollo: implementar y hacer evolucionar las funciones de la plataforma.
     en: |-
-      Software development: implementing and evolving platform features.
+      Development: implementing and evolving the platform's features.
   - id: |-
       ai
     es: |-
-      Inteligencia artificial: desarrollo e implementación de capacidades de IA dentro de las soluciones de software.
+      Inteligencia artificial: incorporar capacidades de IA en el producto.
     en: |-
-      Artificial intelligence: building and implementing AI capabilities inside the software.
+      Artificial intelligence: adding AI capabilities to the product.
   - id: |-
       architecture
     es: |-
-      Arquitectura: participación en decisiones técnicas sobre el diseño y la organización de las soluciones.
+      Arquitectura: participar en cómo se diseñan y se organizan las soluciones.
     en: |-
-      Architecture: taking part in technical decisions about how solutions are designed and organized.
+      Architecture: taking part in how solutions are designed and organized.
   - id: |-
       deployment
     es: |-
-      Despliegue: puesta en funcionamiento de aplicaciones y nuevas funcionalidades.
+      Despliegue: poner en marcha aplicaciones y funciones nuevas.
     en: |-
-      Deployment: putting applications and new features into operation.
+      Deployment: releasing applications and new features.
   - id: |-
       tooling
     es: |-
-      Herramientas y procesos: desarrollo de utilidades internas y optimización de los procesos de trabajo del equipo.
+      Herramientas internas: utilidades y mejoras en la forma de trabajar del equipo.
     en: |-
-      Tools and processes: building internal utilities and improving the team's workflows.
+      Internal tools: utilities and improvements to how the team works.

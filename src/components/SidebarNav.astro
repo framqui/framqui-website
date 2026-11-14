@@ -33,7 +33,7 @@ const currentPath = Astro.url.pathname.endsWith("/") && Astro.url.pathname.lengt
 <div id="overlay" class="fixed inset-0 z-40 hidden bg-black/70 backdrop-blur-sm md:hidden"></div>
 
 <!-- HEADER ON MOBILE -->
-<header class="flex items-center justify-between py-4 px-6 md:hidden">
+<header class="flex items-center justify-between px-6 py-4 md:hidden">
   <a href={ROUTES.HOME} class="whitespace-nowrap text-xl font-bold no-underline">
     <span class="text-[var(--accent)]">[</span>
     Framqui
@@ -57,7 +57,7 @@ const currentPath = Astro.url.pathname.endsWith("/") && Astro.url.pathname.lengt
 <aside
     id="sidebar-menu"
     inert
-    class="fixed top-0 bottom-0 left-0 z-50 flex w-64 -translate-x-full flex-col justify-between bg-[var(--bg)] p-6 pb-6 transition-transform duration-200 md:top-4 md:bottom-8 md:left-4 md:z-auto md:w-[160px] md:translate-x-0 md:bg-transparent md:p-0"
+    class="fixed top-0 bottom-0 left-0 z-50 flex w-64 -translate-x-full flex-col justify-between bg-[var(--bg)] p-6 transition-transform duration-200 md:top-4 md:bottom-8 md:left-4 md:z-auto md:w-[160px] md:translate-x-0 md:bg-transparent md:p-0"
 >
   <div>
     <!-- CLOSE BUTTON ON MOBILE -->
@@ -89,8 +89,8 @@ const currentPath = Astro.url.pathname.endsWith("/") && Astro.url.pathname.lengt
                 href={link.url}
                 data-i18n={`nav.${link.key}`}
                 class:list={[
-                  "text-xs tracking-widest transition-colors duration-200 no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4",
-                  isActive ? "text-[var(--accent)] font-bold" : "text-[var(--fg)]"
+                  "text-xs uppercase tracking-widest no-underline transition-colors duration-200 hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4",
+                  isActive ? "font-bold text-[var(--accent)]" : "text-[var(--fg)]"
                 ]}
             >
               {es.nav[link.key]}
@@ -101,14 +101,14 @@ const currentPath = Astro.url.pathname.endsWith("/") && Astro.url.pathname.lengt
   </div>
 
   <!-- VISUAL SETTING CONTROL -->
-  <div class="flex flex-col gap-2 text-xs font-mono">
+  <div class="flex flex-col gap-2 font-mono text-xs">
     {controls.map((control) => (
         <button
             type="button"
             id={control.id}
             data-i18n-aria={control.ariaKey}
             aria-label={control.aria}
-            class="text-left bg-transparent border-none cursor-pointer p-0 text-xs tracking-widest text-[var(--fg)] no-underline hover:underline transition-colors duration-200"
+            class="cursor-pointer border-none bg-transparent p-0 text-left font-mono text-xs uppercase tracking-widest text-[var(--fg)] transition-colors duration-200 hover:underline"
         >
           <span class="inline-block whitespace-nowrap">
             <span class="text-[var(--accent)] font-bold">[</span>

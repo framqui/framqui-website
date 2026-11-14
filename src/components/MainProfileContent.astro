@@ -3,56 +3,43 @@ import { Icon } from "astro-icon/components";
 import { SOCIAL_LINKS } from "../constants/social.ts";
 import es from "../i18n/es.json";
 import { loadProfile } from "../lib/profile.ts";
+import PageHeader from "./PageHeader.astro";
 
 const { profile, interests, experience, stack } = await loadProfile();
 ---
 
 <div class="min-w-0 flex-1 lg:order-1">
-  <h1 class="font-sans text-4xl font-bold leading-[1.00] tracking-tight text-[var(--fg)] sm:text-5xl">
-    Andres Felipe Ramos Quintero
-  </h1>
-
-  <p data-i18n="profile.role" class="mt-4 max-w-xl font-sans text-lg leading-relaxed text-[var(--muted)]">
-    {profile.role.es}
-  </p>
-
-  <!-- SECTION FOR VISIBLE NETWORKS ON MOBILE -->
-  <div class="lg:hidden mb-4">
-    <div class="flex flex-wrap gap-x-2 font-mono text-sm uppercase tracking-widest">
-      {SOCIAL_LINKS.map((link, index) => {
-        const external = link.url.startsWith("http");
-        return (
-            <>
-              <a
-                  href={link.url}
-                  target={external ? "_blank" : undefined}
-                  rel={external ? "noopener noreferrer" : undefined}
-                  class="no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4 text-[var(--fg)] font-mono"
-              >
-                {link.i18nKey ? <span data-i18n={link.i18nKey}>{link.name}</span> : link.name}
-              </a>
-              {index < SOCIAL_LINKS.length - 1 && (
-                  <span class="text-[var(--muted)] select-none font-mono">|</span>
-              )}
-            </>
-        );
-      })}
+  <PageHeader title="Andres Felipe Ramos Quintero" description={profile.role.es} descriptionKey="profile.role">
+    <div class="mb-1 mt-5 lg:hidden">
+      <div class="flex flex-wrap gap-x-2 gap-y-1 font-mono text-sm uppercase tracking-widest">
+        {SOCIAL_LINKS.map((link, index) => {
+          const external = link.url.startsWith("http");
+          return (
+              <>
+                <a
+                    href={link.url}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    class="text-[var(--fg)] no-underline hover:underline hover:decoration-[var(--accent)] hover:underline-offset-4"
+                >
+                  {link.i18nKey ? <span data-i18n={link.i18nKey}>{link.name}</span> : link.name}
+                </a>
+                {index < SOCIAL_LINKS.length - 1 && (
+                    <span class="select-none text-[var(--line)]" aria-hidden="true">/</span>
+                )}
+              </>
+          );
+        })}
+      </div>
     </div>
-  </div>
+  </PageHeader>
 
-  <hr class="mt-6 w-full border-t-2 border-[var(--accent)]" />
-
-  <!-- ABOUT ME -->
-  <div class="mt-10 mb-10">
-    <h2 data-i18n="profile.aboutTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+  <section class="sheet">
+    <h2 data-i18n="profile.aboutTitle" class="sheet-title font-sans">
       {profile.aboutTitle.es}
     </h2>
-    <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
-  </div>
-
-  <div class="grid grid-cols-1 items-start gap-8 xl:grid-cols-[220px_minmax(0,1fr)] xl:gap-12 2xl:grid-cols-[260px_minmax(0,1fr)]">
-    <figure class="flex flex-col items-center text-center">
-      <div class="w-40 overflow-hidden rounded-sm border border-[var(--muted)]/20 sm:w-48 xl:w-full max-w-[200px]">
+    <div class="mt-6 grid grid-cols-1 items-start gap-6 md:grid-cols-[200px_minmax(0,1fr)] md:gap-10">
+      <figure class="mx-auto w-[200px] text-center md:mx-0">
         <img
             src="/me.webp"
             alt={es.a11y.profilePhoto}
@@ -61,131 +48,103 @@ const { profile, interests, experience, stack } = await loadProfile();
             height="532"
             loading="lazy"
             decoding="async"
-            class="block h-auto w-full"
+            class="block w-full"
         />
-      </div>
-      <figcaption data-i18n="profile.caption" class="mt-4 max-w-[200px] font-sans text-sm font-bold leading-relaxed text-[var(--fg)]">
-        {profile.caption.es}
-      </figcaption>
-    </figure>
-
-    <div class="flex max-w-3xl flex-col gap-7 font-sans text-sm leading-relaxed text-[var(--muted)]">
-      <div class="flex flex-col gap-4">
+        <figcaption data-i18n="profile.caption" class="mt-4 font-sans text-sm font-bold leading-snug text-[var(--fg)]">
+          {profile.caption.es}
+        </figcaption>
+      </figure>
+      <div class="flex max-w-3xl flex-col gap-4 font-sans text-[0.9375rem] leading-relaxed text-[var(--muted)]">
         {profile.bio.map((paragraph, index) => (
             paragraph.html
-                ? <p class="font-sans" data-i18n-html={`profile.bio.${index}`} set:html={paragraph.es} />
-                : <p class="font-sans" data-i18n={`profile.bio.${index}`}>{paragraph.es}</p>
+                ? <p data-i18n-html={`profile.bio.${index}`} set:html={paragraph.es} />
+                : <p data-i18n={`profile.bio.${index}`}>{paragraph.es}</p>
         ))}
-      </div>
-
-      <div>
-        <h3 data-i18n="profile.siteTitle" class="font-sans text-sm font-bold text-[var(--fg)]">
-          {profile.siteTitle.es}
-        </h3>
-        <p class="mt-2 font-sans" data-i18n-html="profile.siteBody" set:html={profile.siteBody.es} />
+        <div>
+          <h3 data-i18n="profile.siteTitle" class="font-sans text-sm font-semibold text-[var(--fg)]">
+            {profile.siteTitle.es}
+          </h3>
+          <p class="mt-1.5" data-i18n-html="profile.siteBody" set:html={profile.siteBody.es} />
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- INTERESTS SECTION -->
-  <div class="mt-10 mb-10">
-    <h2 data-i18n="profile.interestsTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+  <section class="sheet">
+    <h2 data-i18n="profile.interestsTitle" class="sheet-title font-sans">
       {profile.interestsTitle.es}
     </h2>
-    <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
-  </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
     {interests.map((entry) => (
-        <div class="flex flex-col rounded-sm border border-[var(--muted)]/20 bg-transparent p-5">
-          <h3 data-i18n={`interests.${entry.id}.title`} class="mb-3 font-sans text-lg font-bold text-[var(--fg)]">
+        <article class="row">
+          <h3 data-i18n={`interests.${entry.id}.title`} class="row-label font-sans">
             {entry.data.title.es}
           </h3>
-          <p data-i18n={`interests.${entry.id}.description`} class="font-sans text-sm leading-relaxed text-[var(--muted)]">
+          <p data-i18n={`interests.${entry.id}.description`} class="row-body">
             {entry.data.description.es}
           </p>
-        </div>
+        </article>
     ))}
-  </div>
+  </section>
 
-  <!-- EXPERIENCE SECTION -->
-  <div class="mt-10 mb-10">
-    <h2 data-i18n="profile.experienceTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+  <section class="sheet">
+    <h2 data-i18n="profile.experienceTitle" class="sheet-title font-sans">
       {profile.experienceTitle.es}
     </h2>
-    <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
     {experience.map((entry) => (
-        <div class="flex flex-col gap-4 rounded-sm border border-[var(--muted)]/20 bg-transparent p-6 font-sans">
+        <article class="row">
           <div>
-            <h3 class="font-sans text-lg font-bold text-[var(--fg)]">
-              {entry.data.company}
-            </h3>
-            <p data-i18n={`experience.${entry.id}.role`} class="mt-1 font-sans text-sm text-[var(--muted)]">
-              {entry.data.role.es}
-            </p>
+            <h3 class="row-label font-sans">{entry.data.company}</h3>
             <p data-i18n={`experience.${entry.id}.period`} class="mt-1 font-mono text-xs tracking-wide text-[var(--fg)]">
               {entry.data.period.es}
             </p>
           </div>
-
-          <p data-i18n={`experience.${entry.id}.description`} class="font-sans text-sm leading-relaxed text-[var(--muted)]">
-            {entry.data.description.es}
-          </p>
-
-          <div>
-            <h4 data-i18n={`experience.${entry.id}.sectionTitle`} class="mb-2 font-sans text-sm font-bold text-[var(--fg)]">
+          <div class="row-body">
+            <p data-i18n={`experience.${entry.id}.role`} class="font-medium text-[var(--fg)]">
+              {entry.data.role.es}
+            </p>
+            <p data-i18n={`experience.${entry.id}.description`} class="mt-3">
+              {entry.data.description.es}
+            </p>
+            <h4 data-i18n={`experience.${entry.id}.sectionTitle`} class="mb-2 mt-4 font-sans text-sm font-semibold text-[var(--fg)]">
               {entry.data.sectionTitle.es}
             </h4>
-            <ul class="font-sans list-inside list-disc space-y-1.5 text-sm leading-relaxed text-[var(--muted)]">
+            <ul class="list-disc space-y-1.5 pl-5">
               {entry.data.items.map((item) => (
-                  <li data-i18n={`experience.${entry.id}.items.${item.id}`} class="font-sans">{item.es}</li>
+                  <li data-i18n={`experience.${entry.id}.items.${item.id}`}>{item.es}</li>
               ))}
             </ul>
-          </div>
-
-          <div class="mt-2 border-t border-[var(--muted)]/15 pt-4">
             <a
                 href={entry.data.linkUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-i18n={`experience.${entry.id}.linkText`}
-                class="font-sans text-sm font-bold text-[var(--fg)] no-underline hover:underline hover:decoration-[var(--accent)] hover:underline-offset-4"
+                class="mt-4 inline-block font-semibold text-[var(--accent)] no-underline hover:underline hover:underline-offset-4"
             >
               {entry.data.linkText.es}
             </a>
           </div>
-        </div>
+        </article>
     ))}
-  </div>
+  </section>
 
-  <!-- TECH STACK SECTION -->
-  <div class="mt-10 mb-10">
-    <h2 data-i18n="profile.stackTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+  <section class="sheet">
+    <h2 data-i18n="profile.stackTitle" class="sheet-title font-sans">
       {profile.stackTitle.es}
     </h2>
-    <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
-  </div>
-
-  <p data-i18n="profile.stackIntro" class="mb-8 font-sans text-sm leading-relaxed text-[var(--muted)]">
-    {profile.stackIntro.es}
-  </p>
-
-  <div class="flex flex-col gap-6 font-sans">
+    <p data-i18n="profile.stackIntro" class="row-body max-w-3xl py-4">
+      {profile.stackIntro.es}
+    </p>
     {stack.map((group) => (
-        <div>
-          <h3 data-i18n={`techGroups.${group.id}`} class="mb-3 font-sans text-sm font-bold text-[var(--fg)]">
+        <div class="row">
+          <h3 data-i18n={`techGroups.${group.id}`} class="row-label font-sans">
             {group.data.title.es}
           </h3>
-          <ul class="flex flex-wrap gap-2 font-sans">
+          <ul class="flex flex-wrap gap-x-4 gap-y-2">
             {group.data.items.map((item) => (
-                <li class="inline-flex items-center gap-2 rounded-sm border border-[var(--muted)]/20 px-3 py-1.5 font-sans text-sm text-[var(--fg)]">
+                <li class="inline-flex items-center gap-1.5 font-sans text-sm text-[var(--fg)]">
                   <Icon
                       name={item.icon}
-                      class="h-4 w-4 shrink-0"
-                      style={item.color ? `color: ${item.color}` : undefined}
+                      class="h-3.5 w-3.5 shrink-0 text-[var(--muted)]"
                       aria-hidden="true"
                   />
                   {typeof item.name === "string"
@@ -196,5 +155,5 @@ const { profile, interests, experience, stack } = await loadProfile();
           </ul>
         </div>
     ))}
-  </div>
+  </section>
 </div>

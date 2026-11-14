@@ -1,7 +1,11 @@
 {
   "nav": {
-    "posts": "WRITING",
-    "notes": "NOTES"
+    "posts": "Writing",
+    "notes": "Notes"
+  },
+  "pages": {
+    "postsTitle": "Writing",
+    "notesTitle": "Notes"
   },
   "a11y": {
     "openMenu": "Open menu",
@@ -16,20 +20,20 @@
     "profilePhoto": "Profile photo of Andres Ramos"
   },
   "lang": {
-    "current": "ENGLISH"
+    "current": "English"
   },
   "theme": {
-    "light": "LIGHT",
-    "dark": "DARK"
+    "light": "Light",
+    "dark": "Dark"
   },
   "footer": {
-    "connect": "CONNECT:"
+    "connect": "Contact"
   },
   "social": {
     "email": "EMAIL"
   },
   "details": {
-    "title": "DETAILS",
+    "title": "Details",
     "networks": "Networks and contact",
     "role": "Role",
     "experience": "Experience",
@@ -38,23 +42,23 @@
     "location": "Location"
   },
   "construction": {
-    "title": "Section under construction",
-    "body": "Code is being pecked together to build this page. Come back soon... Cluck cluck"
+    "title": "In progress",
+    "body": "This section does not have content yet. I am preparing it."
   },
   "meta": {
     "locale": "en_US",
     "imageAlt": "Portrait of Andres Ramos",
     "home": {
       "title": "Andres Ramos - Framqui",
-      "description": "Mid-level software developer in Pitalito, Huila. A public log on backend development, software products, and artificial intelligence."
+      "description": "Software developer in Pitalito, Huila. I write about backend, products, and artificial intelligence."
     },
     "notes": {
       "title": "Andres Ramos - Notes",
-      "description": "Technical notes by Andres Ramos on software development, products, and artificial intelligence."
+      "description": "Technical notes by Andres Ramos on software, products, and artificial intelligence."
     },
     "posts": {
       "title": "Andres Ramos - Writing",
-      "description": "Writing by Andres Ramos on product development, software, and artificial intelligence."
+      "description": "Writing by Andres Ramos on products, software, and artificial intelligence."
     }
   }
 }

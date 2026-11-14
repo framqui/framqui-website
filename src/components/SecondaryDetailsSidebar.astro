@@ -27,7 +27,7 @@ const coreTech = profile.core.map((entry) => ({
 >
   <div class="flex flex-col gap-6 lg:gap-8">
     <div class="flex items-center justify-between">
-      <h2 class="font-mono text-md font-bold uppercase tracking-widest text-[var(--muted)]">
+      <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-[var(--muted)]">
         <span data-i18n="details.title">DETALLES</span>
       </h2>
       <!-- COLLAPSIBLE ON MOBILE -->
@@ -50,13 +50,13 @@ const coreTech = profile.core.map((entry) => ({
     </div>
 
     <div id="side-list" class="hidden lg:block">
-      <div class="divide-y divide-[var(--muted)]/40 border-b border-[var(--muted)]/40">
-        <section class="pb-6">
-          <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+      <div class="divide-y divide-[var(--line)]">
+        <section class="pb-5">
+          <h3 class="mb-3 font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
             <span data-i18n="details.networks">Redes y contacto</span>
           </h3>
-          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
-            <ul class="flex flex-col items-start gap-3 font-mono text-xs uppercase tracking-widest">
+          <div class="font-sans text-sm text-[var(--fg)]">
+            <ul class="flex flex-col items-start gap-2.5 font-mono text-xs uppercase tracking-widest">
               {SOCIAL_LINKS.map((link) => {
                 const external = link.url.startsWith("http");
                 return (
@@ -65,7 +65,7 @@ const coreTech = profile.core.map((entry) => ({
                           href={link.url}
                           target={external ? "_blank" : undefined}
                           rel={external ? "noopener noreferrer" : undefined}
-                          class="inline-flex items-center gap-1.5 border-b-2 border-transparent pb-1 text-[var(--fg)] no-underline hover:border-[var(--accent)]"
+                          class="inline-flex items-center gap-2 text-[var(--fg)] no-underline hover:underline hover:decoration-[var(--accent)] hover:underline-offset-4"
                       >
                         <Icon
                             name={link.icon}
@@ -83,8 +83,8 @@ const coreTech = profile.core.map((entry) => ({
         </section>
 
         {facts.map((fact) => (
-            <section class="py-6">
-              <h3 class:list={["font-mono text-xs uppercase tracking-widest text-[var(--muted)]", fact.spaced && "mb-3"]}>
+            <section class="py-5">
+              <h3 class="mb-1.5 font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
                 <span data-i18n={fact.labelKey}>{fact.label}</span>
               </h3>
               <div data-i18n={fact.valueKey} class="mt-0.5 font-sans text-sm text-[var(--fg)]">
@@ -93,8 +93,8 @@ const coreTech = profile.core.map((entry) => ({
             </section>
         ))}
 
-        <section class="py-6">
-          <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+        <section class="py-5">
+          <h3 class="mb-3 font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
             <span data-i18n="details.tech">{es.details.tech}</span>
           </h3>
           <ul class="space-y-2.5 font-sans text-sm text-[var(--fg)]">
@@ -116,8 +116,8 @@ const coreTech = profile.core.map((entry) => ({
           </ul>
         </section>
 
-        <section class="py-6">
-          <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+        <section class="py-5">
+          <h3 class="mb-1.5 font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
             <span data-i18n="details.interests">{es.details.interests}</span>
           </h3>
           {profile.sidebarInterests.map((interest) => (
@@ -127,8 +127,8 @@ const coreTech = profile.core.map((entry) => ({
           ))}
         </section>
 
-        <section class="py-6">
-          <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
+        <section class="py-5">
+          <h3 class="mb-1.5 font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
             <span data-i18n="details.location">{es.details.location}</span>
           </h3>
           <div data-i18n="profile.location" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
