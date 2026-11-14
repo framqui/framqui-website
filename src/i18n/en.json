@@ -1,11 +1,9 @@
 {
   "nav": {
-    "posts": "Writing",
-    "notes": "Notes"
+    "posts": "Writing"
   },
   "pages": {
-    "postsTitle": "Writing",
-    "notesTitle": "Notes"
+    "postsTitle": "Writing"
   },
   "a11y": {
     "openMenu": "Open menu",
@@ -42,8 +40,8 @@
     "location": "Location"
   },
   "construction": {
-    "title": "In progress",
-    "body": "This section does not have content yet. I am preparing it."
+    "title": "Page under construction",
+    "body": "Currently pecking code to build this page."
   },
   "meta": {
     "locale": "en_US",
@@ -51,10 +49,6 @@
     "home": {
       "title": "Andres Ramos - Framqui",
       "description": "Software developer in Pitalito, Huila. I write about backend, products, and artificial intelligence."
-    },
-    "notes": {
-      "title": "Andres Ramos - Notes",
-      "description": "Technical notes by Andres Ramos on software, products, and artificial intelligence."
     },
     "posts": {
       "title": "Andres Ramos - Writing",

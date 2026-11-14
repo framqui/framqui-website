@@ -1,11 +1,9 @@
 {
   "nav": {
-    "posts": "Escritos",
-    "notes": "Notas"
+    "posts": "Escritos"
   },
   "pages": {
-    "postsTitle": "Escritos",
-    "notesTitle": "Notas"
+    "postsTitle": "Escritos"
   },
   "a11y": {
     "openMenu": "Abrir menú",
@@ -42,8 +40,8 @@
     "location": "Ubicación"
   },
   "construction": {
-    "title": "En construcción",
-    "body": "Esta sección todavía no tiene contenido. La estoy preparando."
+    "title": "Página en construcción",
+    "body": "Actualmente picoteando código para construir esta página."
   },
   "meta": {
     "locale": "es_ES",
@@ -51,10 +49,6 @@
     "home": {
       "title": "Andres Ramos - Framqui",
       "description": "Desarrollador de software en Pitalito, Huila. Escribo sobre backend, productos e inteligencia artificial."
-    },
-    "notes": {
-      "title": "Andres Ramos - Notas",
-      "description": "Notas técnicas de Andres Ramos sobre software, productos e inteligencia artificial."
     },
     "posts": {
       "title": "Andres Ramos - Escritos",
