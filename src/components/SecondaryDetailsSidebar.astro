@@ -19,12 +19,13 @@ const TECH_STACK = [
 
 <aside
     class="mb-8 w-full text-left lg:order-2 lg:mb-0 lg:w-64 lg:shrink-0"
+    data-i18n-aria="a11y.secondaryDetails"
     aria-label="Detalles secundarios"
 >
   <div class="flex flex-col gap-6 lg:gap-8">
     <div class="flex items-center justify-between">
       <h2 class="font-mono text-md font-bold uppercase tracking-widest text-[var(--muted)]">
-        DETALLES
+        <span data-i18n="details.title">DETALLES</span>
       </h2>
       <!-- COLLAPSIBLE ON MOBILE -->
       <button
@@ -32,6 +33,7 @@ const TECH_STACK = [
           data-side-toggle="top"
           aria-expanded="false"
           aria-controls="side-list"
+          data-i18n-aria="a11y.toggleDetails"
           aria-label="Mostrar u ocultar información"
           class="mr-2 cursor-pointer text-[var(--fg)] lg:hidden"
       >
@@ -48,7 +50,7 @@ const TECH_STACK = [
       <div class="divide-y divide-[var(--muted)]/40 border-b border-[var(--muted)]/40">
         <section class="pb-6">
           <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-            Redes y contacto
+            <span data-i18n="details.networks">Redes y contacto</span>
           </h3>
           <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
             <ul class="flex flex-col items-start gap-3 font-mono text-xs uppercase tracking-widest">
@@ -68,7 +70,7 @@ const TECH_STACK = [
                             style={link.color ? `color: ${link.color}` : undefined}
                             aria-hidden="true"
                         />
-                        {link.name}
+                        {link.i18nKey ? <span data-i18n={link.i18nKey}>{link.name}</span> : link.name}
                       </a>
                     </li>
                 );
@@ -79,25 +81,25 @@ const TECH_STACK = [
 
         <section class="py-6">
           <h3 class="font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
-            Rol
+            <span data-i18n="details.role">Rol</span>
           </h3>
-          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+          <div data-i18n="details.roleValue" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
             Desarrollador de software - Mid level
           </div>
         </section>
 
         <section class="py-6">
           <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-            Experiencia
+            <span data-i18n="details.experience">Experiencia</span>
           </h3>
-          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+          <div data-i18n="details.experienceValue" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
             Más de 5 años
           </div>
         </section>
 
         <section class="py-6">
           <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-            Tecnologías principales
+            <span data-i18n="details.tech">Tecnologías principales</span>
           </h3>
           <ul class="space-y-2.5 font-sans text-sm text-[var(--fg)]">
             {TECH_STACK.map(({ name, icons }) => (
@@ -120,24 +122,24 @@ const TECH_STACK = [
 
         <section class="py-6">
           <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-            Intereses
+            <span data-i18n="details.interests">Intereses</span>
           </h3>
-          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+          <div data-i18n="details.interestSoftware" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
             Desarrollo de software
           </div>
-          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+          <div data-i18n="details.interestProducts" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
             Creación de productos digitales
           </div>
-          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+          <div data-i18n="details.interestAi" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
             Inteligencia artificial
           </div>
         </section>
 
         <section class="py-6">
           <h3 class="font-mono text-xs mb-3 uppercase tracking-widest text-[var(--muted)]">
-            Ubicación
+            <span data-i18n="details.location">Ubicación</span>
           </h3>
-          <div class="mt-0.5 font-sans text-sm text-[var(--fg)]">
+          <div data-i18n="details.locationValue" class="mt-0.5 font-sans text-sm text-[var(--fg)]">
             Pitalito, Huila, Colombia
           </div>
         </section>
@@ -149,6 +151,7 @@ const TECH_STACK = [
             type="button"
             data-side-toggle="bottom"
             aria-controls="side-list"
+            data-i18n-aria="a11y.hideDetails"
             aria-label="Ocultar información"
             class="mr-2 cursor-pointer text-[var(--fg)]"
         >

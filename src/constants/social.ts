@@ -3,6 +3,7 @@ export interface SocialLink {
   url: string;
   icon: string;
   color?: string;
+  i18nKey?: string;
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
@@ -19,6 +20,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     name: "CORREO",
+    i18nKey: "social.email",
     url: "mailto:andfera201@gmail.com",
     icon: "simple-icons:gmail",
     color: "#EA4335",

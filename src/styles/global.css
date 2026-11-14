@@ -7,6 +7,10 @@ body {
   height: 100%;
 }
 
+html.i18n-pending body {
+  visibility: hidden;
+}
+
 @theme {
   --font-sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;

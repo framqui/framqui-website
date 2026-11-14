@@ -13,12 +13,22 @@ import SidebarNav from "../components/SidebarNav.astro";
   <title>Andres Ramos - Framqui</title>
   <script is:inline>
     (function() {
-      const stored = localStorage.getItem('framqui-theme');
-      if (stored === 'light') {
-        document.documentElement.classList.add('light');
-      } else if (!stored && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        document.documentElement.classList.add('light');
-      }
+      try {
+        const storedTheme = localStorage.getItem('framqui-theme');
+        if (storedTheme === 'light') {
+          document.documentElement.classList.add('light');
+        } else if (!storedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.classList.add('light');
+        }
+
+        if (localStorage.getItem('framqui-lang') === 'en') {
+          document.documentElement.lang = 'en';
+          document.documentElement.classList.add('i18n-pending');
+          window.setTimeout(function () {
+            document.documentElement.classList.remove('i18n-pending');
+          }, 2500);
+        }
+      } catch (e) {}
     })();
   </script>
 </head>

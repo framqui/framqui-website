@@ -1,0 +1,122 @@
+{
+  "nav": {
+    "bio": "BIO",
+    "posts": "ESCRITOS",
+    "notes": "NOTAS"
+  },
+  "a11y": {
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "toggleLang": "Cambiar idioma",
+    "toggleTheme": "Cambiar tema",
+    "secondaryDetails": "Detalles secundarios",
+    "toggleDetails": "Mostrar u ocultar información",
+    "hideDetails": "Ocultar información",
+    "construction": "Un pollo picoteando unos y ceros"
+  },
+  "lang": {
+    "current": "ESPAÑOL"
+  },
+  "theme": {
+    "light": "CLARO",
+    "dark": "OSCURO"
+  },
+  "footer": {
+    "connect": "CONECTA:"
+  },
+  "social": {
+    "email": "CORREO"
+  },
+  "details": {
+    "title": "DETALLES",
+    "networks": "Redes y contacto",
+    "role": "Rol",
+    "roleValue": "Desarrollador de software - Mid level",
+    "experience": "Experiencia",
+    "experienceValue": "Más de 5 años",
+    "tech": "Tecnologías principales",
+    "interests": "Intereses",
+    "interestSoftware": "Desarrollo de software",
+    "interestProducts": "Creación de productos digitales",
+    "interestAi": "Inteligencia artificial",
+    "location": "Ubicación",
+    "locationValue": "Pitalito, Huila, Colombia"
+  },
+  "construction": {
+    "title": "Sección en construcción",
+    "body": "Se está picoteando código para la construcción de esta página. Vuelve pronto... Cloc cloc"
+  },
+  "profile": {
+    "role": "Desarrollador de software mid level",
+    "aboutTitle": "Sobre mí",
+    "caption": "Transformando el desarrollo de software con inteligencia artificial",
+    "bio1": "Hola, soy <strong class=\"font-bold text-[var(--fg)] font-sans\">Andres Ramos, </strong>desarrollador de software con más de 5 años de experiencia enfocados principalmente en el desarrollo backend. A inicios de 2026 inicié una transición hacia la <strong class=\"font-bold text-[var(--fg)] font-sans\">creación de productos de software </strong>integrando <strong class=\"font-bold text-[var(--fg)] font-sans\">Inteligencia Artificial </strong>en mis desarrollos y compartiendo activamente lo que aprendo con la comunidad.",
+    "bio2": "Nací en un pueblo muy pequeño y actualmente vivo en <strong class=\"font-bold text-[var(--fg)] font-sans\">Pitalito, Huila, </strong>un lugar reconocido por su café de alta calidad y su cultura cafetera. Fuera de la tecnología, disfruto levantar pesas, escuchar rock y leer sobre filosofía.",
+    "bio3": "A lo largo de mi trayectoria he pasado de construir e integrar componentes de software a involucrarme en el ciclo de vida completo de los productos: desde el análisis de problemas y el diseño de soluciones hasta la implementación, arquitectura, despliegue y coordinación técnica.",
+    "siteTitle": "Este sitio",
+    "siteBody": "Esta página funciona como mi <strong class=\"font-bold text-[var(--fg)] font-sans\">bitácora pública y espacio personal.</strong> Aquí iré compartiendo notas técnicas, reflexiones sobre desarrollo de productos, guías, cursos, proyectos e imágenes en los que me encuentre trabajando. Es un entorno vivo que irá evolucionando a la par de mi crecimiento profesional y personal.",
+    "interestsTitle": "Intereses",
+    "experienceTitle": "Experiencia profesional",
+    "stackTitle": "Stack tecnológico",
+    "stackIntro": "Tecnologías y herramientas que me interesa aprender, explorar y seguir incorporando a mi desarrollo profesional."
+  },
+  "interests": {
+    "software": {
+      "title": "Desarrollo de software",
+      "description": "Construir soluciones modulares, mantenibles y bien estructuradas, prestando atención a la calidad del código, la organización de los componentes y las decisiones técnicas que facilitan la evolución de los sistemas."
+    },
+    "ai": {
+      "title": "Inteligencia artificial",
+      "description": "Explorar cómo la IA puede ampliar las capacidades del software, ayudar a resolver problemas, mejorar los procesos de desarrollo y abrir nuevas posibilidades para la creación de productos."
+    },
+    "products": {
+      "title": "Desarrollo de productos",
+      "description": "Participar en la evolución de ideas, desde la identificación de un problema y la comprensión de sus necesidades hasta el diseño y la construcción de soluciones útiles que aporten valor."
+    },
+    "learning": {
+      "title": "Aprendizaje continuo",
+      "description": "Profundizar en nuevas tecnologías, investigar cómo funcionan las cosas, experimentar con diferentes herramientas y convertir el conocimiento adquirido en experiencia práctica."
+    }
+  },
+  "experience": {
+    "r5": {
+      "role": "Fintech · Área de seguros",
+      "description": "Durante mis primeros años trabajé en el área de seguros de R5, donde participé en el desarrollo de automatizaciones, scripts e integraciones. También brindé soporte técnico interno y externo a diferentes áreas y entidades, entre ellas Bancolombia y AXA Seguros, apoyando la operación de venta de SOAT desde la plataforma.",
+      "sectionTitle": "Responsabilidades y proyectos",
+      "linkText": "Conocer R5 ↗",
+      "items": {
+        "support": "Soporte técnico interno y externo: atención de requerimientos, análisis de errores y resolución de incidentes relacionados con la operación.",
+        "soat": "Venta de SOAT: soporte al funcionamiento de los procesos de venta desde el sistema de R5.",
+        "integrations": "Integraciones con terceros: desarrollo y mantenimiento de conexiones con entidades financieras, aseguradoras y otros proveedores.",
+        "services": "Integración de servicios: incorporación de nuevas aseguradoras y pasarelas de pago.",
+        "automation": "Automatización de procesos: desarrollo de scripts y herramientas para optimizar tareas operativas.",
+        "fraud": "Prevención de fraude: participación en herramientas para la gestión de fraudes y listas de clientes restringidos."
+      }
+    },
+    "nova": {
+      "role": "Desarrollo de productos de software",
+      "description": "Actualmente trabajo en Novadynamics, participando en el desarrollo de una solución tecnológica para contact centers virtuales. La plataforma integra chat, telefonía, herramientas de gestión e inteligencia artificial para centralizar la operación en un mismo entorno.",
+      "sectionTitle": "Áreas de trabajo",
+      "linkText": "Visitar Novadynamics ↗",
+      "items": {
+        "requirements": "Análisis de requerimientos: identificación de necesidades y definición de soluciones técnicas.",
+        "databases": "Bases de datos: diseño, estructuración y gestión de modelos de datos.",
+        "development": "Desarrollo de software: implementación y evolución de funcionalidades de la plataforma.",
+        "ai": "Inteligencia artificial: desarrollo e implementación de capacidades de IA dentro de las soluciones de software.",
+        "architecture": "Arquitectura: participación en decisiones técnicas sobre el diseño y la organización de las soluciones.",
+        "deployment": "Despliegue: puesta en funcionamiento de aplicaciones y nuevas funcionalidades.",
+        "tooling": "Herramientas y procesos: desarrollo de utilidades internas y optimización de los procesos de trabajo del equipo."
+      }
+    }
+  },
+  "techGroups": {
+    "languages": "Lenguajes",
+    "backend": "Backend & APIs",
+    "frontend": "Frontend",
+    "databases": "Bases de datos",
+    "cloud": "Nube & DevOps",
+    "aws": "Servicios de AWS",
+    "tools": "Herramientas de desarrollo",
+    "areas": "Áreas de interés"
+  }
+}

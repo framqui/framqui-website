@@ -1,61 +1,22 @@
 ---
 import { Icon } from "astro-icon/components";
 import { SOCIAL_LINKS } from "../constants/social.ts";
+import es from "../i18n/es.json";
 
-const INTERESTS = [
-  {
-    title: "Desarrollo de software",
-    description: "Construir soluciones modulares, mantenibles y bien estructuradas, prestando atención a la calidad del código, la organización de los componentes y las decisiones técnicas que facilitan la evolución de los sistemas."
-  },
-  {
-    title: "Inteligencia artificial",
-    description: "Explorar cómo la IA puede ampliar las capacidades del software, ayudar a resolver problemas, mejorar los procesos de desarrollo y abrir nuevas posibilidades para la creación de productos."
-  },
-  {
-    title: "Desarrollo de productos",
-    description: "Participar en la evolución de ideas, desde la identificación de un problema y la comprensión de sus necesidades hasta el diseño y la construcción de soluciones útiles que aporten valor."
-  },
-  {
-    title: "Aprendizaje continuo",
-    description: "Profundizar en nuevas tecnologías, investigar cómo funcionan las cosas, experimentar con diferentes herramientas y convertir el conocimiento adquirido en experiencia práctica."
-  }
-];
+const INTERESTS = ["software", "ai", "products", "learning"] as const;
 
 const EXPERIENCES = [
   {
+    id: "r5",
     company: "R5",
-    role: "Fintech · Área de seguros",
-    description: "Durante mis primeros años trabajé en el área de seguros de R5, donde participé en el desarrollo de automatizaciones, scripts e integraciones. También brindé soporte técnico interno y externo a diferentes áreas y entidades, entre ellas Bancolombia y AXA Seguros, apoyando la operación de venta de SOAT desde la plataforma.",
-    sectionTitle: "Responsabilidades y proyectos",
-    items: [
-      "Soporte técnico interno y externo: atención de requerimientos, análisis de errores y resolución de incidentes relacionados con la operación.",
-      "Venta de SOAT: soporte al funcionamiento de los procesos de venta desde el sistema de R5.",
-      "Integraciones con terceros: desarrollo y mantenimiento de conexiones con entidades financieras, aseguradoras y otros proveedores.",
-      "Integración de servicios: incorporación de nuevas aseguradoras y pasarelas de pago.",
-      "Automatización de procesos: desarrollo de scripts y herramientas para optimizar tareas operativas.",
-      "Prevención de fraude: participación en herramientas para la gestión de fraudes y listas de clientes restringidos."
-    ],
-    linkText: "Conocer R5 ↗",
-    linkUrl: "https://www.grupor5.com/comprar-soat-en-linea"
+    linkUrl: "https://www.grupor5.com/comprar-soat-en-linea",
   },
   {
+    id: "nova",
     company: "Novadynamics",
-    role: "Desarrollo de productos de software",
-    description: "Actualmente trabajo en Novadynamics, participando en el desarrollo de una solución tecnológica para contact centers virtuales. La plataforma integra chat, telefonía, herramientas de gestión e inteligencia artificial para centralizar la operación en un mismo entorno.",
-    sectionTitle: "Áreas de trabajo",
-    items: [
-      "Análisis de requerimientos: identificación de necesidades y definición de soluciones técnicas.",
-      "Bases de datos: diseño, estructuración y gestión de modelos de datos.",
-      "Desarrollo de software: implementación y evolución de funcionalidades de la plataforma.",
-      "Inteligencia artificial: desarrollo e implementación de capacidades de IA dentro de las soluciones de software.",
-      "Arquitectura: participación en decisiones técnicas sobre el diseño y la organización de las soluciones.",
-      "Despliegue: puesta en funcionamiento de aplicaciones y nuevas funcionalidades.",
-      "Herramientas y procesos: desarrollo de utilidades internas y optimización de los procesos de trabajo del equipo."
-    ],
-    linkText: "Visitar Novadynamics ↗",
-    linkUrl: "https://nova-dynamics.net/"
-  }
-];
+    linkUrl: "https://nova-dynamics.net/",
+  },
+] as const;
 
 interface TechItem {
   name: string;
@@ -64,6 +25,7 @@ interface TechItem {
 }
 
 interface TechGroup {
+  key: keyof typeof es.techGroups;
   title: string;
   items: TechItem[];
 }
@@ -72,7 +34,8 @@ const ACCENT = "var(--accent)";
 
 const TECH_GROUPS: TechGroup[] = [
   {
-    title: "Lenguajes",
+    key: "languages",
+    title: es.techGroups.languages,
     items: [
       { name: "Python", icon: "simple-icons:python", color: "#3776AB" },
       { name: "JavaScript", icon: "simple-icons:javascript", color: "#F7DF1E" },
@@ -82,7 +45,8 @@ const TECH_GROUPS: TechGroup[] = [
     ],
   },
   {
-    title: "Backend & APIs",
+    key: "backend",
+    title: es.techGroups.backend,
     items: [
       { name: "Node.js", icon: "simple-icons:nodedotjs", color: "#339933" },
       { name: "NestJS", icon: "simple-icons:nestjs", color: "#E0234E" },
@@ -91,7 +55,8 @@ const TECH_GROUPS: TechGroup[] = [
     ],
   },
   {
-    title: "Frontend",
+    key: "frontend",
+    title: es.techGroups.frontend,
     items: [
       { name: "React", icon: "simple-icons:react", color: "#61DAFB" },
       { name: "Next.js", icon: "simple-icons:nextdotjs" },
@@ -100,7 +65,8 @@ const TECH_GROUPS: TechGroup[] = [
     ],
   },
   {
-    title: "Bases de datos",
+    key: "databases",
+    title: es.techGroups.databases,
     items: [
       { name: "PostgreSQL", icon: "simple-icons:postgresql", color: "#4169E1" },
       { name: "MongoDB", icon: "simple-icons:mongodb", color: "#47A248" },
@@ -108,7 +74,8 @@ const TECH_GROUPS: TechGroup[] = [
     ],
   },
   {
-    title: "Nube & DevOps",
+    key: "cloud",
+    title: es.techGroups.cloud,
     items: [
       { name: "AWS", icon: "simple-icons:amazonwebservices", color: "#FF9900" },
       { name: "Docker", icon: "simple-icons:docker", color: "#2496ED" },
@@ -118,7 +85,8 @@ const TECH_GROUPS: TechGroup[] = [
     ],
   },
   {
-    title: "Servicios de AWS",
+    key: "aws",
+    title: es.techGroups.aws,
     items: [
       { name: "S3", icon: "simple-icons:amazons3", color: "#569A31" },
       { name: "EC2", icon: "simple-icons:amazonec2", color: "#FF9900" },
@@ -131,7 +99,8 @@ const TECH_GROUPS: TechGroup[] = [
     ],
   },
   {
-    title: "Herramientas de desarrollo",
+    key: "tools",
+    title: es.techGroups.tools,
     items: [
       { name: "VS Code", icon: "simple-icons:visualstudiocode", color: "#007ACC" },
       { name: "WebStorm", icon: "simple-icons:webstorm" },
@@ -141,7 +110,8 @@ const TECH_GROUPS: TechGroup[] = [
     ],
   },
   {
-    title: "Áreas de interés",
+    key: "areas",
+    title: es.techGroups.areas,
     items: [
       { name: "AI for Development", icon: "mdi:robot-outline", color: ACCENT },
       { name: "Software Architecture", icon: "mdi:sitemap", color: ACCENT },
@@ -160,8 +130,8 @@ const TECH_GROUPS: TechGroup[] = [
     Andres Felipe Ramos Quintero
   </h1>
 
-  <p class="mt-4 max-w-xl font-sans text-lg leading-relaxed text-[var(--muted)]">
-    Desarrollador de software mid level
+  <p data-i18n="profile.role" class="mt-4 max-w-xl font-sans text-lg leading-relaxed text-[var(--muted)]">
+    {es.profile.role}
   </p>
 
   <!-- SECTION FOR VISIBLE NETWORKS ON MOBILE -->
@@ -177,7 +147,7 @@ const TECH_GROUPS: TechGroup[] = [
                   rel={external ? "noopener noreferrer" : undefined}
                   class="no-underline hover:underline hover:decoration-[var(--accent)] hover:decoration-2 hover:underline-offset-4 text-[var(--fg)] font-mono"
               >
-                {link.name}
+                {link.i18nKey ? <span data-i18n={link.i18nKey}>{link.name}</span> : link.name}
               </a>
               {index < SOCIAL_LINKS.length - 1 && (
                   <span class="text-[var(--muted)] select-none font-mono">|</span>
@@ -192,8 +162,8 @@ const TECH_GROUPS: TechGroup[] = [
 
   <!-- ABOUT ME -->
   <div class="mt-10 mb-10">
-    <h2 class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
-      Sobre mí
+    <h2 data-i18n="profile.aboutTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+      {es.profile.aboutTitle}
     </h2>
     <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
   </div>
@@ -208,51 +178,43 @@ const TECH_GROUPS: TechGroup[] = [
             class="block h-auto w-full"
         />
       </div>
-      <figcaption class="mt-4 max-w-[200px] font-sans text-sm font-bold leading-relaxed text-[var(--fg)]">
-        Transformando el desarrollo de software con inteligencia artificial
+      <figcaption data-i18n="profile.caption" class="mt-4 max-w-[200px] font-sans text-sm font-bold leading-relaxed text-[var(--fg)]">
+        {es.profile.caption}
       </figcaption>
     </figure>
 
     <div class="flex max-w-3xl flex-col gap-7 font-sans text-sm leading-relaxed text-[var(--muted)]">
       <div class="flex flex-col gap-4">
-        <p class="font-sans">
-          Hola, soy <strong class="font-bold text-[var(--fg)] font-sans">Andres Ramos, </strong>desarrollador de software con más de 5 años de experiencia enfocados principalmente en el desarrollo backend. A inicios de 2026 inicié una transición hacia la <strong class="font-bold text-[var(--fg)] font-sans">creación de productos de software </strong>integrando <strong class="font-bold text-[var(--fg)] font-sans">Inteligencia Artificial </strong>en mis desarrollos y compartiendo activamente lo que aprendo con la comunidad.
-        </p>
-        <p class="font-sans">
-          Nací en un pueblo muy pequeño y actualmente vivo en <strong class="font-bold text-[var(--fg)] font-sans">Pitalito, Huila, </strong>un lugar reconocido por su café de alta calidad y su cultura cafetera. Fuera de la tecnología, disfruto levantar pesas, escuchar rock y leer sobre filosofía.
-        </p>
-        <p class="font-sans">
-          A lo largo de mi trayectoria he pasado de construir e integrar componentes de software a involucrarme en el ciclo de vida completo de los productos: desde el análisis de problemas y el diseño de soluciones hasta la implementación, arquitectura, despliegue y coordinación técnica.
-        </p>
+        <p class="font-sans" data-i18n-html="profile.bio1" set:html={es.profile.bio1} />
+        <p class="font-sans" data-i18n-html="profile.bio2" set:html={es.profile.bio2} />
+        <p class="font-sans" data-i18n="profile.bio3">{es.profile.bio3}</p>
       </div>
 
       <div>
-        <h3 class="font-sans text-sm font-bold text-[var(--fg)]">
-          Este sitio
+        <h3 data-i18n="profile.siteTitle" class="font-sans text-sm font-bold text-[var(--fg)]">
+          {es.profile.siteTitle}
         </h3>
-        <p class="mt-2 font-sans">
-          Esta página funciona como mi <strong class="font-bold text-[var(--fg)] font-sans">bitácora pública y espacio personal.</strong> Aquí iré compartiendo notas técnicas, reflexiones sobre desarrollo de productos, guías, cursos, proyectos e imágenes en los que me encuentre trabajando. Es un entorno vivo que irá evolucionando a la par de mi crecimiento profesional y personal.
-        </p>
+        <p class="mt-2 font-sans" data-i18n-html="profile.siteBody" set:html={es.profile.siteBody} />
       </div>
     </div>
   </div>
 
   <!-- INTERESTS SECTION -->
   <div class="mt-10 mb-10">
-    <h2 class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
-      Intereses
+    <h2 data-i18n="profile.interestsTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+      {es.profile.interestsTitle}
     </h2>
     <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-    {INTERESTS.map((item) => (
+    {INTERESTS.map((key) => (
         <div class="flex flex-col rounded-sm border border-[var(--muted)]/20 bg-transparent p-5">
-          <h3 class="mb-3 font-sans text-lg font-bold text-[var(--fg)]">
-            {item.title}
+          <h3 data-i18n={`interests.${key}.title`} class="mb-3 font-sans text-lg font-bold text-[var(--fg)]">
+            {es.interests[key].title}
           </h3>
-          <p class="font-sans text-sm leading-relaxed text-[var(--muted)]">
-            {item.description}
+          <p data-i18n={`interests.${key}.description`} class="font-sans text-sm leading-relaxed text-[var(--muted)]">
+            {es.interests[key].description}
           </p>
         </div>
     ))}
@@ -260,35 +222,37 @@ const TECH_GROUPS: TechGroup[] = [
 
   <!-- EXPERIENCE SECTION -->
   <div class="mt-10 mb-10">
-    <h2 class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
-      Experiencia profesional
+    <h2 data-i18n="profile.experienceTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+      {es.profile.experienceTitle}
     </h2>
     <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-    {EXPERIENCES.map((exp) => (
+    {EXPERIENCES.map((exp) => {
+      const copy = es.experience[exp.id];
+      return (
         <div class="flex flex-col gap-4 rounded-sm border border-[var(--muted)]/20 bg-transparent p-6 font-sans">
           <div>
             <h3 class="font-sans text-lg font-bold text-[var(--fg)]">
               {exp.company}
             </h3>
-            <p class="mt-1 font-sans text-sm text-[var(--muted)]">
-              {exp.role}
+            <p data-i18n={`experience.${exp.id}.role`} class="mt-1 font-sans text-sm text-[var(--muted)]">
+              {copy.role}
             </p>
           </div>
 
-          <p class="font-sans text-sm leading-relaxed text-[var(--muted)]">
-            {exp.description}
+          <p data-i18n={`experience.${exp.id}.description`} class="font-sans text-sm leading-relaxed text-[var(--muted)]">
+            {copy.description}
           </p>
 
           <div>
-            <h4 class="mb-2 font-sans text-sm font-bold text-[var(--fg)]">
-              {exp.sectionTitle}
+            <h4 data-i18n={`experience.${exp.id}.sectionTitle`} class="mb-2 font-sans text-sm font-bold text-[var(--fg)]">
+              {copy.sectionTitle}
             </h4>
             <ul class="font-sans list-inside list-disc space-y-1.5 text-sm leading-relaxed text-[var(--muted)]">
-              {exp.items.map((item) => (
-                  <li class="font-sans">{item}</li>
+              {Object.entries(copy.items).map(([itemKey, item]) => (
+                  <li data-i18n={`experience.${exp.id}.items.${itemKey}`} class="font-sans">{item}</li>
               ))}
             </ul>
           </div>
@@ -298,31 +262,33 @@ const TECH_GROUPS: TechGroup[] = [
                 href={exp.linkUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-i18n={`experience.${exp.id}.linkText`}
                 class="font-sans text-sm font-bold text-[var(--fg)] no-underline hover:underline hover:decoration-[var(--accent)] hover:underline-offset-4"
             >
-              {exp.linkText}
+              {copy.linkText}
             </a>
           </div>
         </div>
-    ))}
+      );
+    })}
   </div>
 
   <!-- TECH STACK SECTION -->
   <div class="mt-10 mb-10">
-    <h2 class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
-      Stack tecnológico
+    <h2 data-i18n="profile.stackTitle" class="font-sans text-3xl font-bold tracking-tight text-[var(--fg)] sm:text-4xl">
+      {es.profile.stackTitle}
     </h2>
     <hr class="mt-2 w-full border-t border-[var(--muted)]/30" />
   </div>
 
-  <p class="mb-8 font-sans text-sm leading-relaxed text-[var(--muted)]">
-    Tecnologías y herramientas que me interesa aprender, explorar y seguir incorporando a mi desarrollo profesional.
+  <p data-i18n="profile.stackIntro" class="mb-8 font-sans text-sm leading-relaxed text-[var(--muted)]">
+    {es.profile.stackIntro}
   </p>
 
   <div class="flex flex-col gap-6 font-sans">
     {TECH_GROUPS.map((group) => (
         <div>
-          <h3 class="mb-3 font-sans text-sm font-bold text-[var(--fg)]">
+          <h3 data-i18n={`techGroups.${group.key}`} class="mb-3 font-sans text-sm font-bold text-[var(--fg)]">
             {group.title}
           </h3>
           <ul class="flex flex-wrap gap-2 font-sans">
