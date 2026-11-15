@@ -2,7 +2,11 @@
 import Header from '../components/Header.astro';
 import ArticleHero from '../components/ArticleHero.astro';
 import hero from '../data/hero.json';
+import profileMd from '../content/profile.md?raw';
+import { marked } from 'marked';
 import '../styles/global.css';
+
+const htmlContent = marked.parse(profileMd, { gfm: true });
 ---
 
 <html lang="es">
@@ -14,18 +18,11 @@ import '../styles/global.css';
   </head>
   <body class="font-sans bg-bg text-gray-900 leading-relaxed antialiased">
     <Header active="inicio" />
-    <main class="max-w-[600px] mx-auto px-8 sm:px-4">
-      <!-- Article hero -->
+    <main class="max-w-[800px] mx-auto px-8 sm:px-4">
       <ArticleHero title={hero.title} date={hero.date} />
 
-      <!-- Profile section -->
-      <section class="flex flex-col items-start text-left pb-[8rem]">
-        <div class="w-40 h-40 rounded-full border-2 border-gray-900 mb-6 sm:w-[120px] sm:h-[120px]"></div>
-        <p class="text-base text-text-muted leading-[1.7] max-w-[400px]">
-          Bienvenido a mi espacio personal. Aquí comparto mis escritos,
-          prácticas y proyectos.
-        </p>
-      </section>
+
+      <div class="prose prose-base max-w-none pb-[8rem]" set:html={htmlContent} />
     </main>
   </body>
 </html>

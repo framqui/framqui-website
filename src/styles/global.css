@@ -1,9 +1,10 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --font-sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-  --color-petrol: #2563eb;
+  --color-blue: #2563eb;
   --color-bg: #fefefe;
   --color-text-muted: #666;
   --color-text-dark: #111;
