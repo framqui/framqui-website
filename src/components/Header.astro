@@ -1,0 +1,65 @@
+---
+const activeItem = Astro.props.active || 'inicio';
+---
+
+<nav class="flex flex-wrap items-center justify-center gap-10 sm:gap-10 py-4 border-b border-gray-400">
+  <a
+    href="#inicio"
+    class={`font-mono font-bold text-sm no-underline tracking-tight transition-colors duration-200 hover:text-petrol hover:underline hover:underline-offset-4 sm:text-base ${
+      activeItem === 'inicio' ? 'text-petrol underline underline-offset-4' : 'text-text-dark'
+    }`}
+  >INICIO</a>
+  <a
+    href="#escritos"
+    class={`font-mono font-bold text-sm no-underline tracking-tight transition-colors duration-200 hover:text-petrol hover:underline hover:underline-offset-4 sm:text-base ${
+      activeItem === 'escritos' ? 'text-petrol underline underline-offset-4' : 'text-text-dark'
+    }`}
+  >ESCRITOS</a>
+  <a
+    href="#practicas"
+    class={`font-mono font-bold text-sm no-underline tracking-tight transition-colors duration-200 hover:text-petrol hover:underline hover:underline-offset-4 sm:text-base ${
+      activeItem === 'practicas' ? 'text-petrol underline underline-offset-4' : 'text-text-dark'
+    }`}
+  >PRÁCTICAS</a>
+
+  <!-- Dropdown -->
+  <div class="relative inline-block">
+    <button class="dropdown-toggle font-mono font-bold text-sm text-text-dark bg-transparent border-none cursor-pointer tracking-tight transition-colors duration-200 p-0 inline-flex items-center gap-1 hover:text-petrol hover:underline hover:underline-offset-4 sm:text-base">
+      MÁS <span class="text-xs leading-none select-none">▾</span>
+    </button>
+    <div class="dropdown-menu hidden absolute top-full left-1/2 -translate-x-1/2 flex-col gap-2 py-2 px-6 mt-1 bg-bg border border-gray-200 min-w-[120px] z-10">
+      <a href="#suscribete" class="font-mono font-bold text-sm text-text-dark no-underline tracking-tight whitespace-nowrap transition-colors duration-200 hover:text-petrol hover:underline hover:underline-offset-4 sm:text-base">SUSCRÍBETE</a>
+      <a href="#contacto" class="font-mono font-bold text-sm text-text-dark no-underline tracking-tight whitespace-nowrap transition-colors duration-200 hover:text-petrol hover:underline hover:underline-offset-4 sm:text-base">CONTACTAME</a>
+      <a href="#politicas" class="font-mono font-bold text-sm text-text-dark no-underline tracking-tight whitespace-nowrap transition-colors duration-200 hover:text-petrol hover:underline hover:underline-offset-4 sm:text-base">POLÍTICAS</a>
+      <a href="#framqui" class="font-mono font-bold text-sm text-text-dark no-underline tracking-tight whitespace-nowrap transition-colors duration-200 hover:text-petrol hover:underline hover:underline-offset-4 sm:text-base">FRAMQUI</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .dropdown-menu.show {
+    display: flex;
+  }
+
+  @media (max-width: 640px) {
+    .nav > :where(*) {
+      font-size: 0.75rem !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.dropdown-toggle');
+    const menu = document.querySelector('.dropdown-menu');
+
+    toggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu?.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+      menu?.classList.remove('show');
+    });
+  });
+</script>

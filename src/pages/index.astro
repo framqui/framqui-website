@@ -1,11 +1,31 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Header from '../components/Header.astro';
+import ArticleHero from '../components/ArticleHero.astro';
+import hero from '../data/hero.json';
+import '../styles/global.css';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>framqui</title>
+  </head>
+  <body class="font-sans bg-bg text-gray-900 leading-relaxed antialiased">
+    <Header active="inicio" />
+    <main class="max-w-[600px] mx-auto px-8 sm:px-4">
+      <!-- Article hero -->
+      <ArticleHero title={hero.title} date={hero.date} />
+
+      <!-- Profile section -->
+      <section class="flex flex-col items-start text-left pb-[8rem]">
+        <div class="w-40 h-40 rounded-full border-2 border-gray-900 mb-6 sm:w-[120px] sm:h-[120px]"></div>
+        <p class="text-base text-text-muted leading-[1.7] max-w-[400px]">
+          Bienvenido a mi espacio personal. Aquí comparto mis escritos,
+          prácticas y proyectos.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
