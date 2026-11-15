@@ -1,3 +1,16 @@
+:root {
+  --tw-prose-body: var(--color-text-dark);
+  --tw-prose-headings: var(--color-text-dark);
+  --tw-prose-links: #5b8a99;
+  --tw-prose-bold: var(--color-text-dark);
+  --tw-prose-counters: var(--color-text-muted);
+  --tw-prose-bullets: var(--color-text-muted);
+  --tw-prose-hr: var(--color-text-muted);
+  --tw-prose-quotes: var(--color-text-dark);
+  --tw-prose-quote-borders: var(--color-text-muted);
+  --tw-prose-captions: var(--color-text-muted);
+}
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
