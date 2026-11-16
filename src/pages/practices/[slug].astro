@@ -1,28 +1,22 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import MarkdownContent from '../../components/MarkdownContent.astro';
+import ArticlePage from '../../components/ArticlePage.astro';
 import { marked } from 'marked';
-import { getPractices, getPracticeBySlug } from '../../utils/practices.js';
+import { practices } from '../../utils/content.js';
 
 export async function getStaticPaths() {
-  const allPractices = getPractices();
+  const allPractices = practices.loadAll();
   return allPractices.map((practice) => ({
     params: { slug: practice.slug },
-    props: { article: { slug: practice.slug, data: practice.data } },
+    props: { slug: practice.slug },
   }));
 }
 
-const { article } = Astro.props;
-const practice = getPracticeBySlug(article.slug);
+const { slug } = Astro.props;
+const practice = practices.loadBySlug(slug);
 const htmlContent = marked.parse(practice.body, { gfm: true });
 ---
 
 <BaseLayout active="practices">
-  <div class="text-left py-4 mb-6">
-    <a href="/practices" class="font-mono font-bold text-base text-text-muted no-underline cursor-pointer hover:text-blue hover:underline transition-colors">
-      ← volver
-    </a>
-  </div>
-
-  <MarkdownContent htmlContent={htmlContent} />
+  <ArticlePage htmlContent={htmlContent} backPath="/practices" />
 </BaseLayout>
