@@ -18,9 +18,11 @@ const htmlContent = marked.parse(practice.body, { gfm: true });
 ---
 
 <BaseLayout active="practices">
-  <a href="/practices" class="block mb-6 text-sm text-text-muted hover:text-blue transition-colors">
-    ← Volver a Prácticas
-  </a>
+  <div class="text-left py-4 mb-6">
+    <a href="/practices" class="font-mono font-bold text-base text-text-muted no-underline cursor-pointer hover:text-blue hover:underline transition-colors">
+      ← volver
+    </a>
+  </div>
 
   <MarkdownContent htmlContent={htmlContent} />
 </BaseLayout>

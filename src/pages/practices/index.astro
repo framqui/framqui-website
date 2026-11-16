@@ -8,12 +8,12 @@ const articles = getPractices();
 
 <BaseLayout active="practices">
   <MarkdownContent>
-    <h1>Prácticas</h1>
+    <h1 class="text-3xl font-semibold tracking-tight text-text-dark mt-10 mb-4">Prácticas</h1>
 
     <div class="space-y-6">
       {articles.map((article) => (
-        <article>
-          <a href={`/practices/${article.slug}`} class="text-xl font-semibold text-text-dark no-underline hover:text-blue hover:underline transition-colors">
+        <article class="space-y-1">
+          <a href={`/practices/${article.slug}`} class="block text-xl font-semibold text-text-dark no-underline hover:text-blue hover:underline transition-colors">
             {article.data.title}
           </a>
 
@@ -42,8 +42,5 @@ const articles = getPractices();
       ))}
     </div>
 
-    {articles.length === 0 && (
-      <p>Aún no hay practices publicadas.</p>
-    )}
   </MarkdownContent>
 </BaseLayout>

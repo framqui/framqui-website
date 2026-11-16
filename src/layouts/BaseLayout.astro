@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -21,6 +22,7 @@ const { active = 'inicio' }: Props = Astro.props;
     <Header active={active} />
     <main class="max-w-[700px] mx-auto px-5 py-[5rem] flex-1 overflow-hidden">
       <slot />
+      <ScrollToTop />
     </main>
     <Footer />
   </body>
