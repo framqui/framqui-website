@@ -1,3 +1,12 @@
+/* Hide scrollbar globally */
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
 :root {
   --tw-prose-body: var(--color-text-dark);
   --tw-prose-headings: var(--color-text-dark);
@@ -13,6 +22,34 @@
 
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+/* Make wide tables responsive without breaking table layout */
+.prose table {
+  table-layout: fixed;
+  width: 100%;
+  max-width: 100%;
+}
+.prose td,
+.prose th {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+/* Fix prose list articles: links should be block so date appears below title */
+.prose article > a {
+  display: block;
+}
+
+/* Reduce spacing between details in list articles */
+.prose article > time,
+.prose article > p,
+.prose article > div {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
 
 @theme {
   --font-sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", system-ui, sans-serif;

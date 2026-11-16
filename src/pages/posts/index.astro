@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarkdownContent from '../../components/MarkdownContent.astro';
+import { getPosts } from '../../utils/posts.js';
+
+const articles = getPosts();
+---
+
+<BaseLayout active="posts">
+  <MarkdownContent>
+    <h1>Escritos</h1>
+
+    <div class="space-y-6">
+      {articles.map((article) => (
+        <article>
+          <a href={`/posts/${article.slug}`} class="text-xl font-semibold text-text-dark no-underline hover:text-blue hover:underline transition-colors">
+            {article.data.title}
+          </a>
+
+          <time class="text-xs text-text-muted font-mono">
+            {new Date(article.data.date).toLocaleDateString('es-ES', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </time>
+
+          {article.data.description && (
+            <p class="text-xs text-text-muted font-mono">{article.data.description}</p>
+          )}
+
+          {article.data.tags && article.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+              {article.data.tags.map((tag) => (
+                <span class="text-xs text-text-muted font-mono">#{tag}</span>
+              ))}
+            </div>
+          )}
+
+          <div class="w-full h-px bg-gray-200 mt-3" />
+        </article>
+      ))}
+    </div>
+
+    {articles.length === 0 && (
+      <p>Aún no hay posts publicados.</p>
+    )}
+  </MarkdownContent>
+</BaseLayout>

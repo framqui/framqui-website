@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarkdownContent from '../../components/MarkdownContent.astro';
+import { marked } from 'marked';
+import { getPractices, getPracticeBySlug } from '../../utils/practices.js';
+
+export async function getStaticPaths() {
+  const allPractices = getPractices();
+  return allPractices.map((practice) => ({
+    params: { slug: practice.slug },
+    props: { article: { slug: practice.slug, data: practice.data } },
+  }));
+}
+
+const { article } = Astro.props;
+const practice = getPracticeBySlug(article.slug);
+const htmlContent = marked.parse(practice.body, { gfm: true });
+---
+
+<BaseLayout active="practices">
+  <a href="/practices" class="block mb-6 text-sm text-text-muted hover:text-blue transition-colors">
+    ← Volver a Prácticas
+  </a>
+
+  <MarkdownContent htmlContent={htmlContent} />
+</BaseLayout>

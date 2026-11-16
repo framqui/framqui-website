@@ -1,0 +1,20 @@
+---
+export interface Props {
+  htmlContent?: string;
+}
+
+const { htmlContent } = Astro.props;
+---
+
+<div class="overflow-x-auto">
+  {htmlContent && (
+    <div class="prose prose-base">
+      <div set:html={htmlContent} />
+    </div>
+  )}
+  {!htmlContent && (
+    <div class="prose prose-base">
+      <slot />
+    </div>
+  )}
+</div>

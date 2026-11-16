@@ -1,26 +1,13 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarkdownContent from '../components/MarkdownContent.astro';
 import { marked } from 'marked';
-import '../styles/global.css';
 
 const readmeUrl = 'https://raw.githubusercontent.com/framqui/framqui/main/README.md';
 const profileMd = await fetch(readmeUrl).then((res) => res.text());
 const htmlContent = marked.parse(profileMd, { gfm: true });
 ---
 
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <title>framqui</title>
-  </head>
-  <body class="font-sans bg-bg text-gray-900 leading-relaxed antialiased">
-    <Header active="inicio" />
-    <main class="max-w-[700px] mx-auto px-5 sm:px-4 pt-[5rem]">
-      <div class="prose prose-base max-w-none pb-[2rem]" set:html={htmlContent} />
-    </main>
-    <Footer />
-  </body>
-</html>
+<BaseLayout active="inicio">
+  <MarkdownContent htmlContent={htmlContent} />
+</BaseLayout>

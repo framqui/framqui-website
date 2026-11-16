@@ -1,0 +1,9 @@
+---
+const { href, label, activeKey } = Astro.props;
+const activeItem = Astro.props.activeItem || 'inicio';
+
+const isActive = activeItem === activeKey;
+const classes = `font-mono font-bold text-sm tracking-tight transition-colors duration-200 underline-offset-4 sm:text-base ${isActive ? 'text-blue underline' : 'text-text-dark no-underline hover:text-blue hover:underline'}`;
+---
+
+<a href={href} class={classes}>{label}</a>

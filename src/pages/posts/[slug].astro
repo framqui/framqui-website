@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarkdownContent from '../../components/MarkdownContent.astro';
+import { marked } from 'marked';
+import { getPosts, getPostBySlug } from '../../utils/posts.js';
+
+export async function getStaticPaths() {
+  const allPosts = getPosts();
+  return allPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { article: { slug: post.slug, data: post.data } },
+  }));
+}
+
+const { article } = Astro.props;
+const post = getPostBySlug(article.slug);
+const htmlContent = marked.parse(post.body, { gfm: true });
+---
+
+<BaseLayout active="posts">
+  <a href="/posts" class="block mb-6 text-sm text-text-muted hover:text-blue transition-colors">
+    ← Volver a Escritos
+  </a>
+
+  <MarkdownContent htmlContent={htmlContent} />
+</BaseLayout>
