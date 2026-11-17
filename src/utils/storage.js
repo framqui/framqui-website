@@ -1,14 +1,16 @@
 import { encrypt, decrypt } from './encrypt.js';
 
-// Detectar si estamos en Cloudflare Workers (no en local dev)
-const isCloudflare = typeof globalThis.env !== 'undefined'
-  && globalThis.env.SUBSCRIBERS
-  && typeof globalThis.env.SUBSCRIBERS.get === 'function'
-  && !import.meta.env.DEV;
+function getKV(context) {
+  if (context && context.locals && context.locals.runtime && context.locals.runtime.env) {
+    return context.locals.runtime.env.SUBSCRIBERS;
+  }
+  return null;
+}
 
-async function loadSubscribers() {
-  if (isCloudflare) {
-    const raw = await globalThis.env.SUBSCRIBERS.get('subscribers');
+async function loadSubscribers(context) {
+  const kv = getKV(context);
+  if (kv) {
+    const raw = await kv.get('subscribers');
     if (!raw) return [];
     const json = decrypt(raw);
     return JSON.parse(json);
@@ -30,11 +32,12 @@ async function loadSubscribers() {
   }
 }
 
-async function saveSubscribers(subscribers) {
+async function saveSubscribers(subscribers, context) {
   const json = JSON.stringify(subscribers, null, 2);
   const encrypted = encrypt(json);
-  if (isCloudflare) {
-    await globalThis.env.SUBSCRIBERS.put('subscribers', encrypted);
+  const kv = getKV(context);
+  if (kv) {
+    await kv.put('subscribers', encrypted);
   } else {
     const fs = await import('fs');
     const path = await import('path');
@@ -48,9 +51,10 @@ async function saveSubscribers(subscribers) {
   }
 }
 
-async function loadPending() {
-  if (isCloudflare) {
-    const raw = await globalThis.env.SUBSCRIBERS.get('pending');
+async function loadPending(context) {
+  const kv = getKV(context);
+  if (kv) {
+    const raw = await kv.get('pending');
     if (!raw) return [];
     const json = decrypt(raw);
     return JSON.parse(json);
@@ -72,10 +76,11 @@ async function loadPending() {
   }
 }
 
-async function savePending(pending) {
+async function savePending(pending, context) {
   if (pending.length === 0) {
-    if (isCloudflare) {
-      await globalThis.env.SUBSCRIBERS.delete('pending');
+    const kv = getKV(context);
+    if (kv) {
+      await kv.delete('pending');
     } else {
       const fs = await import('fs');
       const path = await import('path');
@@ -89,8 +94,9 @@ async function savePending(pending) {
   }
   const json = JSON.stringify(pending, null, 2);
   const encrypted = encrypt(json);
-  if (isCloudflare) {
-    await globalThis.env.SUBSCRIBERS.put('pending', encrypted);
+  const kv = getKV(context);
+  if (kv) {
+    await kv.put('pending', encrypted);
   } else {
     const fs = await import('fs');
     const path = await import('path');
