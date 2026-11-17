@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@astrojs/cloudflare": "^14.4.8",
-    "@astrojs/node": "^11.1.13"
+    "@astrojs/node": "^11.1.13",
+    "wrangler": "^4.162.0"
   }
 }
