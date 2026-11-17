@@ -25,6 +25,7 @@ cp .env.example .env
 |---|---|
 | `RESEND_API_KEY` | API key de [Resend](https://resend.com/api-keys) para enviar correos |
 | `ENCRYPT_KEY` | Clave hexadecimal de 64 caracteres para encriptar los datos de suscriptores |
+| `PUBLIC_SITE_URL` | URL del sitio (ej: `http://localhost:4321` en local, `https://framqui.com` en producción) |
 
 ## Comandos
 

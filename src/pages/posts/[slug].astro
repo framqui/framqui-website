@@ -13,11 +13,11 @@ export async function getStaticPaths() {
   });
   return allPosts.map((post) => ({
     params: { slug: post.slug },
-    props: { slug: post.slug },
+    props: { slug: post.slug, postData: post.data },
   }));
 }
 
-const { slug } = Astro.props;
+const { slug, postData } = Astro.props;
 const postsGlob = import.meta.glob('../../content/posts/*.md', { eager: true });
 const key = Object.keys(postsGlob).find((k) => k.endsWith(`/${slug}.md`));
 const mod = key ? postsGlob[key] : { frontmatter: {}, rawContent: () => '' };
@@ -25,6 +25,6 @@ const post = { slug, data: mod.frontmatter || {}, body: typeof mod.rawContent ==
 const htmlContent = marked.parse(post.body, { gfm: true });
 ---
 
-<BaseLayout active="posts">
+<BaseLayout active="posts" title={`${post.data.title} - Escritos - Framqui`} description={post.data.description || 'Artículos sobre desarrollo web, tecnología y programación.'}>
   <ArticlePage htmlContent={htmlContent} backPath="/posts" showComments={true} />
 </BaseLayout>

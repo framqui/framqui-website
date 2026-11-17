@@ -52,7 +52,7 @@ function generateToken() {
   return randomBytes(32).toString('hex');
 }
 
-const isDev = import.meta.env.DEV;
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'http://localhost:4321';
 
 export async function POST({ request }) {
   const { email } = await request.json();
@@ -77,9 +77,7 @@ export async function POST({ request }) {
   if (existingPending) {
     // Reenviar el mismo token pendiente
     const resend = new Resend(import.meta.env.RESEND_API_KEY);
-    const verifyUrl = isDev
-      ? `http://localhost:4321/api/verify-subscribe?token=${existingPending.token}`
-      : `https://framqui.com/api/verify-subscribe?token=${existingPending.token}`;
+    const verifyUrl = `${SITE_URL}/api/verify-subscribe?token=${existingPending.token}`;
     try {
       const result = await resend.emails.send({
         from: 'Framqui <onboarding@resend.dev>',
@@ -116,9 +114,7 @@ export async function POST({ request }) {
   savePending(pending);
 
   const resend = new Resend(import.meta.env.RESEND_API_KEY);
-  const verifyUrl = isDev
-    ? `http://localhost:4321/api/verify-subscribe?token=${token}`
-    : `https://framqui.com/api/verify-subscribe?token=${token}`;
+  const verifyUrl = `${SITE_URL}/api/verify-subscribe?token=${token}`;
 
   try {
     const result = await resend.emails.send({

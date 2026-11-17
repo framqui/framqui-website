@@ -13,11 +13,11 @@ export async function getStaticPaths() {
   });
   return allPractices.map((practice) => ({
     params: { slug: practice.slug },
-    props: { slug: practice.slug },
+    props: { slug: practice.slug, practiceData: practice.data },
   }));
 }
 
-const { slug } = Astro.props;
+const { slug, practiceData } = Astro.props;
 const practicesGlob = import.meta.glob('../../content/practices/*.md', { eager: true });
 const key = Object.keys(practicesGlob).find((k) => k.endsWith(`/${slug}.md`));
 const mod = key ? practicesGlob[key] : { frontmatter: {}, rawContent: () => '' };
@@ -25,6 +25,6 @@ const practice = { slug, data: mod.frontmatter || {}, body: typeof mod.rawConten
 const htmlContent = marked.parse(practice.body, { gfm: true });
 ---
 
-<BaseLayout active="practices">
+<BaseLayout active="practices" title={`${practice.data.title} - Prácticas - Framqui`} description={practice.data.description || 'Prácticas y proyectos de automatización, scripts y DevOps.'}>
   <ArticlePage htmlContent={htmlContent} backPath="/practices" />
 </BaseLayout>

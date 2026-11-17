@@ -10,7 +10,7 @@ Si quieres recibir una notificación cada vez que se publique algo nuevo, suscr�
 const htmlContent = marked.parse(md, { gfm: true });
 ---
 
-<BaseLayout active="suscribite">
+<BaseLayout active="suscribite" title="Suscríbete - Framqui" description="Suscríbete para recibir notificaciones cuando se publique un nuevo artículo o práctica.">
   <MarkdownContent htmlContent={htmlContent} />
   <p class="text-xs font-mono font-bold text-orange-600 mt-10">
     🔒 Al suscribirte recibirás un correo de confirmación. Tu correo se almacena de forma segura y solo se utilizará para enviarte notificaciones de nuevos artículos. No se enviará spam ni se utilizará para contextos ajenos a esta web. Puedes leer nuestras <a href="/politicas" class="underline hover:text-orange-700">políticas de privacidad</a>.

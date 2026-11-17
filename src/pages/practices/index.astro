@@ -9,6 +9,6 @@ const articles = Object.entries(practicesGlob).map(([path, mod]) => {
 }).sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 ---
 
-<BaseLayout active="practices">
+<BaseLayout active="practices" title="Prácticas - Framqui" description="Prácticas y proyectos de automatización, scripts y DevOps.">
   <ArticleList title="Prácticas" articles={articles} basePath="/practices" />
 </BaseLayout>
