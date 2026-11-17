@@ -1,9 +1,9 @@
 import { Resend } from 'resend';
-import { randomBytes } from 'crypto';
 import { loadSubscribers, saveSubscribers, loadPending, savePending } from '../../utils/storage.js';
 
 function generateToken() {
-  return randomBytes(32).toString('hex');
+  const bytes = crypto.getRandomValues(new Uint8Array(32));
+  return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'http://localhost:4321';
