@@ -8,6 +8,9 @@ const md = `# Suscríbete
 Si quieres recibir una notificación cada vez que se publique algo nuevo, suscríbete aquí.`;
 
 const htmlContent = marked.parse(md, { gfm: true });
+
+const url = new URL(Astro.url);
+const status = url.searchParams.get('status');
 ---
 
 <BaseLayout active="suscribite" title="Suscríbete - Framqui" description="Suscríbete para recibir notificaciones cuando se publique un nuevo artículo o práctica.">
@@ -15,75 +18,33 @@ const htmlContent = marked.parse(md, { gfm: true });
   <p class="text-xs font-mono font-bold text-orange-600 mt-10">
     🔒 Al suscribirte recibirás un correo de confirmación. Tu correo se almacena de forma segura y solo se utilizará para enviarte notificaciones de nuevos artículos. No se enviará spam ni se utilizará para contextos ajenos a esta web. Puedes leer nuestras <a href="/politicas" class="underline hover:text-orange-700">políticas de privacidad</a>.
   </p>
-  <form id="subscribe-form" class="flex flex-col sm:flex-row gap-2 w-full mt-2">
+
+  {status === 'success' && (
+    <p class="text-xs font-mono mt-2 text-green-600">Para completar tu suscripción, revisa tu bandeja de entrada o spam y confirma el correo.</p>
+  )}
+  {status === 'already' && (
+    <p class="text-xs font-mono mt-2 text-green-600">Ya estás suscrito.</p>
+  )}
+  {status === 'resend' && (
+    <p class="text-xs font-mono mt-2 text-green-600">Se reenvió el correo de confirmación. Revisa tu bandeja de entrada.</p>
+  )}
+  {status === 'error' && (
+    <p class="text-xs font-mono mt-2 text-red-600">Error al enviar el correo. Intenta de nuevo.</p>
+  )}
+
+  <form action="/api/subscribe" method="POST" class="flex flex-col sm:flex-row gap-2 w-full mt-2">
     <input
-      id="subscribe-email"
+      name="email"
       type="email"
       placeholder="tu@correo.com"
       required
       class="flex-1 font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors"
     />
     <button
-      id="subscribe-btn"
       type="submit"
-      class="font-mono text-xs bg-transparent text-text-dark border border-gray-300 rounded px-3 py-1.5 no-underline hover:border-blue hover:text-blue transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      class="font-mono text-xs bg-transparent text-text-dark border border-gray-300 rounded px-3 py-1.5 no-underline hover:border-blue hover:text-blue transition-colors cursor-pointer"
     >
       Suscríbete
     </button>
   </form>
-  <p id="subscribe-msg" class="text-xs font-mono mt-1 hidden"></p>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('subscribe-form');
-      const emailInput = document.getElementById('subscribe-email');
-      const btn = document.getElementById('subscribe-btn');
-      const msg = document.getElementById('subscribe-msg');
-
-      if (!form) return;
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = emailInput.value;
-
-        btn.disabled = true;
-        btn.textContent = 'Enviando...';
-        msg.classList.add('hidden');
-
-        try {
-          const res = await fetch('/api/subscribe', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email }),
-          });
-
-          const data = await res.json();
-
-          if (res.ok) {
-            if (data.message === 'Ya estás suscrito') {
-              msg.textContent = 'Ya estás suscrito.';
-            } else {
-              msg.textContent = 'Para completar tu suscripción, revisa tu bandeja de entrada o spam y confirma el correo.';
-            }
-            msg.className = 'text-xs font-mono mt-1 text-green-600';
-            msg.classList.remove('hidden');
-            emailInput.value = '';
-            btn.textContent = 'Enviar ✓';
-          } else {
-            msg.textContent = data.error || 'Error al suscribirse';
-            msg.className = 'text-xs font-mono mt-1 text-red-600';
-            msg.classList.remove('hidden');
-            btn.disabled = false;
-            btn.textContent = 'Suscríbete';
-          }
-        } catch {
-          msg.textContent = 'Error de conexión';
-          msg.className = 'text-xs font-mono mt-1 text-red-600';
-          msg.classList.remove('hidden');
-          btn.disabled = false;
-          btn.textContent = 'Suscríbete';
-        }
-      });
-    });
-  </script>
 </BaseLayout>

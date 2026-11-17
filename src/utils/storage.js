@@ -1,15 +1,22 @@
 import { encrypt, decrypt } from './encrypt.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const DATA_DIR = path.join(__dirname, '..', 'pages', 'data');
-const SUBSCRIBERS_FILE = path.join(DATA_DIR, 'subscribers.json');
-const PENDING_FILE = path.join(DATA_DIR, 'pending-subscribers.json');
+// Estos imports solo se usan en Node.js local, no en Cloudflare Workers
+let SUBSCRIBERS_FILE;
+let PENDING_FILE;
 
-// Detectar si estamos en Cloudflare Workers (sin fs ni Buffer)
-const isCloudflare = typeof process === 'undefined' || !process.versions?.node;
+async function getLocalPaths() {
+  // Lazy init: solo se ejecuta cuando se necesita (en local)
+  if (!SUBSCRIBERS_FILE) {
+    const path = await import('path');
+    const url = await import('url');
+    const __filename = url.fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const DATA_DIR = path.join(__dirname, '..', 'pages', 'data');
+    SUBSCRIBERS_FILE = path.join(DATA_DIR, 'subscribers.json');
+    PENDING_FILE = path.join(DATA_DIR, 'pending-subscribers.json');
+  }
+  return { SUBSCRIBERS_FILE, PENDING_FILE };
+}
 
 async function loadFromFile(filePath) {
   const fs = await import('fs');
@@ -25,6 +32,7 @@ async function loadFromFile(filePath) {
 
 async function saveToFile(filePath, encrypted) {
   const fs = await import('fs');
+  const path = await import('path');
   const dir = path.dirname(filePath);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(filePath, encrypted, 'utf-8');
@@ -43,6 +51,7 @@ async function loadSubscribers(kv) {
     const json = await decrypt(raw);
     return JSON.parse(json);
   }
+  const { SUBSCRIBERS_FILE } = await getLocalPaths();
   return loadFromFile(SUBSCRIBERS_FILE);
 }
 
@@ -52,6 +61,7 @@ async function saveSubscribers(subscribers, kv) {
   if (kv) {
     await kv.put('subscribers', encrypted);
   } else {
+    const { SUBSCRIBERS_FILE } = await getLocalPaths();
     await saveToFile(SUBSCRIBERS_FILE, encrypted);
   }
 }
@@ -63,6 +73,7 @@ async function loadPending(kv) {
     const json = await decrypt(raw);
     return JSON.parse(json);
   }
+  const { PENDING_FILE } = await getLocalPaths();
   return loadFromFile(PENDING_FILE);
 }
 
@@ -71,6 +82,7 @@ async function savePending(pending, kv) {
     if (kv) {
       await kv.delete('pending');
     } else {
+      const { PENDING_FILE } = await getLocalPaths();
       await deleteFile(PENDING_FILE);
     }
     return;
@@ -80,6 +92,7 @@ async function savePending(pending, kv) {
   if (kv) {
     await kv.put('pending', encrypted);
   } else {
+    const { PENDING_FILE } = await getLocalPaths();
     await saveToFile(PENDING_FILE, encrypted);
   }
 }
