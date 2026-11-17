@@ -24,6 +24,9 @@ const { htmlContent, backPath, showComments = false } = Astro.props;
 {showComments && (
   <div class="mt-16 pt-8 border-t border-gray-200">
     <h3 class="font-mono font-bold text-base text-text-dark mb-6">Comentarios</h3>
+    <p class="text-xs font-mono font-bold text-orange-600 mb-6">
+      Para comentar necesitas una cuenta de GitHub. Comenta con moderación y manteniéndote en el tema del artículo. Los comentarios ofensivos, spam o fuera de contexto serán eliminados. Para más información, lee nuestras <a href="/politicas" class="underline hover:text-orange-700">políticas de privacidad</a>. Para eliminar tu propio comentario, dirígete a <a href="https://github.com/framqui/framqui-website/discussions" class="underline hover:text-orange-700" target="_blank">GitHub Discussions</a> y búscalo en Framqui.
+    </p>
     <script
       src="https://giscus.app/client.js"
       data-repo="framqui/framqui-website"

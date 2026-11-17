@@ -13,7 +13,7 @@ const htmlContent = marked.parse(md, { gfm: true });
 <BaseLayout active="suscribite">
   <MarkdownContent htmlContent={htmlContent} />
   <p class="text-xs font-mono font-bold text-orange-600 mt-10">
-    🔒 Tu correo se almacena de forma segura y solo se utilizará para enviarte notificaciones de nuevos artículos. No se enviará spam ni se utilizará para contextos ajenos a esta web. Puedes leer nuestras <a href="/politicas" class="underline hover:text-orange-700">políticas de privacidad</a>.
+    🔒 Al suscribirte recibirás un correo de confirmación. Tu correo se almacena de forma segura y solo se utilizará para enviarte notificaciones de nuevos artículos. No se enviará spam ni se utilizará para contextos ajenos a esta web. Puedes leer nuestras <a href="/politicas" class="underline hover:text-orange-700">políticas de privacidad</a>.
   </p>
   <form id="subscribe-form" class="flex flex-col sm:flex-row gap-2 w-full mt-2">
     <input
@@ -60,11 +60,15 @@ const htmlContent = marked.parse(md, { gfm: true });
           const data = await res.json();
 
           if (res.ok) {
-            msg.textContent = data.message;
+            if (data.message === 'Ya estás suscrito') {
+              msg.textContent = 'Ya estás suscrito.';
+            } else {
+              msg.textContent = 'Para completar tu suscripción, revisa tu bandeja de entrada o spam y confirma el correo.';
+            }
             msg.className = 'text-xs font-mono mt-1 text-green-600';
             msg.classList.remove('hidden');
             emailInput.value = '';
-            btn.textContent = 'Suscrito ✓';
+            btn.textContent = 'Enviar ✓';
           } else {
             msg.textContent = data.error || 'Error al suscribirse';
             msg.className = 'text-xs font-mono mt-1 text-red-600';
