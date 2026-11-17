@@ -21,7 +21,7 @@ const htmlContent = marked.parse(`# ${title}`, { gfm: true });
 ---
 
 <MarkdownContent htmlContent={htmlContent}>
-  <div class="space-y-6">
+  <div class="space-y-6 mt-10">
     {articles.map((article) => (
       <article class="space-y-1">
         <a

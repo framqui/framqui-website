@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleList from '../../components/ArticleList.astro';
 
-const practicesGlob = import.meta.glob('../content/practices/*.md', { eager: true });
+const practicesGlob = import.meta.glob('../../content/practices/*.md', { eager: true });
 const articles = Object.entries(practicesGlob).map(([path, mod]) => {
   const slug = path.split('/').pop()?.replace('.md', '') || '';
   return { slug, data: mod.frontmatter || {}, body: typeof mod.rawContent === 'function' ? mod.rawContent() : '' };

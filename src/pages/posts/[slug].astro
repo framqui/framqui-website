@@ -3,9 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticlePage from '../../components/ArticlePage.astro';
 import { marked } from 'marked';
 
-const postsGlob = import.meta.glob('../content/posts/*.md', { eager: true });
+export const prerender = true;
 
 export async function getStaticPaths() {
+  const postsGlob = import.meta.glob('../../content/posts/*.md', { eager: true });
   const allPosts = Object.entries(postsGlob).map(([path, mod]) => {
     const slug = path.split('/').pop()?.replace('.md', '') || '';
     return { slug, data: mod.frontmatter || {} };
@@ -17,8 +18,9 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.props;
+const postsGlob = import.meta.glob('../../content/posts/*.md', { eager: true });
 const key = Object.keys(postsGlob).find((k) => k.endsWith(`/${slug}.md`));
-const mod = postsGlob[key];
+const mod = key ? postsGlob[key] : { frontmatter: {}, rawContent: () => '' };
 const post = { slug, data: mod.frontmatter || {}, body: typeof mod.rawContent === 'function' ? mod.rawContent() : '' };
 const htmlContent = marked.parse(post.body, { gfm: true });
 ---
