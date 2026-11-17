@@ -11,6 +11,7 @@ const htmlContent = marked.parse(md, { gfm: true });
 
 const url = new URL(Astro.url);
 const status = url.searchParams.get('status');
+const unsub = url.searchParams.get('unsub');
 ---
 
 <BaseLayout active="suscribite" title="Suscríbete - Framqui" description="Suscríbete para recibir notificaciones cuando se publique un nuevo artículo o práctica.">
@@ -31,6 +32,18 @@ const status = url.searchParams.get('status');
   {status === 'error' && (
     <p class="text-xs font-mono mt-2 text-red-600">Error al enviar el correo. Intenta de nuevo.</p>
   )}
+  {unsub === 'success' && (
+    <p class="text-xs font-mono mt-2 text-green-600">Has sido desuscrito correctamente.</p>
+  )}
+  {unsub === 'notfound' && (
+    <p class="text-xs font-mono mt-2 text-red-600">El correo no está suscrito.</p>
+  )}
+  {unsub === 'invalid' && (
+    <p class="text-xs font-mono mt-2 text-red-600">Correo inválido.</p>
+  )}
+  {unsub === 'error' && (
+    <p class="text-xs font-mono mt-2 text-red-600">Error al desuscribir. Intenta de nuevo.</p>
+  )}
 
   <form action="/api/subscribe" method="POST" class="flex flex-col sm:flex-row gap-2 w-full mt-2">
     <input
@@ -45,6 +58,27 @@ const status = url.searchParams.get('status');
       class="font-mono text-xs bg-transparent text-text-dark border border-gray-300 rounded px-3 py-1.5 no-underline hover:border-blue hover:text-blue transition-colors cursor-pointer"
     >
       Suscríbete
+    </button>
+  </form>
+
+  <div class="w-full h-px bg-gray-200 mt-10 mb-6" />
+
+  <p class="text-xs font-mono text-text-muted mb-2">
+    ¿Ya no quieres recibir notificaciones? Ingresa tu correo para desuscribirte.
+  </p>
+  <form action="/api/unsubscribe" method="POST" class="flex flex-col sm:flex-row gap-2 w-full">
+    <input
+      name="email"
+      type="email"
+      placeholder="tu@correo.com"
+      required
+      class="flex-1 font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors"
+    />
+    <button
+      type="submit"
+      class="font-mono text-xs bg-transparent text-text-dark border border-gray-300 rounded px-3 py-1.5 no-underline hover:border-blue hover:text-blue transition-colors cursor-pointer"
+    >
+      Desuscribirme
     </button>
   </form>
 </BaseLayout>

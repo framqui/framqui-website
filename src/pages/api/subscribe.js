@@ -6,10 +6,9 @@ function generateToken() {
   return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'http://localhost:4321';
-
 export async function POST({ request }) {
   try {
+    const siteUrl = new URL(request.url).origin;
     const formData = await request.formData();
     const email = formData.get('email');
 
@@ -28,7 +27,7 @@ export async function POST({ request }) {
 
     const subscribers = await loadSubscribers(kv);
     if (subscribers.includes(email)) {
-      return Response.redirect(`${SITE_URL}/suscribite?status=already`, 302);
+      return Response.redirect(`${siteUrl}/suscribite?status=already`, 302);
     }
 
     const pending = await loadPending(kv);
@@ -36,7 +35,7 @@ export async function POST({ request }) {
     if (existingPending) {
       // Reenviar el mismo token pendiente
       const resend = new Resend(import.meta.env.RESEND_API_KEY);
-      const verifyUrl = `${SITE_URL}/api/verify-subscribe?token=${existingPending.token}`;
+      const verifyUrl = `${siteUrl}/api/verify-subscribe?token=${existingPending.token}`;
       try {
         await resend.emails.send({
           from: 'Framqui <onboarding@resend.dev>',
@@ -53,7 +52,7 @@ export async function POST({ request }) {
       } catch (err) {
         console.error('Error reenviando correo:', err);
       }
-      return Response.redirect(`${SITE_URL}/suscribite?status=resend`, 302);
+      return Response.redirect(`${siteUrl}/suscribite?status=resend`, 302);
     }
 
     const token = generateToken();
@@ -61,7 +60,7 @@ export async function POST({ request }) {
     await savePending(pending, kv);
 
     const resend = new Resend(import.meta.env.RESEND_API_KEY);
-    const verifyUrl = `${SITE_URL}/api/verify-subscribe?token=${token}`;
+    const verifyUrl = `${siteUrl}/api/verify-subscribe?token=${token}`;
 
     try {
       await resend.emails.send({
@@ -80,12 +79,12 @@ export async function POST({ request }) {
       pending.pop();
       await savePending(pending, kv);
       console.error('Error enviando correo:', err);
-      return Response.redirect(`${SITE_URL}/suscribite?status=error`, 302);
+      return Response.redirect(`${siteUrl}/suscribite?status=error`, 302);
     }
 
-    return Response.redirect(`${SITE_URL}/suscribite?status=success`, 302);
+    return Response.redirect(`${siteUrl}/suscribite?status=success`, 302);
   } catch (err) {
     console.error('Error en subscribe:', err);
-    return Response.redirect(`${SITE_URL}/suscribite?status=error`, 302);
+    return Response.redirect(`${siteUrl}/suscribite?status=error`, 302);
   }
 }
