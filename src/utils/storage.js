@@ -8,15 +8,12 @@ const DATA_DIR = path.join(__dirname, '..', 'pages', 'data');
 const SUBSCRIBERS_FILE = path.join(DATA_DIR, 'subscribers.json');
 const PENDING_FILE = path.join(DATA_DIR, 'pending-subscribers.json');
 
-// Detectar si estamos en Cloudflare Workers
-let kv = null;
-try {
-  const { env } = await import('cloudflare:workers');
-  if (env && env.SUBSCRIBERS) {
-    kv = env.SUBSCRIBERS;
+function getKV(locals) {
+  try {
+    return locals.runtime.env.SUBSCRIBERS;
+  } catch {
+    return null;
   }
-} catch {
-  // No estamos en Cloudflare, usar archivos locales
 }
 
 function loadFromFile(filePath) {
@@ -38,7 +35,8 @@ function saveToFile(filePath, encrypted) {
   fs.writeFileSync(filePath, encrypted, 'utf-8');
 }
 
-async function loadSubscribers() {
+async function loadSubscribers(locals) {
+  const kv = getKV(locals);
   if (kv) {
     const raw = await kv.get('subscribers');
     if (!raw) return [];
@@ -48,9 +46,10 @@ async function loadSubscribers() {
   return loadFromFile(SUBSCRIBERS_FILE);
 }
 
-async function saveSubscribers(subscribers) {
+async function saveSubscribers(subscribers, locals) {
   const json = JSON.stringify(subscribers, null, 2);
   const encrypted = encrypt(json);
+  const kv = getKV(locals);
   if (kv) {
     await kv.put('subscribers', encrypted);
   } else {
@@ -58,7 +57,8 @@ async function saveSubscribers(subscribers) {
   }
 }
 
-async function loadPending() {
+async function loadPending(locals) {
+  const kv = getKV(locals);
   if (kv) {
     const raw = await kv.get('pending');
     if (!raw) return [];
@@ -68,8 +68,9 @@ async function loadPending() {
   return loadFromFile(PENDING_FILE);
 }
 
-async function savePending(pending) {
+async function savePending(pending, locals) {
   if (pending.length === 0) {
+    const kv = getKV(locals);
     if (kv) {
       await kv.delete('pending');
     } else {
@@ -80,6 +81,7 @@ async function savePending(pending) {
   }
   const json = JSON.stringify(pending, null, 2);
   const encrypted = encrypt(json);
+  const kv = getKV(locals);
   if (kv) {
     await kv.put('pending', encrypted);
   } else {
