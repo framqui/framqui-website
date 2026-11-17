@@ -1,15 +1,16 @@
 import { Resend } from 'resend';
 import { loadSubscribers, saveSubscribers, loadPending, savePending } from '../../utils/storage.js';
 
-export async function GET({ request }) {
+export async function GET({ request, platform }) {
   const url = new URL(request.url);
   const token = url.searchParams.get('token');
+  const kv = platform?.env?.SUBSCRIBERS || null;
 
   if (!token) {
     return new Response('Token inválido', { status: 400, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
   }
 
-  const pending = await loadPending();
+  const pending = await loadPending(kv);
   const index = pending.findIndex((p) => p.token === token);
 
   if (index === -1) {
@@ -18,11 +19,11 @@ export async function GET({ request }) {
 
   const { email } = pending[index];
   pending.splice(index, 1);
-  await savePending(pending);
+  await savePending(pending, kv);
 
-  const subscribers = await loadSubscribers();
+  const subscribers = await loadSubscribers(kv);
   subscribers.push(email);
-  await saveSubscribers(subscribers);
+  await saveSubscribers(subscribers, kv);
 
   const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
