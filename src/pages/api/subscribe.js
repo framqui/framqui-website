@@ -8,7 +8,7 @@ function generateToken() {
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'http://localhost:4321';
 
-export async function POST({ request, locals }) {
+export async function POST({ request }) {
   const { email } = await request.json();
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -18,7 +18,7 @@ export async function POST({ request, locals }) {
     });
   }
 
-  const subscribers = await loadSubscribers(locals);
+  const subscribers = await loadSubscribers();
   if (subscribers.includes(email)) {
     return new Response(JSON.stringify({ message: 'Ya estás suscrito' }), {
       status: 200,
@@ -26,7 +26,7 @@ export async function POST({ request, locals }) {
     });
   }
 
-  const pending = await loadPending(locals);
+  const pending = await loadPending();
   const existingPending = pending.find((p) => p.email === email);
   if (existingPending) {
     // Reenviar el mismo token pendiente
@@ -65,7 +65,7 @@ export async function POST({ request, locals }) {
 
   const token = generateToken();
   pending.push({ email, token, createdAt: new Date().toISOString() });
-  await savePending(pending, locals);
+  await savePending(pending);
 
   const resend = new Resend(import.meta.env.RESEND_API_KEY);
   const verifyUrl = `${SITE_URL}/api/verify-subscribe?token=${token}`;
