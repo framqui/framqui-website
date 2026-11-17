@@ -2,10 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticlePage from '../../components/ArticlePage.astro';
 import { marked } from 'marked';
-import { practices } from '../../utils/content.js';
+
+const practicesGlob = import.meta.glob('../content/practices/*.md', { eager: true });
 
 export async function getStaticPaths() {
-  const allPractices = practices.loadAll();
+  const allPractices = Object.entries(practicesGlob).map(([path, mod]) => {
+    const slug = path.split('/').pop()?.replace('.md', '') || '';
+    return { slug, data: mod.frontmatter || {} };
+  });
   return allPractices.map((practice) => ({
     params: { slug: practice.slug },
     props: { slug: practice.slug },
@@ -13,7 +17,9 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.props;
-const practice = practices.loadBySlug(slug);
+const key = Object.keys(practicesGlob).find((k) => k.endsWith(`/${slug}.md`));
+const mod = practicesGlob[key];
+const practice = { slug, data: mod.frontmatter || {}, body: typeof mod.rawContent === 'function' ? mod.rawContent() : '' };
 const htmlContent = marked.parse(practice.body, { gfm: true });
 ---
 

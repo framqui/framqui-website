@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarkdownContent from '../components/MarkdownContent.astro';
+import { marked } from 'marked';
+
+const md = `# Políticas de Privacidad
+
+Última actualización: 16 de noviembre de 2026
+
+## Recopilación de datos
+
+Este sitio web recopila únicamente los datos que el usuario proporciona de forma voluntaria a través de los formularios de contacto y suscripción:
+
+- **Formulario de contacto:** nombre, correo electrónico, asunto y mensaje.
+- **Formulario de suscripción:** correo electrónico.
+
+No se recopila ninguna otra información personal ni se utilizan cookies de seguimiento.
+
+## Uso de los datos
+
+Los datos recopilados se utilizan exclusivamente para los siguientes propósitos:
+
+- **Contacto:** responder a los mensajes enviados a través del formulario de contacto.
+- **Suscripción:** enviar notificaciones por correo electrónico cuando se publique un nuevo artículo o práctica en el sitio.
+
+## Almacenamiento de datos
+
+- Los correos de suscripción se almacenan de forma encriptada en nuestro servidor.
+- Los mensajes de contacto se envían directamente a nuestro correo electrónico a través de un servicio externo (FormSubmit).
+
+## Servicios terceros
+
+Este sitio utiliza los siguientes servicios externos para procesar y enviar datos:
+
+- **Resend** (resend.com): servicio de envío de correos electrónicos utilizado para enviar las notificaciones de suscripción y correos de bienvenida. Resend puede procesar datos en servidores ubicados fuera de tu país.
+- **FormSubmit** (formsubmit.co): servicio de procesamiento de formularios utilizado para recibir los mensajes del formulario de contacto.
+
+Para más información sobre cómo estos servicios manejan tus datos, consulta sus respectivas políticas de privacidad.
+
+## No venta ni spam
+
+Nos comprometemos a:
+
+- **No vender, alquilar ni compartir** los datos personales con terceros.
+- **No utilizar** los correos electrónicos para enviar spam, publicidad o contenido no solicitado.
+- **No utilizar** los datos para ningún propósito diferente al descrito en esta política.
+
+## Seguridad
+
+Los datos de suscripción se almacenan utilizando encriptación AES-256, un estándar de seguridad ampliamente reconocido. Solo el servidor tiene acceso a la clave de desencriptación.
+
+## Derechos del usuario
+
+El usuario puede solicitar la eliminación de sus datos en cualquier momento enviando un correo a andfera201@gmail.com con el asunto "FRAMQUI-DESUSCRIPCIÓN".
+
+## Cambios en esta política
+
+Cualquier cambio a esta política de privacidad se publicará en esta misma página con una fecha de actualización.
+
+## Contacto
+
+Para preguntas sobre esta política, puedes escribirme a andfera201@gmail.com o a través del formulario de contacto.`;
+
+const htmlContent = marked.parse(md, { gfm: true });
+---
+
+<BaseLayout active="politicas">
+  <MarkdownContent htmlContent={htmlContent} />
+</BaseLayout>

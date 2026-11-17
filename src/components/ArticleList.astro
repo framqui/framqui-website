@@ -1,5 +1,6 @@
 ---
 import MarkdownContent from './MarkdownContent.astro';
+import { marked } from 'marked';
 
 export interface Props {
   title: string;
@@ -16,11 +17,10 @@ export interface Props {
 }
 
 const { title, articles, basePath } = Astro.props;
+const htmlContent = marked.parse(`# ${title}`, { gfm: true });
 ---
 
-<MarkdownContent>
-  <h1 class="text-3xl font-semibold tracking-tight text-text-dark mt-10 mb-4">{title}</h1>
-
+<MarkdownContent htmlContent={htmlContent}>
   <div class="space-y-6">
     {articles.map((article) => (
       <article class="space-y-1">

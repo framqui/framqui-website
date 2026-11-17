@@ -1,6 +1,5 @@
 ---
 import MarkdownContent from './MarkdownContent.astro';
-import Comments from './Comments.astro';
 
 export interface Props {
   htmlContent: string;
@@ -22,4 +21,24 @@ const { htmlContent, backPath, showComments = false } = Astro.props;
 
 <MarkdownContent htmlContent={htmlContent} />
 
-{showComments && <Comments />}
+{showComments && (
+  <div class="mt-16 pt-8 border-t border-gray-200">
+    <h3 class="font-mono font-bold text-base text-text-dark mb-6">Comentarios</h3>
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="framqui/framqui-website"
+      data-repo-id="R_kgDOVug6CA"
+      data-category="General"
+      data-category-id="DIC_kwDOVug6CM4DLO_O"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light"
+      data-lang="es"
+      crossorigin="anonymous"
+      loading="lazy"
+    ></script>
+  </div>
+)}

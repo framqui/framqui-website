@@ -1,4 +1,6 @@
-/* Hide scrollbar globally */
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
 * {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -10,81 +12,6 @@
 :root {
   --color-muted: #f5f5f5;
 }
-
-@import "tailwindcss";
-
-/* Tech-focused typography for markdown content */
-.content {
-  @apply text-text-dark leading-7;
-}
-.content h1 {
-  @apply text-3xl font-semibold tracking-tight text-text-dark mt-10 mb-4;
-}
-.content h2 {
-  @apply text-2xl font-semibold tracking-tight text-text-dark border-b border-gray-200 pb-2 mt-10 mb-4;
-}
-.content h3 {
-  @apply text-xl font-semibold text-text-dark mt-8 mb-3;
-}
-.content h4 {
-  @apply text-lg font-semibold text-text-dark mt-6 mb-2;
-}
-.content p {
-  @apply text-base text-text-dark leading-7 mb-5;
-}
-.content blockquote {
-  @apply mt-6 mb-5 border-l-4 border-gray-300 pl-5 text-text-muted not-italic;
-}
-.content code {
-  @apply relative rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-text-dark;
-}
-.content pre {
-  @apply mt-6 mb-5 overflow-x-auto rounded-lg border border-gray-200 bg-gray-900 p-4;
-}
-.content pre code {
-  @apply bg-transparent p-0 font-mono text-sm text-gray-100;
-}
-.content ul {
-  @apply my-5 ml-6 list-disc text-text-dark;
-}
-.content ol {
-  @apply my-5 ml-6 list-decimal text-text-dark;
-}
-.content li {
-  @apply mb-2 leading-7;
-}
-.content li > ul,
-.content li > ol {
-  @apply my-2;
-}
-.content table {
-  @apply w-full text-sm text-left text-text-dark mt-5 mb-5;
-}
-.content thead {
-  @apply border-b border-gray-300;
-}
-.content th {
-  @apply text-left font-semibold py-3 pr-4;
-}
-.content td {
-  @apply border-b border-gray-100 py-3 pr-4;
-}
-.content hr {
-  @apply my-10 border-gray-200;
-}
-.content img {
-  @apply rounded-lg;
-}
-.content a {
-  @apply text-blue no-underline hover:underline transition-colors;
-}
-.content strong {
-  @apply font-semibold;
-}
-.content time {
-  @apply text-sm text-text-muted;
-}
-
 
 @theme {
   --font-sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", system-ui, sans-serif;

@@ -6,13 +6,5 @@ export interface Props {
 const { htmlContent } = Astro.props;
 ---
 
-<div class="overflow-x-auto">
-  {htmlContent && (
-    <div class="content">
-      <div set:html={htmlContent} />
-    </div>
-  )}
-  {!htmlContent && (
-    <slot />
-  )}
-</div>
+{htmlContent && <div class="prose" set:html={htmlContent} />}
+<slot />

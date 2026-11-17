@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarkdownContent from '../components/MarkdownContent.astro';
+import { marked } from 'marked';
+
+const md = `# Contáctame
+
+Si quieres hablar sobre un proyecto, una propuesta, una idea, tecnología, agendar una llamada, necesitas ayuda o simplemente conversar, puedes enviarme un mensaje directo desde aquí. Lo revisaré constantemente.`;
+const htmlContent = marked.parse(md, { gfm: true });
+---
+
+<BaseLayout active="contactame">
+  <MarkdownContent htmlContent={htmlContent} />
+  <p class="text-xs font-mono font-bold text-orange-600 mt-10">
+    ⚠ Validación con FormSubmit: debes activar tu correo, confirmarlo y validar antes de enviar correos por seguridad. Para más información, lee nuestras <a href="/politicas" class="underline hover:text-orange-700">políticas de privacidad</a>.
+  </p>
+  <form
+      id="contact-form"
+      class="flex flex-col gap-3 w-full mt-2"
+      method="POST"
+      action="https://formsubmit.co/andfera201@gmail.com"
+    >
+      <input type="hidden" name="_template" value="table" />
+      <input
+        type="text"
+        name="name"
+        placeholder="Tu nombre"
+        required
+        class="font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Tu correo"
+        required
+        class="font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors"
+      />
+      <input
+        type="text"
+        name="_subject"
+        placeholder="Asunto"
+        required
+        class="font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors"
+      />
+      <textarea
+        name="message"
+        placeholder="Tu mensaje"
+        rows="5"
+        required
+        class="font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors resize-y"
+      ></textarea>
+      <button
+        type="submit"
+        class="font-mono text-xs bg-transparent text-text-dark border border-gray-300 rounded px-3 py-1.5 no-underline hover:border-blue hover:text-blue transition-colors cursor-pointer self-end"
+      >
+        Enviar
+      </button>
+    </form>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      const subjectInput = this.querySelector('input[name="_subject"]');
+      if (subjectInput && subjectInput.value) {
+        subjectInput.value = 'FRAMQUI-CONTACTAME - ' + subjectInput.value;
+      }
+    });
+  </script>
+
+</BaseLayout>

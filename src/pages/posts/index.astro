@@ -1,9 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleList from '../../components/ArticleList.astro';
-import { posts } from '../../utils/content.js';
 
-const articles = posts.loadAll();
+const postsGlob = import.meta.glob('../content/posts/*.md', { eager: true });
+const articles = Object.entries(postsGlob).map(([path, mod]) => {
+  const slug = path.split('/').pop()?.replace('.md', '') || '';
+  return { slug, data: mod.frontmatter || {}, body: typeof mod.rawContent === 'function' ? mod.rawContent() : '' };
+}).sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 ---
 
 <BaseLayout active="posts">
