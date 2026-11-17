@@ -1,8 +1,7 @@
 import { Resend } from 'resend';
 import { loadSubscribers, saveSubscribers, loadPending, savePending } from '../../utils/storage.js';
 
-export async function GET(context) {
-  const { request } = context;
+export async function GET({ request, locals }) {
   const url = new URL(request.url);
   const token = url.searchParams.get('token');
 
@@ -10,7 +9,7 @@ export async function GET(context) {
     return new Response('Token inválido', { status: 400, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
   }
 
-  const pending = await loadPending(context);
+  const pending = await loadPending(locals);
   const index = pending.findIndex((p) => p.token === token);
 
   if (index === -1) {
@@ -19,11 +18,11 @@ export async function GET(context) {
 
   const { email } = pending[index];
   pending.splice(index, 1);
-  await savePending(pending, context);
+  await savePending(pending, locals);
 
-  const subscribers = await loadSubscribers(context);
+  const subscribers = await loadSubscribers(locals);
   subscribers.push(email);
-  await saveSubscribers(subscribers, context);
+  await saveSubscribers(subscribers, locals);
 
   const resend = new Resend(import.meta.env.RESEND_API_KEY);
 

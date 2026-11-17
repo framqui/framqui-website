@@ -8,8 +8,7 @@ function generateToken() {
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'http://localhost:4321';
 
-export async function POST(context) {
-  const { request } = context;
+export async function POST({ request, locals }) {
   const { email } = await request.json();
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -19,7 +18,7 @@ export async function POST(context) {
     });
   }
 
-  const subscribers = await loadSubscribers(context);
+  const subscribers = await loadSubscribers(locals);
   if (subscribers.includes(email)) {
     return new Response(JSON.stringify({ message: 'Ya estás suscrito' }), {
       status: 200,
@@ -27,7 +26,7 @@ export async function POST(context) {
     });
   }
 
-  const pending = await loadPending(context);
+  const pending = await loadPending(locals);
   const existingPending = pending.find((p) => p.email === email);
   if (existingPending) {
     // Reenviar el mismo token pendiente
@@ -66,7 +65,7 @@ export async function POST(context) {
 
   const token = generateToken();
   pending.push({ email, token, createdAt: new Date().toISOString() });
-  await savePending(pending, context);
+  await savePending(pending, locals);
 
   const resend = new Resend(import.meta.env.RESEND_API_KEY);
   const verifyUrl = `${SITE_URL}/api/verify-subscribe?token=${token}`;
@@ -86,7 +85,7 @@ export async function POST(context) {
     });
     if (result.error) {
       pending.pop();
-      await savePending(pending);
+      await savePending(pending, locals);
       return new Response(JSON.stringify({ error: 'No se pudo enviar el correo de confirmación' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -94,7 +93,7 @@ export async function POST(context) {
     }
   } catch (err) {
     pending.pop();
-    await savePending(pending);
+    await savePending(pending, locals);
     return new Response(JSON.stringify({ error: 'No se pudo enviar el correo de confirmación' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json; charset=utf-8' },

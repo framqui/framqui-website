@@ -1,14 +1,16 @@
 import { encrypt, decrypt } from './encrypt.js';
 
-function getKV(context) {
-  if (context && context.locals && context.locals.runtime && context.locals.runtime.env) {
-    return context.locals.runtime.env.SUBSCRIBERS;
-  }
+function getKV(locals) {
+  try {
+    if (locals && locals.runtime && locals.runtime.env && locals.runtime.env.SUBSCRIBERS) {
+      return locals.runtime.env.SUBSCRIBERS;
+    }
+  } catch {}
   return null;
 }
 
-async function loadSubscribers(context) {
-  const kv = getKV(context);
+async function loadSubscribers(locals) {
+  const kv = getKV(locals);
   if (kv) {
     const raw = await kv.get('subscribers');
     if (!raw) return [];
@@ -32,10 +34,10 @@ async function loadSubscribers(context) {
   }
 }
 
-async function saveSubscribers(subscribers, context) {
+async function saveSubscribers(subscribers, locals) {
   const json = JSON.stringify(subscribers, null, 2);
   const encrypted = encrypt(json);
-  const kv = getKV(context);
+  const kv = getKV(locals);
   if (kv) {
     await kv.put('subscribers', encrypted);
   } else {
@@ -45,14 +47,14 @@ async function saveSubscribers(subscribers, context) {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
     const DATA_FILE = path.join(__dirname, '..', 'pages', 'data', 'subscribers.json');
-    const dir = path.dirname(DATA_FILE);
+    const dir = path.dirname(PENDING_FILE);
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(DATA_FILE, encrypted, 'utf-8');
   }
 }
 
-async function loadPending(context) {
-  const kv = getKV(context);
+async function loadPending(locals) {
+  const kv = getKV(locals);
   if (kv) {
     const raw = await kv.get('pending');
     if (!raw) return [];
@@ -76,9 +78,9 @@ async function loadPending(context) {
   }
 }
 
-async function savePending(pending, context) {
+async function savePending(pending, locals) {
   if (pending.length === 0) {
-    const kv = getKV(context);
+    const kv = getKV(locals);
     if (kv) {
       await kv.delete('pending');
     } else {
@@ -94,7 +96,7 @@ async function savePending(pending, context) {
   }
   const json = JSON.stringify(pending, null, 2);
   const encrypted = encrypt(json);
-  const kv = getKV(context);
+  const kv = getKV(locals);
   if (kv) {
     await kv.put('pending', encrypted);
   } else {
