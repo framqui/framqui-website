@@ -1,55 +1,5 @@
 import { Resend } from 'resend';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { encrypt, decrypt } from '../../utils/encrypt.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const DATA_FILE = path.join(__dirname, '..', 'data', 'subscribers.json');
-const PENDING_FILE = path.join(__dirname, '..', 'data', 'pending-subscribers.json');
-
-function loadSubscribers() {
-  try {
-    const content = fs.readFileSync(DATA_FILE, 'utf-8').trim();
-    if (!content) return [];
-    const json = decrypt(content);
-    return JSON.parse(json);
-  } catch {
-    return [];
-  }
-}
-
-function saveSubscribers(subscribers) {
-  const dir = path.dirname(DATA_FILE);
-  fs.mkdirSync(dir, { recursive: true });
-  const json = JSON.stringify(subscribers, null, 2);
-  const encrypted = encrypt(json);
-  fs.writeFileSync(DATA_FILE, encrypted, 'utf-8');
-}
-
-function loadPending() {
-  try {
-    const content = fs.readFileSync(PENDING_FILE, 'utf-8').trim();
-    if (!content) return [];
-    const json = decrypt(content);
-    return JSON.parse(json);
-  } catch {
-    return [];
-  }
-}
-
-function savePending(pending) {
-  if (pending.length === 0) {
-    try { fs.unlinkSync(PENDING_FILE); } catch {}
-    return;
-  }
-  const dir = path.dirname(PENDING_FILE);
-  fs.mkdirSync(dir, { recursive: true });
-  const json = JSON.stringify(pending, null, 2);
-  const encrypted = encrypt(json);
-  fs.writeFileSync(PENDING_FILE, encrypted, 'utf-8');
-}
+import { loadSubscribers, saveSubscribers, loadPending, savePending } from '../../utils/storage.js';
 
 export async function GET({ request }) {
   const url = new URL(request.url);
@@ -59,7 +9,7 @@ export async function GET({ request }) {
     return new Response('Token inválido', { status: 400, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
   }
 
-  const pending = loadPending();
+  const pending = await loadPending();
   const index = pending.findIndex((p) => p.token === token);
 
   if (index === -1) {
@@ -68,11 +18,11 @@ export async function GET({ request }) {
 
   const { email } = pending[index];
   pending.splice(index, 1);
-  savePending(pending);
+  await savePending(pending);
 
-  const subscribers = loadSubscribers();
+  const subscribers = await loadSubscribers();
   subscribers.push(email);
-  saveSubscribers(subscribers);
+  await saveSubscribers(subscribers);
 
   const resend = new Resend(import.meta.env.RESEND_API_KEY);
 

@@ -1,52 +1,6 @@
 import { Resend } from 'resend';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { randomBytes } from 'crypto';
-import { encrypt, decrypt } from '../../utils/encrypt.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const DATA_FILE = path.join(__dirname, '..', 'data', 'subscribers.json');
-const PENDING_FILE = path.join(__dirname, '..', 'data', 'pending-subscribers.json');
-
-function loadSubscribers() {
-  try {
-    const content = fs.readFileSync(DATA_FILE, 'utf-8').trim();
-    if (!content) return [];
-    const json = decrypt(content);
-    return JSON.parse(json);
-  } catch {
-    return [];
-  }
-}
-
-function saveSubscribers(subscribers) {
-  const dir = path.dirname(DATA_FILE);
-  fs.mkdirSync(dir, { recursive: true });
-  const json = JSON.stringify(subscribers, null, 2);
-  const encrypted = encrypt(json);
-  fs.writeFileSync(DATA_FILE, encrypted, 'utf-8');
-}
-
-function loadPending() {
-  try {
-    const content = fs.readFileSync(PENDING_FILE, 'utf-8').trim();
-    if (!content) return [];
-    const json = decrypt(content);
-    return JSON.parse(json);
-  } catch {
-    return [];
-  }
-}
-
-function savePending(pending) {
-  const dir = path.dirname(PENDING_FILE);
-  fs.mkdirSync(dir, { recursive: true });
-  const json = JSON.stringify(pending, null, 2);
-  const encrypted = encrypt(json);
-  fs.writeFileSync(PENDING_FILE, encrypted, 'utf-8');
-}
+import { loadSubscribers, saveSubscribers, loadPending, savePending } from '../../utils/storage.js';
 
 function generateToken() {
   return randomBytes(32).toString('hex');
@@ -64,7 +18,7 @@ export async function POST({ request }) {
     });
   }
 
-  const subscribers = loadSubscribers();
+  const subscribers = await loadSubscribers();
   if (subscribers.includes(email)) {
     return new Response(JSON.stringify({ message: 'Ya estás suscrito' }), {
       status: 200,
@@ -72,7 +26,7 @@ export async function POST({ request }) {
     });
   }
 
-  const pending = loadPending();
+  const pending = await loadPending();
   const existingPending = pending.find((p) => p.email === email);
   if (existingPending) {
     // Reenviar el mismo token pendiente
@@ -111,7 +65,7 @@ export async function POST({ request }) {
 
   const token = generateToken();
   pending.push({ email, token, createdAt: new Date().toISOString() });
-  savePending(pending);
+  await savePending(pending);
 
   const resend = new Resend(import.meta.env.RESEND_API_KEY);
   const verifyUrl = `${SITE_URL}/api/verify-subscribe?token=${token}`;
@@ -131,7 +85,7 @@ export async function POST({ request }) {
     });
     if (result.error) {
       pending.pop();
-      savePending(pending);
+      await savePending(pending);
       return new Response(JSON.stringify({ error: 'No se pudo enviar el correo de confirmación' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -139,7 +93,7 @@ export async function POST({ request }) {
     }
   } catch (err) {
     pending.pop();
-    savePending(pending);
+    await savePending(pending);
     return new Response(JSON.stringify({ error: 'No se pudo enviar el correo de confirmación' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
