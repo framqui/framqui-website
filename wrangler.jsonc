@@ -1,0 +1,5 @@
+{
+  "name": "framqui-website",
+  "compatibility_date": "2024-11-17",
+  "compatibility_flags": ["nodejs_compat"]
+}
