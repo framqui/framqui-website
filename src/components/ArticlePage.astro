@@ -10,7 +10,7 @@ export interface Props {
 const { htmlContent, backPath, showComments = false } = Astro.props;
 ---
 
-<a href={backPath} class="font-mono text-xs text-muted no-underline hover:text-ink">← Volver</a>
+<a href={backPath} class="font-mono text-xs text-muted no-underline hover:text-accent">← Volver</a>
 
 <div class="mt-8">
   <MarkdownContent htmlContent={htmlContent} />

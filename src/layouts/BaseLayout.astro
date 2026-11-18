@@ -41,6 +41,15 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
     <Header active={active} />
     <main class="w-full max-w-[42rem] mx-auto px-6 pt-14 pb-20 flex-1">
       <slot />
+      <p class="mt-10 text-right">
+        <button
+          type="button"
+          onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+          class="cursor-pointer border-0 bg-transparent p-0 font-mono text-xs text-muted hover:text-accent"
+        >
+          Subir →
+        </button>
+      </p>
     </main>
     <Footer />
   </body>
