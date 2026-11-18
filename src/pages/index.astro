@@ -8,6 +8,6 @@ const profileMd = await fetch(readmeUrl).then((res) => res.text());
 const htmlContent = marked.parse(profileMd, { gfm: true });
 ---
 
-<BaseLayout active="inicio" title="Framqui" description="Desarrollador de software. Backend, producto e inteligencia artificial aplicada.">
+<BaseLayout active="inicio" title="Framqui" description="Sitio web de Andres Ramos, desarrollador de software. Escribimos sobre tecnología, desarrollo de software, inteligencia artificial, desarrollo de producto y más.">
   <MarkdownContent htmlContent={htmlContent} />
 </BaseLayout>
