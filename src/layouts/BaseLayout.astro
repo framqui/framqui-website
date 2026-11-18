@@ -11,12 +11,16 @@ interface Props {
 
 const { active = 'inicio', title, description } = Astro.props;
 
-const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'http://localhost:4321';
+const configuredUrl = import.meta.env.PUBLIC_SITE_URL;
+const siteUrl = configuredUrl && !String(configuredUrl).includes('localhost')
+  ? String(configuredUrl).replace(/\/$/, '')
+  : 'https://framqui.com';
 const defaultTitle = 'Andres Ramos — Framqui';
-const defaultDescription = 'Desarrollador de software. Backend, producto e inteligencia artificial aplicada.';
+const defaultDescription = 'Sitio de Andres Ramos. Notas, prácticas y avisos sobre software, producto e inteligencia artificial.';
 const pageTitle = title || defaultTitle;
 const pageDescription = description || defaultDescription;
 const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+const imageUrl = `${siteUrl}/favicon.svg`;
 ---
 
 <html lang="es">
@@ -24,18 +28,41 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
     <meta name="description" content={pageDescription} />
+    <meta name="author" content="Andres Ramos" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#f6f3ee" />
     <link rel="canonical" href={canonicalUrl} />
     <title>{pageTitle}</title>
+    <meta property="og:site_name" content="Framqui" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:alt" content="Framqui" />
     <meta property="og:locale" content="es_ES" />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={imageUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Framqui',
+      url: siteUrl,
+      description: defaultDescription,
+      author: {
+        '@type': 'Person',
+        name: 'Andres Ramos',
+        url: siteUrl,
+        sameAs: [
+          'https://github.com/framqui',
+          'https://www.linkedin.com/in/framqui/',
+        ],
+      },
+    })} />
   </head>
   <body class="font-serif text-ink antialiased flex flex-col min-h-screen">
     <Header active={active} />
