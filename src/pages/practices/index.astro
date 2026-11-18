@@ -10,5 +10,11 @@ const articles = Object.entries(practicesGlob).map(([path, mod]) => {
 ---
 
 <BaseLayout active="practices" title="Prácticas - Framqui" description="Prácticas y proyectos de automatización, scripts y DevOps.">
-  <ArticleList title="Prácticas" articles={articles} basePath="/practices" />
+  <ArticleList
+    title="Prácticas"
+    intro="Espacio de aprendizaje. Aquí encontrarás proyectos, problemas y cursos sobre desarrollo de software, inteligencia artificial, tecnología y desarrollo de productos."
+    note="Si quieres aprender a resolver problemas reales y hacer crecer tu hoja de vida, este es el lugar. Estos aprendizajes no están pensados para acumular certificados ni para recorrer tecnologías: el foco es el problema. Tú eliges cómo resolverlo y qué herramientas usar. Lo importante es documentar tu criterio y tu manera de llegar a una solución."
+    articles={articles}
+    basePath="/practices"
+  />
 </BaseLayout>

@@ -3,55 +3,66 @@ import NavLink from './NavLink.astro';
 
 const activeItem = Astro.props.active || 'inicio';
 
-const dropdownItems = [
-  { href: '/suscribite', label: 'SUSCRÍBETE' },
-  { href: '/contactame', label: 'CONTACTAME' },
-  { href: '/politicas', label: 'POLÍTICAS' },
-  { href: '#framqui', label: 'FRAMQUI' },
+const links = [
+  { href: '/', label: 'Inicio', activeKey: 'inicio' },
+  { href: '/practices', label: 'Prácticas', activeKey: 'practices' },
+  { href: '/posts', label: 'Escritos', activeKey: 'posts' },
 ];
+
+const more = [
+  { href: '/suscribite', label: 'Suscríbete', activeKey: 'suscribite' },
+  { href: '/contactame', label: 'Contáctame', activeKey: 'contactame' },
+  { href: '/framqui', label: 'Framqui', activeKey: 'framqui' },
+  { href: '/politicas', label: 'Políticas', activeKey: 'politicas' },
+];
+
+const moreActive = more.some((item) => item.activeKey === activeItem);
 ---
 
-<nav class="flex flex-wrap items-center justify-center gap-10 sm:gap-10 py-4 border-b border-gray-400">
-  <NavLink href="/" label="INICIO" activeKey="inicio" activeItem={activeItem} />
-  <NavLink href="/posts" label="ESCRITOS" activeKey="posts" activeItem={activeItem} />
-  <NavLink href="/practices" label="PRÁCTICAS" activeKey="practices" activeItem={activeItem} />
+<header class="border-b border-line">
+  <nav class="max-w-[42rem] mx-auto px-6 py-5 flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
+    {links.map((link) => (
+      <NavLink href={link.href} label={link.label} activeKey={link.activeKey} activeItem={activeItem} />
+    ))}
 
-  <div class="relative inline-block">
-    <button class="dropdown-toggle font-mono font-bold text-sm text-text-dark bg-transparent border-none cursor-pointer tracking-tight transition-colors duration-200 p-0 inline-flex items-center gap-1 hover:text-blue hover:underline hover:underline-offset-4 sm:text-base">
-      MÁS <span class="text-xs leading-none select-none">▾</span>
-    </button>
-    <div class="dropdown-menu hidden absolute top-full left-1/2 -translate-x-1/2 flex-col gap-2 py-2 px-6 mt-1 bg-bg border border-gray-200 min-w-[120px] z-10">
-      {dropdownItems.map((item) => (
-        <a href={item.href} class="font-mono font-bold text-sm text-text-dark no-underline tracking-tight whitespace-nowrap transition-colors duration-200 hover:text-blue hover:underline hover:underline-offset-4 sm:text-base">{item.label}</a>
-      ))}
+    <div class="relative">
+      <button
+        type="button"
+        class:list={[
+          'dropdown-toggle font-mono text-base bg-transparent border-0 cursor-pointer p-0',
+          moreActive ? 'font-bold text-ink' : 'text-muted hover:text-ink',
+        ]}
+        aria-expanded="false"
+      >
+        Más
+      </button>
+      <div class="dropdown-menu hidden absolute left-1/2 top-full z-10 mt-3 w-max -translate-x-1/2 flex-col items-center gap-3 border-y border-line bg-bg px-4 py-3">
+        {more.map((item) => (
+          <NavLink href={item.href} label={item.label} activeKey={item.activeKey} activeItem={activeItem} />
+        ))}
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>
 
 <style>
   .dropdown-menu.show {
     display: flex;
   }
-
-  @media (max-width: 640px) {
-    .nav > :where(*) {
-      font-size: 0.75rem !important;
-    }
-  }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.querySelector('.dropdown-toggle');
-    const menu = document.querySelector('.dropdown-menu');
+  const toggle = document.querySelector('.dropdown-toggle');
+  const menu = document.querySelector('.dropdown-menu');
 
-    toggle?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      menu?.classList.toggle('show');
-    });
+  toggle?.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const open = menu?.classList.toggle('show');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
 
-    document.addEventListener('click', () => {
-      menu?.classList.remove('show');
-    });
+  document.addEventListener('click', () => {
+    menu?.classList.remove('show');
+    toggle?.setAttribute('aria-expanded', 'false');
   });
 </script>

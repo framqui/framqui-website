@@ -1,88 +1,66 @@
 import { Resend } from 'resend';
-import { loadSubscribers, saveSubscribers, loadPending, savePending } from '../../utils/storage.js';
+import { deletePendingByEmail, findPendingByEmail, getDb, getEnv, isSubscribed, savePending } from '../../utils/storage.js';
 
-function generateToken() {
-  const bytes = crypto.getRandomValues(new Uint8Array(32));
-  return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function randomToken() {
+  const bytes = new Uint8Array(32);
+  crypto.getRandomValues(bytes);
+  return [...bytes].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+function confirmationHtml(verifyUrl, policiesUrl) {
+  return `<p>Gracias por suscribirte.</p><p>Antes de confirmar, te invito a leer las <a href="${policiesUrl}">políticas de privacidad</a>. Ahí explico el tratamiento de tus datos, los servicios que usa el sitio y cómo se protege esa información. Léelas: tu seguridad en la web es importante para mí.</p><p>Para confirmar tu suscripción, entra en este enlace:</p><p><a href="${verifyUrl}">${verifyUrl}</a></p><p>Mil gracias.</p><p>Andres Ramos</p>`;
+}
+
+async function sendConfirmation(apiKey, email, verifyUrl, policiesUrl) {
+  const resend = new Resend(apiKey);
+  await resend.emails.send({
+    from: 'Framqui <onboarding@resend.dev>',
+    to: [email],
+    subject: 'Suscripción Framqui (Andres Ramos)',
+    html: confirmationHtml(verifyUrl, policiesUrl),
+  });
 }
 
 export async function POST({ request }) {
+  const siteUrl = new URL(request.url).origin;
+
   try {
-    const siteUrl = new URL(request.url).origin;
+    const db = getDb();
     const formData = await request.formData();
-    const email = formData.get('email');
+    const email = String(formData.get('email') || '').trim().toLowerCase();
 
-    // En Cloudflare Workers, acceder a KV via cloudflare:workers
-    let kv = null;
-    try {
-      const { env } = await import('cloudflare:workers');
-      kv = env.SUBSCRIBERS || null;
-    } catch {
-      // En local, kv será null y usará archivos JSON
-    }
-
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!EMAIL_PATTERN.test(email)) {
       return new Response('Correo inválido', { status: 400 });
     }
 
-    const subscribers = await loadSubscribers(kv);
-    if (subscribers.includes(email)) {
+    if (await isSubscribed(db, email)) {
       return Response.redirect(`${siteUrl}/suscribite?status=already`, 302);
     }
 
-    const pending = await loadPending(kv);
-    const existingPending = pending.find((p) => p.email === email);
-    if (existingPending) {
-      // Reenviar el mismo token pendiente
-      const resend = new Resend(import.meta.env.RESEND_API_KEY);
-      const verifyUrl = `${siteUrl}/api/verify-subscribe?token=${existingPending.token}`;
-      try {
-        await resend.emails.send({
-          from: 'Framqui <onboarding@resend.dev>',
-          to: [email],
-          subject: 'Confirma tu suscripción',
-          html: `
-            <h1>Confirma tu suscripción</h1>
-            <p>Haz clic en el siguiente enlace para confirmar tu suscripción a las notificaciones de <strong>Framqui</strong>:</p>
-            <p><a href="${verifyUrl}">Confirmar suscripción</a></p>
-            <p>Si no te suscribiste, puedes ignorar este correo.</p>
-            <p>— Andres</p>
-          `,
-        });
-      } catch (err) {
-        console.error('Error reenviando correo:', err);
-      }
-      return Response.redirect(`${siteUrl}/suscribite?status=resend`, 302);
+    const existingPending = await findPendingByEmail(db, email);
+    const token = existingPending?.token ?? randomToken();
+    if (!existingPending) {
+      await savePending(db, email, token);
     }
 
-    const token = generateToken();
-    pending.push({ email, token, createdAt: new Date().toISOString() });
-    await savePending(pending, kv);
-
-    const resend = new Resend(import.meta.env.RESEND_API_KEY);
     const verifyUrl = `${siteUrl}/api/verify-subscribe?token=${token}`;
 
+    const apiKey = getEnv('RESEND_API_KEY');
+
     try {
-      await resend.emails.send({
-        from: 'Framqui <onboarding@resend.dev>',
-        to: [email],
-        subject: 'Confirma tu suscripción',
-        html: `
-          <h1>Confirma tu suscripción</h1>
-          <p>Haz clic en el siguiente enlace para confirmar tu suscripción a las notificaciones de <strong>Framqui</strong>:</p>
-          <p><a href="${verifyUrl}">Confirmar suscripción</a></p>
-          <p>Si no te suscribiste, puedes ignorar este correo.</p>
-          <p>— Andres</p>
-        `,
-      });
+      await sendConfirmation(apiKey, email, verifyUrl, `${siteUrl}/politicas`);
     } catch (err) {
-      pending.pop();
-      await savePending(pending, kv);
+      if (!existingPending) {
+        await deletePendingByEmail(db, email);
+      }
       console.error('Error enviando correo:', err);
       return Response.redirect(`${siteUrl}/suscribite?status=error`, 302);
     }
 
-    return Response.redirect(`${siteUrl}/suscribite?status=success`, 302);
+    const status = existingPending ? 'resend' : 'success';
+    return Response.redirect(`${siteUrl}/suscribite?status=${status}`, 302);
   } catch (err) {
     console.error('Error en subscribe:', err);
     return Response.redirect(`${siteUrl}/suscribite?status=error`, 302);

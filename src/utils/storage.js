@@ -1,100 +1,57 @@
-import { encrypt, decrypt } from './encrypt.js';
+import { env } from 'cloudflare:workers';
 
-// Estos imports solo se usan en Node.js local, no en Cloudflare Workers
-let SUBSCRIBERS_FILE;
-let PENDING_FILE;
-
-async function getLocalPaths() {
-  // Lazy init: solo se ejecuta cuando se necesita (en local)
-  if (!SUBSCRIBERS_FILE) {
-    const path = await import('path');
-    const url = await import('url');
-    const __filename = url.fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const DATA_DIR = path.join(__dirname, '..', 'pages', 'data');
-    SUBSCRIBERS_FILE = path.join(DATA_DIR, 'subscribers.json');
-    PENDING_FILE = path.join(DATA_DIR, 'pending-subscribers.json');
+export function getDb() {
+  const db = env.DB;
+  if (!db) {
+    throw new Error('El binding D1 "DB" no está disponible.');
   }
-  return { SUBSCRIBERS_FILE, PENDING_FILE };
+  return db;
 }
 
-async function loadFromFile(filePath) {
-  const fs = await import('fs');
-  try {
-    const content = fs.readFileSync(filePath, 'utf-8').trim();
-    if (!content) return [];
-    const json = await decrypt(content);
-    return JSON.parse(json);
-  } catch {
-    return [];
-  }
+export function getEnv(key) {
+  return env[key] ?? process.env[key];
 }
 
-async function saveToFile(filePath, encrypted) {
-  const fs = await import('fs');
-  const path = await import('path');
-  const dir = path.dirname(filePath);
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(filePath, encrypted, 'utf-8');
+export async function isSubscribed(db, email) {
+  const row = await db.prepare('SELECT email FROM subscribers WHERE email = ?').bind(email).first();
+  return Boolean(row);
 }
 
-async function deleteFile(filePath) {
-  const fs = await import('fs');
-  try { fs.unlinkSync(filePath); } catch {}
+export async function findPendingByEmail(db, email) {
+  return db.prepare('SELECT email, token FROM pending_subscribers WHERE email = ?').bind(email).first();
 }
 
-// Si kv está disponible (Cloudflare), usar KV. Si no, usar archivos locales.
-async function loadSubscribers(kv) {
-  if (kv) {
-    const raw = await kv.get('subscribers');
-    if (!raw) return [];
-    const json = await decrypt(raw);
-    return JSON.parse(json);
-  }
-  const { SUBSCRIBERS_FILE } = await getLocalPaths();
-  return loadFromFile(SUBSCRIBERS_FILE);
+export async function savePending(db, email, token) {
+  const createdAt = new Date().toISOString();
+  await db
+    .prepare(
+      `INSERT INTO pending_subscribers (email, token, created_at) VALUES (?, ?, ?)
+       ON CONFLICT(email) DO UPDATE SET token = excluded.token, created_at = excluded.created_at`,
+    )
+    .bind(email, token, createdAt)
+    .run();
 }
 
-async function saveSubscribers(subscribers, kv) {
-  const json = JSON.stringify(subscribers, null, 2);
-  const encrypted = await encrypt(json);
-  if (kv) {
-    await kv.put('subscribers', encrypted);
-  } else {
-    const { SUBSCRIBERS_FILE } = await getLocalPaths();
-    await saveToFile(SUBSCRIBERS_FILE, encrypted);
-  }
+export async function deletePendingByEmail(db, email) {
+  await db.prepare('DELETE FROM pending_subscribers WHERE email = ?').bind(email).run();
 }
 
-async function loadPending(kv) {
-  if (kv) {
-    const raw = await kv.get('pending');
-    if (!raw) return [];
-    const json = await decrypt(raw);
-    return JSON.parse(json);
-  }
-  const { PENDING_FILE } = await getLocalPaths();
-  return loadFromFile(PENDING_FILE);
+export async function confirmPending(db, token) {
+  const row = await db.prepare('SELECT email FROM pending_subscribers WHERE token = ?').bind(token).first();
+  if (!row) return null;
+
+  const createdAt = new Date().toISOString();
+  await db.batch([
+    db.prepare('DELETE FROM pending_subscribers WHERE token = ?').bind(token),
+    db.prepare(
+      'INSERT INTO subscribers (email, created_at) VALUES (?, ?) ON CONFLICT(email) DO NOTHING',
+    ).bind(row.email, createdAt),
+  ]);
+
+  return row.email;
 }
 
-async function savePending(pending, kv) {
-  if (pending.length === 0) {
-    if (kv) {
-      await kv.delete('pending');
-    } else {
-      const { PENDING_FILE } = await getLocalPaths();
-      await deleteFile(PENDING_FILE);
-    }
-    return;
-  }
-  const json = JSON.stringify(pending, null, 2);
-  const encrypted = await encrypt(json);
-  if (kv) {
-    await kv.put('pending', encrypted);
-  } else {
-    const { PENDING_FILE } = await getLocalPaths();
-    await saveToFile(PENDING_FILE, encrypted);
-  }
+export async function removeSubscriber(db, email) {
+  const result = await db.prepare('DELETE FROM subscribers WHERE email = ?').bind(email).run();
+  return (result.meta?.changes ?? 0) > 0;
 }
-
-export { loadSubscribers, saveSubscribers, loadPending, savePending };

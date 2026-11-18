@@ -5,80 +5,50 @@ import { marked } from 'marked';
 
 const md = `# Suscríbete
 
-Si quieres recibir una notificación cada vez que se publique algo nuevo, suscríbete aquí.`;
-
+Recibe un aviso cuando haya una publicación nueva o un cambio relevante en el sitio.`;
 const htmlContent = marked.parse(md, { gfm: true });
 
 const url = new URL(Astro.url);
 const status = url.searchParams.get('status');
 const unsub = url.searchParams.get('unsub');
+
+const messages = {
+  success: 'Para confirmar, revisa tu bandeja de entrada o la carpeta de spam.',
+  already: 'Ya estás suscrito.',
+  resend: 'Reenvié el enlace. Para confirmar, revisa tu bandeja de entrada o la carpeta de spam.',
+  error: 'Error al enviar el correo. Intenta de nuevo.',
+};
+
+const unsubMessages = {
+  success: 'Listo. Revisa tu bandeja o el spam: te envié el correo de confirmación.',
+  notfound: 'El correo no está suscrito.',
+  invalid: 'Correo inválido.',
+  error: 'Error al desuscribir. Intenta de nuevo.',
+};
 ---
 
 <BaseLayout active="suscribite" title="Suscríbete - Framqui" description="Suscríbete para recibir notificaciones cuando se publique un nuevo artículo o práctica.">
   <MarkdownContent htmlContent={htmlContent} />
-  <p class="text-xs font-mono font-bold text-orange-600 mt-10">
-    🔒 Al suscribirte recibirás un correo de confirmación. Tu correo se almacena de forma segura y solo se utilizará para enviarte notificaciones de nuevos artículos. No se enviará spam ni se utilizará para contextos ajenos a esta web. Puedes leer nuestras <a href="/politicas" class="underline hover:text-orange-700">políticas de privacidad</a>.
+  <p class="mt-8 text-sm leading-relaxed text-[#c45c26]">
+    Estos datos solo se utilizan para las notificaciones del sitio y para lo relacionado con ellas. No se usan para spam ni para otros fines. Más información en las <a href="/politicas" class="underline underline-offset-4 hover:text-[#9a4316]">políticas de privacidad</a>.
   </p>
 
-  {status === 'success' && (
-    <p class="text-xs font-mono mt-2 text-green-600">Para completar tu suscripción, revisa tu bandeja de entrada o spam y confirma el correo.</p>
-  )}
-  {status === 'already' && (
-    <p class="text-xs font-mono mt-2 text-green-600">Ya estás suscrito.</p>
-  )}
-  {status === 'resend' && (
-    <p class="text-xs font-mono mt-2 text-green-600">Se reenvió el correo de confirmación. Revisa tu bandeja de entrada.</p>
-  )}
-  {status === 'error' && (
-    <p class="text-xs font-mono mt-2 text-red-600">Error al enviar el correo. Intenta de nuevo.</p>
-  )}
-  {unsub === 'success' && (
-    <p class="text-xs font-mono mt-2 text-green-600">Has sido desuscrito correctamente.</p>
-  )}
-  {unsub === 'notfound' && (
-    <p class="text-xs font-mono mt-2 text-red-600">El correo no está suscrito.</p>
-  )}
-  {unsub === 'invalid' && (
-    <p class="text-xs font-mono mt-2 text-red-600">Correo inválido.</p>
-  )}
-  {unsub === 'error' && (
-    <p class="text-xs font-mono mt-2 text-red-600">Error al desuscribir. Intenta de nuevo.</p>
-  )}
-
-  <form action="/api/subscribe" method="POST" class="flex flex-col sm:flex-row gap-2 w-full mt-2">
-    <input
-      name="email"
-      type="email"
-      placeholder="tu@correo.com"
-      required
-      class="flex-1 font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors"
-    />
-    <button
-      type="submit"
-      class="font-mono text-xs bg-transparent text-text-dark border border-gray-300 rounded px-3 py-1.5 no-underline hover:border-blue hover:text-blue transition-colors cursor-pointer"
-    >
-      Suscríbete
-    </button>
+  <form action="/api/subscribe" method="POST" class="mt-4 flex flex-col gap-3 sm:flex-row">
+    <input name="email" type="email" placeholder="tu@correo.com" required class="field" />
+    <button type="submit" class="btn">Suscríbete</button>
   </form>
+  {status && messages[status] && (
+    <p class:list={['notice mt-3', status === 'error' && 'notice-bad']}>{messages[status]}</p>
+  )}
 
-  <div class="w-full h-px bg-gray-200 mt-10 mb-6" />
-
-  <p class="text-xs font-mono text-text-muted mb-2">
-    ¿Ya no quieres recibir notificaciones? Ingresa tu correo para desuscribirte.
-  </p>
-  <form action="/api/unsubscribe" method="POST" class="flex flex-col sm:flex-row gap-2 w-full">
-    <input
-      name="email"
-      type="email"
-      placeholder="tu@correo.com"
-      required
-      class="flex-1 font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors"
-    />
-    <button
-      type="submit"
-      class="font-mono text-xs bg-transparent text-text-dark border border-gray-300 rounded px-3 py-1.5 no-underline hover:border-blue hover:text-blue transition-colors cursor-pointer"
-    >
-      Desuscribirme
-    </button>
-  </form>
+  <section class="mt-12 border-t border-line pt-8">
+    <p class="text-sm text-muted">¿Ya no quieres recibir notificaciones? Ingresa tu correo para desuscribirte.</p>
+    <form action="/api/unsubscribe" method="POST" class="mt-3 flex flex-col gap-3 sm:flex-row">
+      <input name="email" type="email" placeholder="tu@correo.com" required class="field" />
+      <button type="submit" class="btn">Desuscribirme</button>
+    </form>
+    {unsub && unsubMessages[unsub] && (
+      <p class:list={['notice mt-3', unsub !== 'success' && 'notice-bad']}>{unsubMessages[unsub]}</p>
+    )}
+  </section>
 </BaseLayout>

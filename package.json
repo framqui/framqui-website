@@ -10,7 +10,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "notify": "node scripts/notify-subscribers.js"
+    "notify": "node --env-file=.env scripts/notify-subscribers.js",
+    "db:migrate:local": "wrangler d1 migrations apply framqui --local",
+    "db:migrate": "wrangler d1 migrations apply framqui --remote"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.20",

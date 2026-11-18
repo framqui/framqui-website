@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const POPS = [
+  { char: '1', x: 206 },
+  { char: '0', x: 216 },
+  { char: '1', x: 210 },
+  { char: '0', x: 220 },
+];
+const SEEDS = ['1', '0', '1', '1'];
+
+const stack = [
+  ['Astro', 'Framework web con el que está construido este sitio.'],
+  ['Tailwind CSS', 'Framework de estilos con el que se define el aspecto.'],
+  ['Markdown', 'Formato en el que se escribe el contenido.'],
+  ['Marked', 'Librería que convierte ese Markdown en HTML.'],
+  ['Cloudflare', 'Plataforma donde se despliega el sitio.'],
+  ['D1', 'Base de datos, elegida para integrarse directo con Cloudflare.'],
+  ['Resend', 'Servicio de envío de correos.'],
+  ['FormSubmit', 'Servicio que recibe los formularios.'],
+  ['Giscus', 'Sistema de comentarios.'],
+];
+---
+
+<BaseLayout active="framqui" title="Framqui" description="Tecnologías y decisiones con las que se construyó el sitio de Andres Ramos.">
+  <h1 class="text-4xl font-bold tracking-tight">Framqui</h1>
+  <p class="mt-5 text-lg leading-relaxed">
+    Descubre las tecnologías con las que se construyó este sitio de Andres Ramos, y un poco más sobre Framqui.
+  </p>
+
+  <section class="mt-12 flex w-full flex-col items-center text-center">
+    <button type="button" id="chicken" class="cursor-pointer border-0 bg-transparent p-0" aria-label="Conoce a Framqui el pollo">
+    <svg
+      viewBox="0 0 320 185"
+      class="w-full max-w-md"
+      role="img"
+      aria-label="Un pollo picoteando unos y ceros"
+    >
+      <line x1="20" y1="172" x2="300" y2="172" class="stroke-mu" stroke-width="1.5" stroke-linecap="round" opacity="0.45" />
+
+      <g class="stroke-fg" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M98 158 V172 M98 172 L88 172 M98 172 L108 172 M98 172 L92 168" />
+        <path d="M120 160 V172 M120 172 L110 172 M120 172 L130 172 M120 172 L114 168" />
+      </g>
+
+      <g transform="translate(0 12)">
+        <g class="tilt">
+          <path d="M70 102 C44 96 28 70 34 40 C52 54 66 76 74 98 Z" class="fill-fg" opacity="0.95" />
+          <path d="M68 108 C40 110 20 94 18 68 C38 76 58 92 70 104 Z" class="fill-fg" opacity="0.8" />
+          <path d="M68 114 C46 124 24 116 16 98 C36 100 54 106 68 110 Z" class="fill-fg" opacity="0.62" />
+          <path d="M70 104 C74 82 104 74 128 82 C144 87 152 100 150 114 C148 136 126 150 100 150 C76 150 62 134 62 118 C62 111 65 107 70 104 Z" class="fill-fg" />
+          <path d="M82 108 C96 98 116 100 126 112 C116 126 94 128 82 118" class="stroke-bg" fill="none" stroke-width="2" stroke-linecap="round" opacity="0.55" />
+          <path d="M92 112 C102 106 114 108 118 114" class="stroke-bg" fill="none" stroke-width="1.6" stroke-linecap="round" opacity="0.45" />
+
+          <g class="head">
+            <path d="M122 98 C130 72 142 54 156 40 L172 50 C168 70 160 88 152 106 Z" class="fill-fg" />
+            <circle cx="164" cy="36" r="14" class="fill-fg" />
+            <path d="M155 28 C152 17 161 14 163 21 C165 12 174 12 174 21 C181 19 183 28 176 30 Z" class="fill-ac" />
+            <path d="M176 32 L194 38 L176 43 Z" class="fill-ac" />
+            <path d="M173 44 C169 58 180 60 180 47 Z" class="fill-fg" />
+            <circle cx="168" cy="34" r="2.4" class="fill-bg" />
+          </g>
+        </g>
+      </g>
+
+      <g class="fill-mu mono" font-size="13" opacity="0.45">
+        {SEEDS.map((char, i) => (
+          <text x={232 + i * 16} y="168">{char}</text>
+        ))}
+      </g>
+
+      <g class="fill-fg mono" font-size="13" font-weight="700">
+        {POPS.map(({ char, x }, i) => (
+          <text class="pop" x={x} y="166" style={`animation-delay: ${(i * 1.4 + 0.22).toFixed(2)}s`}>{char}</text>
+        ))}
+      </g>
+    </svg>
+    </button>
+    <p id="chicken-hint" class="mt-6 max-w-md text-sm leading-relaxed">Picoteando código con Framqui el «Pollo»</p>
+    <div id="chicken-code" class="hidden mt-6 max-w-md" hidden>
+      <p id="chicken-bits" class="break-all font-mono text-[0.65rem] leading-relaxed text-muted"></p>
+      <button type="button" id="chicken-close" class="mt-4 cursor-pointer border-0 bg-transparent font-mono text-xs text-muted underline underline-offset-4">Cerrar</button>
+    </div>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="text-2xl font-bold tracking-tight">Cómo está hecho</h2>
+    <p class="mt-4 leading-relaxed">
+      Framqui es un sitio pequeño a propósito. El contenido vive en archivos Markdown, las páginas las sirve Astro y el estilo es Tailwind. Así puedo publicar sin montar un panel de administración, y el sitio sigue siendo fácil de leer.
+    </p>
+    <p class="mt-4 leading-relaxed">
+      Cada pieza cubre una sola función, para no llenar el proyecto de servicios.
+    </p>
+    <ul class="mt-6 space-y-2">
+      {stack.map(([name, detail]) => (
+        <li>
+          <span class="font-semibold">{name}.</span> {detail}
+        </li>
+      ))}
+    </ul>
+    <p class="mt-6 leading-relaxed">
+      Algunas partes de este sitio se construyeron con ayuda de Cursor, un agente de inteligencia artificial. Sirvió para avanzar en el código y en las decisiones de implementación. El sitio, el contenido y el criterio siguen siendo de Andres Ramos.
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  const bits = '01000110 01110010 01100001 01101101 01110001 01110101 01101001 00100000 01100101 01101100 00100000 01110000 01101111 01101100 01101100 01101111 00100000 01100101 01110011 00100000 01110101 01101110 00100000 01101000 01101111 01101101 01100101 01101110 01100001 01101010 01100101 00100000 01100001 00100000 01110101 01101110 00100000 01100111 01110010 01100001 01101110 00100000 01100001 01101101 01101001 01100111 01101111 00100000 01110001 01110101 01100101 00100000 01101101 01110101 01110010 01101001 01101111 00100000 01101000 01100001 01100011 01100101 00100000 01110100 01101001 01100101 01101101 01110000 01101111 00101110 00100000 01001100 01100101 00100000 01100100 01100101 01100011 01101001 01100001 01101101 01101111 01110011 00100000 01100101 01101100 00100000 01110000 01101111 01101100 01101100 01101111';
+  const chicken = document.getElementById('chicken');
+  const hint = document.getElementById('chicken-hint');
+  const code = document.getElementById('chicken-code');
+  const output = document.getElementById('chicken-bits');
+  const close = document.getElementById('chicken-close');
+  let timer = 0;
+
+  function reveal() {
+    window.clearInterval(timer);
+    hint?.classList.add('hidden');
+    code?.classList.remove('hidden');
+    if (code) code.hidden = false;
+    if (output) output.textContent = '';
+    let index = 0;
+    timer = window.setInterval(() => {
+      index += 12;
+      if (output) output.textContent = bits.slice(0, index);
+      if (index >= bits.length) window.clearInterval(timer);
+    }, 16);
+  }
+
+  function hide() {
+    window.clearInterval(timer);
+    if (output) output.textContent = '';
+    code?.classList.add('hidden');
+    if (code) code.hidden = true;
+    hint?.classList.remove('hidden');
+  }
+
+  chicken?.addEventListener('click', reveal);
+  close?.addEventListener('click', hide);
+</script>
+
+<style>
+  .fill-fg { fill: #1a1916; }
+  .fill-bg { fill: #f6f3ee; }
+  .fill-ac { fill: #8c4a32; }
+  .fill-mu { fill: #6f6a63; }
+  .stroke-fg { stroke: #1a1916; }
+  .stroke-bg { stroke: #f6f3ee; }
+  .stroke-mu { stroke: #6f6a63; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+  .tilt,
+  .head {
+    transform-box: view-box;
+  }
+
+  .tilt {
+    transform-origin: 108px 150px;
+    animation: tilt 1.4s ease-in-out infinite;
+  }
+
+  .head {
+    transform-origin: 136px 98px;
+    animation: head 1.4s ease-in-out infinite;
+  }
+
+  .pop {
+    opacity: 0;
+    animation: pop 5.6s ease-out infinite both;
+  }
+
+  @keyframes tilt {
+    0%, 34%, 100% { transform: rotate(0deg); }
+    16% { transform: rotate(12deg); }
+  }
+
+  @keyframes head {
+    0%, 34%, 100% { transform: rotate(0deg); }
+    16% { transform: rotate(70deg); }
+  }
+
+  @keyframes pop {
+    0% { opacity: 0; transform: translateY(0); }
+    4% { opacity: 1; transform: translateY(0); }
+    40%, 100% { opacity: 0; transform: translateY(-28px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tilt,
+    .head,
+    .pop {
+      animation: none;
+    }
+  }
+</style>

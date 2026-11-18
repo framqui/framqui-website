@@ -5,73 +5,57 @@ import { marked } from 'marked';
 
 const md = `# Políticas de Privacidad
 
-Última actualización: 16 de noviembre de 2026
+Última actualización: 18 de noviembre de 2026
 
-## Recopilación de datos
+Framqui es el sitio personal de Andres Ramos. Aquí se indica qué datos personales se tratan, con qué fin y cómo puedes oponerte o pedir su eliminación.
 
-Este sitio web recopila únicamente los datos que el usuario proporciona de forma voluntaria a través de los formularios de contacto y suscripción:
+## Responsable
 
-- **Formulario de contacto:** nombre, correo electrónico, asunto y mensaje.
-- **Formulario de suscripción:** correo electrónico.
+Andres Ramos. Correo: andfera201@gmail.com.
 
-No se recopila ninguna otra información personal ni se utilizan cookies de seguimiento.
+## Datos que se tratan
 
-## Uso de los datos
+Solo los que tú envías:
 
-Los datos recopilados se utilizan exclusivamente para los siguientes propósitos:
+- En el formulario de contacto: nombre, correo, asunto y mensaje.
+- En la suscripción: el correo electrónico.
 
-- **Contacto:** responder a los mensajes enviados a través del formulario de contacto.
-- **Suscripción:** enviar notificaciones por correo electrónico cuando se publique un nuevo artículo o práctica en el sitio.
+No se usan cookies de seguimiento.
 
-## Almacenamiento de datos
+## Finalidad
 
-- Los correos de suscripción se almacenan de forma encriptada en nuestro servidor. Antes de ser almacenados, deben ser confirmados por el propietario del correo a través de un enlace de verificación enviado por Resend.
-- Los mensajes de contacto se envían directamente a nuestro correo electrónico a través de un servicio externo (FormSubmit).
+- El mensaje de contacto se usa para responderte.
+- El correo de suscripción se usa para enviarte avisos cuando haya una publicación nueva o un cambio relevante en el sitio. La suscripción empieza cuando confirmas el enlace que recibes. Puedes darte de baja en cualquier momento.
 
-## Servicios terceros
+No se usan para publicidad ni para fines distintos de los anteriores. No se venden ni se ceden.
 
-Este sitio utiliza los siguientes servicios externos para procesar y enviar datos:
+## Conservación
 
-- **Resend** (resend.com): servicio de envío de correos electrónicos utilizado para enviar las notificaciones de suscripción y correos de bienvenida. Resend puede procesar datos en servidores ubicados fuera de tu país.
-- **FormSubmit** (formsubmit.co): servicio de procesamiento de formularios utilizado para recibir los mensajes del formulario de contacto.
-- **Giscus** (giscus.app): servicio de comentarios basado en GitHub Discussions utilizado para permitir comentarios en los artículos. Giscus puede almacenar comentarios, reacciones y metadatos de navegación en servidores de GitHub.
+El correo de suscripción se conserva mientras la suscripción esté activa y se elimina cuando te das de baja o lo solicitas. Los mensajes de contacto se conservan el tiempo necesario para responderlos.
 
-Para más información sobre cómo estos servicios manejan tus datos, consulta sus respectivas políticas de privacidad.
+## Encargados
 
-## No venta ni spam
+Para prestar el sitio intervienen estos servicios. Cada uno trata los datos según su propia política:
 
-Nos comprometemos a:
+- **Resend**, que envía los correos de suscripción y los avisos.
+- **FormSubmit**, que recibe los mensajes de contacto.
+- **Giscus**, a través de GitHub, para los comentarios. Comentar requiere una cuenta de GitHub.
 
-- **No vender, alquilar ni compartir** los datos personales con terceros.
-- **No utilizar** los correos electrónicos para enviar spam, publicidad o contenido no solicitado.
-- **No utilizar** los datos para ningún propósito diferente al descrito en esta política.
+## Comentarios
 
-## Seguridad
+Deben tratar sobre lo publicado. No se admiten insultos, ataques personales, spam, publicidad ni debates de política o religión. El autor puede eliminar los que no cumplan esto. Para borrar el tuyo, hazlo desde [GitHub Discussions](https://github.com/framqui/framqui-website/discussions).
 
-Los datos de suscripción se almacenan utilizando encriptación AES-256, un estándar de seguridad ampliamente reconocido. Solo el servidor tiene acceso a la clave de desencriptación.
+## Tus derechos
 
-## Normas de comentarios
+Puedes darte de baja en la página de suscripción. Para acceder a tus datos, corregirlos o pedir que se eliminen, escribe a andfera201@gmail.com con el asunto FRAMQUI.NOTIFICACIÓN.
 
-Los artículos de este sitio permiten comentarios a través de Giscus (GitHub Discussions). Para mantener un espacio respetuoso y útil:
+## Cambios
 
-- **Mantente en el tema:** Los comentarios deben estar relacionados con el artículo o práctica publicada.
-- **Sé respetuoso:** No se permite contenido ofensivo, discriminatorio, o que afecte la integridad de otra persona.
-- **Sin política ni religión:** No se admiten comentarios sobre temas políticos, religiosos, o ideológicos.
-- **Sin spam:** No se permite publicidad, enlaces no relacionados, o contenido promocional.
-
-Los comentarios que infrinjan estas normas serán eliminados sin previo aviso. Para eliminar tu propio comentario, dirígete a [GitHub Discussions](https://github.com/framqui/framqui-website/discussions) y búscalo en Framqui.
-
-## Derechos del usuario
-
-El usuario puede solicitar la eliminación de sus datos en cualquier momento enviando un correo a andfera201@gmail.com con el asunto "FRAMQUI-DESUSCRIPCIÓN".
-
-## Cambios en esta política
-
-Cualquier cambio a esta política de privacidad se publicará en esta misma página con una fecha de actualización.
+Cualquier cambio de esta política se publicará en esta página, con la fecha de actualización.
 
 ## Contacto
 
-Para preguntas sobre esta política, puedes escribirme a andfera201@gmail.com o a través del formulario de contacto.`;
+Para preguntas sobre esta política: andfera201@gmail.com o el formulario de contacto del sitio.`;
 
 const htmlContent = marked.parse(md, { gfm: true });
 ---

@@ -5,65 +5,25 @@ import { marked } from 'marked';
 
 const md = `# Contáctame
 
-Si quieres hablar sobre un proyecto, una propuesta, una idea, tecnología, agendar una llamada, necesitas ayuda o simplemente conversar, puedes enviarme un mensaje directo desde aquí. Lo revisaré constantemente.`;
+Si quieres hablar de una idea o un proyecto, invitarme a un café, proponer una charla o escribirme por cualquier otro motivo, hazlo directamente desde aquí.`;
 const htmlContent = marked.parse(md, { gfm: true });
 ---
 
 <BaseLayout active="contactame" title="Contáctame - Framqui" description="Envíame un mensaje sobre proyectos, propuestas, ideas, tecnología o cualquier consulta.">
   <MarkdownContent htmlContent={htmlContent} />
-  <p class="text-xs font-mono font-bold text-orange-600 mt-10">
-    ⚠ Validación con FormSubmit: debes activar tu correo, confirmarlo y validar antes de enviar correos por seguridad. Para más información, lee nuestras <a href="/politicas" class="underline hover:text-orange-700">políticas de privacidad</a>.
+  <p class="mt-8 text-sm leading-relaxed text-[#c45c26]">
+    Tu información se utiliza únicamente para el asunto de este mensaje. No se usa para spam ni para fines ajenos a eso. Más información en las <a href="/politicas" class="underline underline-offset-4 hover:text-[#9a4316]">políticas de privacidad</a>.
   </p>
-  <form
-      id="contact-form"
-      class="flex flex-col gap-3 w-full mt-2"
-      method="POST"
-      action="https://formsubmit.co/andfera201@gmail.com"
-    >
-      <input type="hidden" name="_template" value="table" />
-      <input
-        type="text"
-        name="name"
-        placeholder="Tu nombre"
-        required
-        class="font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors"
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Tu correo"
-        required
-        class="font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors"
-      />
-      <input
-        type="text"
-        name="_subject"
-        placeholder="Asunto"
-        required
-        class="font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors"
-      />
-      <textarea
-        name="message"
-        placeholder="Tu mensaje"
-        rows="5"
-        required
-        class="font-mono text-xs bg-transparent border border-gray-300 rounded px-3 py-1.5 text-text-dark placeholder:text-text-muted focus:outline-none focus:border-blue transition-colors resize-y"
-      ></textarea>
-      <button
-        type="submit"
-        class="font-mono text-xs bg-transparent text-text-dark border border-gray-300 rounded px-3 py-1.5 no-underline hover:border-blue hover:text-blue transition-colors cursor-pointer self-end"
-      >
-        Enviar
-      </button>
-    </form>
-
-  <script>
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-      const subjectInput = this.querySelector('input[name="_subject"]');
-      if (subjectInput && subjectInput.value) {
-        subjectInput.value = 'FRAMQUI-CONTACTAME - ' + subjectInput.value;
-      }
-    });
-  </script>
-
+  <p class="mt-3 text-sm leading-relaxed text-[#c45c26]">
+    Antes de enviar, FormSubmit muestra un captcha para comprobar que no es un envío automático. No verifica que el correo escrito exista.
+  </p>
+  <form id="contact-form" class="mt-4 grid gap-3" method="POST" action="https://formsubmit.co/andfera201@gmail.com">
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_subject" value="FRAMQUI.CONTACTAME" />
+    <input type="text" name="name" placeholder="Tu nombre" required class="field" />
+    <input type="email" name="email" placeholder="Correo de contacto" required class="field" />
+    <input type="text" name="asunto" placeholder="Asunto" required class="field" />
+    <textarea name="message" placeholder="Tu mensaje" rows="5" required class="field resize-y"></textarea>
+    <button type="submit" class="btn justify-self-end">Enviar</button>
+  </form>
 </BaseLayout>

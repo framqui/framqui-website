@@ -3,11 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import MarkdownContent from '../components/MarkdownContent.astro';
 import { marked } from 'marked';
 
-const readmeUrl = 'https://raw.githubusercontent.com/framqui/framqui/main/README.md';
+const readmeUrl = 'https://raw.githubusercontent.com/framqui/framqui/refs/heads/main/README.md';
 const profileMd = await fetch(readmeUrl).then((res) => res.text());
 const htmlContent = marked.parse(profileMd, { gfm: true });
 ---
 
-<BaseLayout active="inicio" title="Framqui" description="Desarrollador web especializado en frontend, automatización y tecnología.">
+<BaseLayout active="inicio" title="Framqui" description="Desarrollador de software. Backend, producto e inteligencia artificial aplicada.">
   <MarkdownContent htmlContent={htmlContent} />
 </BaseLayout>

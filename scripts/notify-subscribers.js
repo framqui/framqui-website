@@ -1,67 +1,72 @@
 #!/usr/bin/env node
 
-// Script para notificar a todos los suscriptores cuando se publica un nuevo artículo
-// Uso: node scripts/notify-subscribers.js --title "Titulo" --slug "slug" --type "escrito" | "practica"
-
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { fileURLToPath } from 'node:url';
 import { Resend } from 'resend';
-import { readFileSync, existsSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { decrypt } from '../src/utils/encrypt.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const DATA_FILE = join(__dirname, '..', 'src', 'data', 'subscribers.json');
+const execFileAsync = promisify(execFile);
 
 function parseArgs() {
   const args = process.argv.slice(2);
-  const title = args.find((a, i) => a === '--title' && args[i + 1]) ? args[args.indexOf('--title') + 1] : null;
-  const slug = args.find((a, i) => a === '--slug' && args[i + 1]) ? args[args.indexOf('--slug') + 1] : null;
-  const type = args.find((a, i) => a === '--type' && args[i + 1]) ? args[args.indexOf('--type') + 1] : null;
-  return { title, slug, type };
+  const valueAfter = (flag) => {
+    const index = args.indexOf(flag);
+    return index !== -1 ? args[index + 1] : null;
+  };
+  return {
+    title: valueAfter('--title'),
+    slug: valueAfter('--slug'),
+    type: valueAfter('--type'),
+    local: !args.includes('--remote'),
+  };
 }
 
-function loadSubscribers() {
-  if (!existsSync(DATA_FILE)) {
-    console.log('No hay suscriptores registrados.');
-    return [];
-  }
-  const encrypted = readFileSync(DATA_FILE, 'utf-8');
-  const json = decrypt(encrypted);
-  return JSON.parse(json);
+async function loadSubscribers(local) {
+  const args = [
+    'wrangler',
+    'd1',
+    'execute',
+    'framqui',
+    local ? '--local' : '--remote',
+    '--json',
+    '--command',
+    'SELECT email FROM subscribers ORDER BY created_at',
+  ];
+  const { stdout } = await execFileAsync('pnpm', ['exec', ...args], {
+    cwd: fileURLToPath(new URL('..', import.meta.url)),
+  });
+  const payload = JSON.parse(stdout);
+  const rows = Array.isArray(payload) ? payload.flatMap((entry) => entry.results ?? []) : [];
+  return rows.map((row) => row.email);
 }
 
 async function main() {
-  const { title, slug, type } = parseArgs();
+  const { title, slug, type, local } = parseArgs();
 
   if (!title || !slug) {
     console.error('Uso: node scripts/notify-subscribers.js --title "Titulo" --slug "slug" --type "escrito" | "practica"');
     process.exit(1);
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
-
   if (!process.env.RESEND_API_KEY) {
     console.error('Error: RESEND_API_KEY no está configurada en las variables de entorno.');
     process.exit(1);
   }
 
-  const subscribers = loadSubscribers();
+  const subscribers = await loadSubscribers(local);
 
   if (subscribers.length === 0) {
     console.log('No hay suscriptores para notificar.');
     return;
   }
 
+  const resend = new Resend(process.env.RESEND_API_KEY);
   const categoryLabel = type === 'practica' ? 'Práctica' : 'Escrito';
   const articleAdj = type === 'practica' ? 'Nueva' : 'Nuevo';
   const publishedAdj = type === 'practica' ? 'publicada' : 'publicado';
-  let articleUrl;
-  if (type === 'practica') {
-    articleUrl = `https://framqui.com/practices/${slug}`;
-  } else {
-    articleUrl = `https://framqui.com/posts/${slug}`;
-  }
+  const articleUrl = type === 'practica'
+    ? `https://framqui.com/practices/${slug}`
+    : `https://framqui.com/posts/${slug}`;
 
   console.log(`Enviando notificaciones a ${subscribers.length} suscriptor(es)...`);
 
@@ -80,12 +85,11 @@ async function main() {
         `,
       });
       console.log(`  ✓ Enviado a ${email}`);
-    })
+    }),
   );
 
-  const successes = results.filter((r) => r.status === 'fulfilled').length;
-  const failures = results.filter((r) => r.status === 'rejected').length;
-
+  const successes = results.filter((result) => result.status === 'fulfilled').length;
+  const failures = results.filter((result) => result.status === 'rejected').length;
   console.log(`\nResultado: ${successes} enviados, ${failures} fallidos.`);
 }
 
