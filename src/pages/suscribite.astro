@@ -23,18 +23,19 @@ const unsubMessages = {
 <BaseLayout active="suscribite" title="Suscríbete - Framqui" description="Suscríbete para recibir notificaciones cuando se publique un nuevo artículo o práctica.">
   <h1>Suscríbete</h1>
 
-  <p class="text-sm text-muted">Recibe notificaciones en tu correo cuando algo nuevo se publique. Envío bajo Resend.</p>
+  <p class="text-sm text-muted">Recibe notificaciones en tu correo cuando algo nuevo se publique.</p>
   <form action="/api/subscribe" method="POST" class="mt-3 flex flex-col gap-3">
     <input name="email" type="email" placeholder="tu@correo.com" required class="field" />
+    <p class="text-left text-sm text-muted">Envío bajo Resend.</p>
     <button type="submit" class="btn w-full">Suscríbete</button>
   </form>
   {status && messages[status] && (
     <p class:list={['notice mt-3', status === 'error' ? 'notice-error' : status === 'already' ? 'notice-warn' : 'notice-ok']}>{messages[status]}</p>
   )}
 
-  <section class="mt-24">
-    <p class="text-sm text-muted">¿Ya no quieres recibir notificaciones? Ingresa tu correo para desuscribirte.</p>
-    <form action="/api/unsubscribe" method="POST" class="mt-3 flex flex-col gap-3">
+  <section class="mt-10">
+    <button type="button" id="unsub-toggle" class="unsub-toggle">¿Ya no quieres recibir notificaciones? Ingresa tu correo para desuscribirte.</button>
+    <form id="unsub-form" action="/api/unsubscribe" method="POST" class="mt-3 flex flex-col gap-3" hidden={!unsub}>
       <input name="email" type="email" placeholder="tu@correo.com" required class="field" />
       <button type="submit" class="btn w-full">Desuscribirme</button>
     </form>
@@ -43,3 +44,30 @@ const unsubMessages = {
     )}
   </section>
 </BaseLayout>
+
+<script>
+  const toggle = document.getElementById('unsub-toggle');
+  const form = document.getElementById('unsub-form');
+  toggle?.addEventListener('click', () => {
+    if (!form) return;
+    form.hidden = !form.hidden;
+  });
+</script>
+
+<style>
+  .unsub-toggle {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    transition: color 0.2s ease;
+  }
+
+  .unsub-toggle:hover {
+    color: var(--color-accent);
+  }
+</style>
