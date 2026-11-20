@@ -22,6 +22,6 @@ const { post } = Astro.props;
 const htmlContent = marked.parse(post.body, { gfm: true });
 ---
 
-<BaseLayout active="posts" title={`${post.data.title} - Escritos - Framqui`} description={post.data.description || 'Artículos sobre desarrollo web, tecnología y programación.'}>
+<BaseLayout active="posts" title={`${post.data.title} - Cerebro - Framqui`} description={post.data.description || 'Artículos sobre desarrollo web, tecnología y programación.'}>
   <ArticlePage htmlContent={htmlContent} backPath="/posts" showComments={true} />
 </BaseLayout>

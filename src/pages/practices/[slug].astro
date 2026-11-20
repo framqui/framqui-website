@@ -22,6 +22,6 @@ const { practice } = Astro.props;
 const htmlContent = marked.parse(practice.body, { gfm: true });
 ---
 
-<BaseLayout active="practices" title={`${practice.data.title} - Prácticas - Framqui`} description={practice.data.description || 'Prácticas y proyectos de automatización, scripts y DevOps.'}>
+<BaseLayout active="practices" title={`${practice.data.title} - Ejercicios - Framqui`} description={practice.data.description || 'Ejercicios y proyectos de automatización, scripts y DevOps.'}>
   <ArticlePage htmlContent={htmlContent} backPath="/practices" />
 </BaseLayout>
