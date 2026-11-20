@@ -8,17 +8,21 @@ export interface Props {
 }
 
 const { htmlContent, backPath, showComments = false } = Astro.props;
+const titleMatch = htmlContent.match(/^<h1\b[^>]*>[\s\S]*?<\/h1>/);
+const titleHtml = titleMatch?.[0] ?? '';
+const bodyHtml = titleMatch ? htmlContent.slice(titleMatch[0].length) : htmlContent;
 ---
 
-<a href={backPath} class="font-mono text-xs text-muted no-underline hover:text-accent">← Volver</a>
+{titleHtml && <div class="prose article-title" set:html={titleHtml} />}
+<a class="article-back" href={backPath}>← Volver</a>
 
 <div class="mt-8">
-  <MarkdownContent htmlContent={htmlContent} />
+  <MarkdownContent htmlContent={bodyHtml} />
 </div>
 
 {showComments && (
   <section class="mt-16 border-t border-line pt-8">
-    <h2 class="text-xl">Comentarios</h2>
+    <h2>Comentarios</h2>
     <p class="mt-3 text-sm leading-relaxed text-muted">
       Hace falta una cuenta de GitHub. Quédate en el tema. Lo ofensivo o el spam se elimina.
       Más detalle en <a href="/politicas" class="underline underline-offset-4">privacidad</a>.

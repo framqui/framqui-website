@@ -26,14 +26,12 @@ const { title, intro, note, empty, articles, basePath } = Astro.props;
 {articles.length === 0 ? (
   empty && <p class="mt-10 text-lg text-muted">{empty}</p>
 ) : (
-  <div class="mt-12 divide-y divide-line border-t border-line pt-6">
+  <div class="article-grid">
     {articles.map((article) => (
-      <article class="py-3">
-        <div class="flex items-baseline justify-between gap-4">
-          <a href={`${basePath}/${article.slug}`} class="truncate text-base font-semibold text-ink no-underline hover:text-accent">
-            {article.data.title}
-          </a>
-          <time class="shrink-0 font-mono text-xs text-muted">
+      <a class="article-card" href={`${basePath}/${article.slug}`}>
+        <div class="article-card-top">
+          <h2>{article.data.title}</h2>
+          <time>
             {new Date(article.data.date).toLocaleDateString('es-ES', {
               day: 'numeric',
               month: 'short',
@@ -41,10 +39,13 @@ const { title, intro, note, empty, articles, basePath } = Astro.props;
             })}
           </time>
         </div>
-        {article.data.description && (
-          <p class="mt-1 text-sm text-muted">{article.data.description}</p>
+        {article.data.description && <p>{article.data.description}</p>}
+        {article.data.tags?.length > 0 && (
+          <ul class="article-tags">
+            {article.data.tags.map((tag) => <li>{tag}</li>)}
+          </ul>
         )}
-      </article>
+      </a>
     ))}
   </div>
 )}

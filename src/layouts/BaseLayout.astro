@@ -73,10 +73,15 @@ const imageUrl = `${siteUrl}/favicon-192.png`;
   <body class="text-ink antialiased flex flex-col min-h-screen">
     <Header active={active} />
     <main class={isHome ? 'home-main' : 'page-main'}>
-      {isHome ? <slot /> : <div class="page-inner"><slot /></div>}
+      {isHome ? <slot /> : <div class="page-inner"><slot /><button type="button" class="to-top">Subir →</button></div>}
     </main>
     <Footer />
     <script>
+      document.querySelectorAll('.to-top').forEach((button) => {
+        button.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
       document.querySelectorAll('form').forEach((form) => {
         form.noValidate = true;
         form.addEventListener('submit', (event) => {

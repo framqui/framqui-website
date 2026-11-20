@@ -1,12 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleList from '../../components/ArticleList.astro';
+import { readMarkdown } from '../../lib/markdown.js';
 
-const practicesGlob = import.meta.glob('../../content/practices/*.md', { eager: true });
-const articles = Object.entries(practicesGlob).map(([path, mod]) => {
-  const slug = path.split('/').pop()?.replace('.md', '') || '';
-  return { slug, data: mod.frontmatter || {}, body: typeof mod.rawContent === 'function' ? mod.rawContent() : '' };
-}).sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+const practicesGlob = import.meta.glob('../../content/practices/*.md', { eager: true, query: '?raw', import: 'default' });
+const articles = Object.entries(practicesGlob).map(([path, raw]) => readMarkdown(path, raw)).sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 ---
 
 <BaseLayout active="practices" title="Prácticas - Framqui" description="Prácticas y proyectos de automatización, scripts y DevOps.">

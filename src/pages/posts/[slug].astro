@@ -1,23 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticlePage from '../../components/ArticlePage.astro';
+import { readMarkdown } from '../../lib/markdown.js';
 import { marked } from 'marked';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const postsGlob = import.meta.glob('../../content/posts/*.md', { eager: true });
+  const postsGlob = import.meta.glob('../../content/posts/*.md', { eager: true, query: '?raw', import: 'default' });
 
-  return Object.entries(postsGlob).map(([filePath, mod]) => {
-    const slug = filePath.split('/').pop()?.replace('.md', '') || '';
+  return Object.entries(postsGlob).map(([filePath, raw]) => {
+    const post = readMarkdown(filePath, raw);
     return {
-      params: { slug },
-      props: {
-        post: {
-          data: mod.frontmatter || {},
-          body: typeof mod.rawContent === 'function' ? mod.rawContent() : '',
-        },
-      },
+      params: { slug: post.slug },
+      props: { post },
     };
   });
 }
