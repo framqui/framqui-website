@@ -3,9 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import MarkdownContent from '../components/MarkdownContent.astro';
 import { marked } from 'marked';
 
-const md = `# Suscríbete
-
-Recibe un aviso cuando haya una publicación nueva o un cambio relevante en el sitio.`;
+const md = `# Suscríbete`;
 const htmlContent = marked.parse(md, { gfm: true });
 
 const url = new URL(Astro.url);
@@ -29,26 +27,24 @@ const unsubMessages = {
 
 <BaseLayout active="suscribite" title="Suscríbete - Framqui" description="Suscríbete para recibir notificaciones cuando se publique un nuevo artículo o práctica.">
   <MarkdownContent htmlContent={htmlContent} />
-  <p class="mt-8 text-sm leading-relaxed text-[#c45c26]">
-    Estos datos solo se utilizan para las notificaciones del sitio y para lo relacionado con ellas. No se usan para spam ni para otros fines. Más información en las <a href="/politicas" class="underline underline-offset-4 hover:text-[#9a4316]">políticas de privacidad</a>.
-  </p>
 
-  <form action="/api/subscribe" method="POST" class="mt-4 flex flex-col gap-3 sm:flex-row">
+  <p class="text-sm text-muted">Recibe notificaciones en tu correo cuando algo nuevo se publique. Envío bajo Resend.</p>
+  <form action="/api/subscribe" method="POST" class="mt-3 flex flex-col gap-3">
     <input name="email" type="email" placeholder="tu@correo.com" required class="field" />
-    <button type="submit" class="btn">Suscríbete</button>
+    <button type="submit" class="btn w-full">Suscríbete</button>
   </form>
   {status && messages[status] && (
-    <p class:list={['notice mt-3', status === 'error' && 'notice-bad']}>{messages[status]}</p>
+    <p class:list={['notice mt-3', status === 'error' ? 'notice-error' : status === 'already' ? 'notice-warn' : 'notice-ok']}>{messages[status]}</p>
   )}
 
-  <section class="mt-12 border-t border-line pt-8">
+  <section class="mt-24">
     <p class="text-sm text-muted">¿Ya no quieres recibir notificaciones? Ingresa tu correo para desuscribirte.</p>
-    <form action="/api/unsubscribe" method="POST" class="mt-3 flex flex-col gap-3 sm:flex-row">
+    <form action="/api/unsubscribe" method="POST" class="mt-3 flex flex-col gap-3">
       <input name="email" type="email" placeholder="tu@correo.com" required class="field" />
-      <button type="submit" class="btn">Desuscribirme</button>
+      <button type="submit" class="btn w-full">Desuscribirme</button>
     </form>
     {unsub && unsubMessages[unsub] && (
-      <p class:list={['notice mt-3', unsub !== 'success' && 'notice-bad']}>{unsubMessages[unsub]}</p>
+      <p class:list={['notice mt-3', unsub === 'success' ? 'notice-ok' : unsub === 'notfound' ? 'notice-warn' : 'notice-error']}>{unsubMessages[unsub]}</p>
     )}
   </section>
 </BaseLayout>

@@ -3,27 +3,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import MarkdownContent from '../components/MarkdownContent.astro';
 import { marked } from 'marked';
 
-const md = `# Contáctame
-
-Si quieres hablar de una idea o un proyecto, invitarme a un café, proponer una charla o escribirme por cualquier otro motivo, hazlo directamente desde aquí.`;
+const md = `# Contáctame`;
 const htmlContent = marked.parse(md, { gfm: true });
 ---
 
 <BaseLayout active="contactame" title="Contáctame - Framqui" description="Envíame un mensaje sobre proyectos, propuestas, ideas, tecnología o cualquier consulta.">
   <MarkdownContent htmlContent={htmlContent} />
-  <p class="mt-8 text-sm leading-relaxed text-[#c45c26]">
-    Tu información se utiliza únicamente para el asunto de este mensaje. No se usa para spam ni para fines ajenos a eso. Más información en las <a href="/politicas" class="underline underline-offset-4 hover:text-[#9a4316]">políticas de privacidad</a>.
-  </p>
-  <p class="mt-3 text-sm leading-relaxed text-[#c45c26]">
-    Antes de enviar, FormSubmit muestra un captcha para comprobar que no es un envío automático. No verifica que el correo escrito exista.
-  </p>
-  <form id="contact-form" class="mt-4 grid gap-3" method="POST" action="https://formsubmit.co/andfera201@gmail.com">
+  <p class="text-sm text-muted">Si quieres hablar de una idea o un proyecto, invitarme a un café, proponer una charla o escribirme por cualquier otro motivo.</p>
+  <form id="contact-form" class="mt-3 grid gap-3" method="POST" action="https://formsubmit.co/andfera201@gmail.com">
     <input type="hidden" name="_template" value="table" />
     <input type="hidden" name="_subject" value="FRAMQUI.CONTACTAME" />
     <input type="text" name="name" placeholder="Tu nombre" required class="field" />
     <input type="email" name="email" placeholder="Correo de contacto" required class="field" />
     <input type="text" name="asunto" placeholder="Asunto" required class="field" />
     <textarea name="message" placeholder="Tu mensaje" rows="5" required class="field resize-y"></textarea>
-    <button type="submit" class="btn justify-self-end">Enviar</button>
+    <p class="text-left text-sm text-muted">Validación bajo FormSubmit.</p>
+    <button type="submit" class="btn w-full">Enviar</button>
   </form>
 </BaseLayout>

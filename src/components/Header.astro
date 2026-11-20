@@ -5,8 +5,8 @@ const activeItem = Astro.props.active || 'inicio';
 
 const links = [
   { href: '/', label: 'Inicio', activeKey: 'inicio' },
-  { href: '/practices', label: 'Prácticas', activeKey: 'practices' },
   { href: '/posts', label: 'Escritos', activeKey: 'posts' },
+  { href: '/practices', label: 'Prácticas', activeKey: 'practices' },
 ];
 
 const more = [
@@ -19,24 +19,15 @@ const more = [
 const moreActive = more.some((item) => item.activeKey === activeItem);
 ---
 
-<header class="border-b border-line">
-  <nav class="max-w-[42rem] mx-auto px-6 py-5 flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
+<header class="site-header">
+  <nav class="site-nav" aria-label="Principal">
     {links.map((link) => (
       <NavLink href={link.href} label={link.label} activeKey={link.activeKey} activeItem={activeItem} />
     ))}
 
-    <div class="relative">
-      <button
-        type="button"
-        class:list={[
-          'dropdown-toggle font-mono text-base bg-transparent border-0 cursor-pointer p-0',
-          moreActive ? 'font-bold text-accent' : 'text-muted hover:text-accent',
-        ]}
-        aria-expanded="false"
-      >
-        Más
-      </button>
-      <div class="dropdown-menu hidden absolute left-1/2 top-full z-10 mt-3 w-max -translate-x-1/2 flex-col items-center gap-3 border-y border-line bg-bg px-4 py-3">
+    <div class:list={['more', moreActive && 'is-active']}>
+      <button type="button" class="more-toggle" aria-expanded="false">Más</button>
+      <div class="more-menu">
         {more.map((item) => (
           <NavLink href={item.href} label={item.label} activeKey={item.activeKey} activeItem={activeItem} />
         ))}
@@ -45,15 +36,9 @@ const moreActive = more.some((item) => item.activeKey === activeItem);
   </nav>
 </header>
 
-<style>
-  .dropdown-menu.show {
-    display: flex;
-  }
-</style>
-
 <script>
-  const toggle = document.querySelector('.dropdown-toggle');
-  const menu = document.querySelector('.dropdown-menu');
+  const toggle = document.querySelector('.more-toggle');
+  const menu = document.querySelector('.more-menu');
 
   toggle?.addEventListener('click', (event) => {
     event.stopPropagation();

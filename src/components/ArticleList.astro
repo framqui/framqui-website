@@ -19,9 +19,9 @@ export interface Props {
 const { title, intro, note, empty, articles, basePath } = Astro.props;
 ---
 
-<h1 class="text-4xl font-bold tracking-tight">{title}</h1>
+<h1 class="text-4xl">{title}</h1>
 {intro && <p class="mt-5 text-lg leading-relaxed">{intro}</p>}
-{note && <p class="mt-5 text-sm leading-relaxed text-[#c45c26]">{note}</p>}
+{note && <p class="mt-5 text-sm leading-relaxed text-accent">{note}</p>}
 
 {articles.length === 0 ? (
   empty && <p class="mt-10 text-lg text-muted">{empty}</p>

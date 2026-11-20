@@ -35,20 +35,20 @@ export async function GET({ request }) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>Suscripción confirmada — Framqui</title>
         </head>
-        <body style="margin:0; min-height:100vh; background:#f6f3ee; color:#1a1916; font-family:Georgia,'Iowan Old Style',Palatino,serif;">
+        <body style="margin:0; min-height:100vh; background:#161513; color:#f3efe8; font-family:Georgia,'Iowan Old Style',Palatino,serif;">
           <main style="max-width:42rem; margin:0 auto; padding:5rem 1.5rem;">
             <h1 style="font-size:2.25rem; font-weight:700; letter-spacing:-0.02em; margin:0;">Suscripción confirmada</h1>
             <p style="margin:1.25rem 0 0; font-size:1.05rem; line-height:1.7;">Gracias por confirmar tu correo. Recibirás notificaciones de Framqui, de Andres Ramos.</p>
             <p style="margin:1rem 0 0; font-size:1.05rem; line-height:1.7;">Si tienes alguna consulta, puedes escribirme en mis redes:</p>
             <p style="margin:1rem 0 0; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:0.8rem;">
-              <a href="https://github.com/framqui" style="color:#6f6a63; text-decoration:none;">GitHub</a>
-              <span style="color:#e4dfd6;"> · </span>
-              <a href="https://www.linkedin.com/in/framqui/" style="color:#6f6a63; text-decoration:none;">LinkedIn</a>
-              <span style="color:#e4dfd6;"> · </span>
-              <a href="mailto:andfera201@gmail.com" style="color:#6f6a63; text-decoration:none;">Correo</a>
+              <a href="https://github.com/framqui" style="color:#a39e96; text-decoration:none;">GitHub</a>
+              <span style="color:#3a3631;"> · </span>
+              <a href="https://www.linkedin.com/in/framqui/" style="color:#a39e96; text-decoration:none;">LinkedIn</a>
+              <span style="color:#3a3631;"> · </span>
+              <a href="mailto:andfera201@gmail.com" style="color:#a39e96; text-decoration:none;">Correo</a>
             </p>
-            <p style="margin:2.5rem 0 0; padding-top:1.5rem; border-top:1px solid #e4dfd6; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:0.95rem;">
-              <a href="/" style="color:#1a1916;">Ir al inicio</a>
+            <p style="margin:2.5rem 0 0; padding-top:1.5rem; border-top:1px solid #3a3631; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:0.95rem;">
+              <a href="/" style="color:#f3efe8;">Ir al inicio</a>
             </p>
           </main>
         </body>

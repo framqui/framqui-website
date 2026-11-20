@@ -4,13 +4,6 @@ const activeItem = Astro.props.activeItem || 'inicio';
 const isActive = activeItem === activeKey;
 ---
 
-<a
-  href={href}
-  class:list={[
-    'font-mono text-base no-underline',
-    isActive ? 'font-bold text-accent' : 'text-muted hover:text-accent',
-  ]}
-  aria-current={isActive ? 'page' : undefined}
->
+<a href={href} aria-current={isActive ? 'page' : undefined}>
   {label}
 </a>

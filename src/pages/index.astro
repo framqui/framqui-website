@@ -1,13 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import MarkdownContent from '../components/MarkdownContent.astro';
-import { marked } from 'marked';
-
-const readmeUrl = 'https://raw.githubusercontent.com/framqui/framqui/refs/heads/main/README.md';
-const profileMd = await fetch(readmeUrl).then((res) => res.text());
-const htmlContent = marked.parse(profileMd, { gfm: true });
+import HomeHero from '../components/HomeHero.astro';
 ---
 
-<BaseLayout active="inicio" title="Framqui" description="Sitio web de Andres Ramos, desarrollador de software. Escribimos sobre tecnología, desarrollo de software, inteligencia artificial, desarrollo de producto y más.">
-  <MarkdownContent htmlContent={htmlContent} />
+<BaseLayout
+  active="inicio"
+  title="Framqui"
+  description="Desarrollo de software, inteligencia artificial y desarrollo de productos. Andres Ramos."
+>
+  <HomeHero />
 </BaseLayout>

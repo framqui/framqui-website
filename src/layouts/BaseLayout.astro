@@ -10,6 +10,7 @@ interface Props {
 }
 
 const { active = 'inicio', title, description } = Astro.props;
+const isHome = Astro.url.pathname === '/';
 
 const configuredUrl = import.meta.env.PUBLIC_SITE_URL;
 const siteUrl = configuredUrl && !String(configuredUrl).includes('localhost')
@@ -33,7 +34,10 @@ const imageUrl = `${siteUrl}/favicon-192.png`;
     <meta name="description" content={pageDescription} />
     <meta name="author" content="Andres Ramos" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#f6f3ee" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
     <link rel="canonical" href={canonicalUrl} />
     <title>{pageTitle}</title>
     <meta property="og:site_name" content="Framqui" />
@@ -66,20 +70,33 @@ const imageUrl = `${siteUrl}/favicon-192.png`;
       },
     })} />
   </head>
-  <body class="font-serif text-ink antialiased flex flex-col min-h-screen">
+  <body class="text-ink antialiased flex flex-col min-h-screen">
     <Header active={active} />
-    <main class="w-full max-w-[42rem] mx-auto px-6 pt-14 pb-20 flex-1">
-      <slot />
-      <p class="mt-10 text-right">
-        <button
-          type="button"
-          onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-          class="cursor-pointer border-0 bg-transparent p-0 font-mono text-xs text-muted hover:text-accent"
-        >
-          Subir →
-        </button>
-      </p>
+    <main class={isHome ? 'home-main' : 'page-main'}>
+      {isHome ? <slot /> : <div class="page-inner"><slot /></div>}
     </main>
     <Footer />
+    <script>
+      document.querySelectorAll('form').forEach((form) => {
+        form.noValidate = true;
+        form.addEventListener('submit', (event) => {
+          let message = form.querySelector('.form-error');
+          if (!message) {
+            message = document.createElement('p');
+            message.className = 'notice notice-error form-error mt-3';
+            form.append(message);
+          }
+          const field = form.querySelector(':invalid');
+          if (!field) {
+            message.hidden = true;
+            return;
+          }
+          event.preventDefault();
+          message.hidden = false;
+          message.textContent = field.validationMessage;
+          field.focus();
+        });
+      });
+    </script>
   </body>
 </html>

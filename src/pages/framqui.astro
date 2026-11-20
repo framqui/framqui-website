@@ -23,8 +23,8 @@ const stack = [
 ---
 
 <BaseLayout active="framqui" title="Framqui" description="Tecnologías y decisiones con las que se construyó el sitio de Andres Ramos.">
-  <h1 class="text-4xl font-bold tracking-tight">Framqui</h1>
-  <p class="mt-5 text-lg leading-relaxed">
+  <h1 class="text-4xl !mb-4">Framqui</h1>
+  <p class="text-sm leading-relaxed text-muted">
     Descubre las tecnologías con las que se construyó este sitio de Andres Ramos, y un poco más sobre Framqui.
   </p>
 
@@ -76,29 +76,29 @@ const stack = [
       </g>
     </svg>
     </button>
-    <p id="chicken-hint" class="mt-6 max-w-md text-sm leading-relaxed">Picoteando código con Framqui el «Pollo»</p>
+    <p id="chicken-hint" class="mt-6 max-w-md text-sm leading-relaxed text-accent">Picoteando código con Framqui el «Pollo»</p>
     <div id="chicken-code" class="hidden mt-6 max-w-md" hidden>
       <p id="chicken-bits" class="break-all font-mono text-[0.65rem] leading-relaxed text-muted"></p>
       <button type="button" id="chicken-close" class="mt-4 cursor-pointer border-0 bg-transparent font-mono text-xs text-muted underline underline-offset-4">Cerrar</button>
     </div>
   </section>
 
-  <section class="mt-10">
-    <h2 class="text-2xl font-bold tracking-tight">Cómo está hecho</h2>
-    <p class="mt-4 leading-relaxed">
+  <section class="mt-14">
+    <h2 class="font-serif text-3xl font-medium">Cómo está hecho</h2>
+    <p class="mt-6 text-base leading-7">
       Framqui es un sitio pequeño a propósito. El contenido vive en archivos Markdown, las páginas las sirve Astro y el estilo es Tailwind. Así puedo publicar sin montar un panel de administración, y el sitio sigue siendo fácil de leer.
     </p>
-    <p class="mt-4 leading-relaxed">
+    <p class="mt-4 text-base leading-7">
       Cada pieza cubre una sola función, para no llenar el proyecto de servicios.
     </p>
-    <ul class="mt-6 space-y-2">
+    <ul class="mt-8 space-y-3">
       {stack.map(([name, detail]) => (
-        <li>
-          <span class="font-semibold">{name}.</span> {detail}
+        <li class="leading-7">
+          <span class="text-accent">{name}.</span> <span class="text-muted">{detail}</span>
         </li>
       ))}
     </ul>
-    <p class="mt-6 leading-relaxed">
+    <p class="mt-8 text-base leading-7">
       Algunas partes de este sitio se construyeron con ayuda de Cursor, un agente de inteligencia artificial. Sirvió para avanzar en el código y en las decisiones de implementación. El sitio, el contenido y el criterio siguen siendo de Andres Ramos.
     </p>
   </section>
@@ -140,13 +140,13 @@ const stack = [
 </script>
 
 <style>
-  .fill-fg { fill: #1a1916; }
-  .fill-bg { fill: #f6f3ee; }
-  .fill-ac { fill: #8c4a32; }
-  .fill-mu { fill: #6f6a63; }
-  .stroke-fg { stroke: #1a1916; }
-  .stroke-bg { stroke: #f6f3ee; }
-  .stroke-mu { stroke: #6f6a63; }
+  .fill-fg { fill: #c8c6c1; }
+  .fill-bg { fill: #000000; }
+  .fill-ac { fill: #9c8148; }
+  .fill-mu { fill: #8a8a8a; }
+  .stroke-fg { stroke: #c8c6c1; }
+  .stroke-bg { stroke: #000000; }
+  .stroke-mu { stroke: #8a8a8a; }
   .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
   .tilt,
