@@ -55,9 +55,51 @@ body {
   height: 4.25rem;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
   padding: 0 6vw;
   border-bottom: 1px solid rgba(140, 140, 140, 0.28);
+}
+
+.header-note {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  line-height: 1;
+  color: var(--color-muted);
+}
+
+.header-note a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-bright);
+  text-decoration: none;
+}
+
+.header-note svg {
+  width: 0.7rem;
+  height: 0.7rem;
+  display: block;
+}
+
+.header-note a:hover {
+  color: var(--color-accent);
+}
+
+.header-note a.header-subscribe {
+  color: var(--color-accent);
+  transition: color 0.2s ease;
+}
+
+.header-note a.header-subscribe:hover {
+  color: var(--color-bright);
+}
+
+.header-note a.header-subscribe + a {
+  margin-left: 0.35rem;
 }
 
 .site-nav {
@@ -233,8 +275,14 @@ body {
 @media (max-width: 760px) {
   .site-header {
     height: auto;
+    flex-wrap: wrap;
     justify-content: center;
     padding: 0.9rem 1rem;
+  }
+
+  .header-note {
+    max-width: none;
+    text-align: center;
   }
 
   .site-nav {
@@ -408,13 +456,19 @@ body {
   list-style: none;
 }
 
-.article-tags li {
+.page-main .article-tags li,
+.page-main .article-tags li + li {
+  display: inline-flex;
+  align-items: center;
   margin: 0;
-  padding: 0.15rem 0.45rem;
+  padding: 0.12rem 0.4rem;
   border: 1px solid var(--color-accent);
+  background: #0f0f0f;
   color: var(--color-accent);
   font-family: var(--font-mono);
   font-size: 0.7rem;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .page-main .copy h2 {

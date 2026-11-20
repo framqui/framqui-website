@@ -12,6 +12,11 @@ export function getEnv(key) {
   return env[key] ?? process.env[key];
 }
 
+export async function countSubscribers(db) {
+  const row = await db.prepare('SELECT COUNT(*) AS total FROM subscribers').first();
+  return Number(row?.total ?? 0);
+}
+
 export async function isSubscribed(db, email) {
   const row = await db.prepare('SELECT email FROM subscribers WHERE email = ?').bind(email).first();
   return Boolean(row);

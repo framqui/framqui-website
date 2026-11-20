@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { countSubscribers, getDb } from '../utils/storage.js';
 import '../styles/global.css';
 
 interface Props {
@@ -11,6 +12,13 @@ interface Props {
 
 const { active = 'inicio', title, description } = Astro.props;
 const isHome = Astro.url.pathname === '/';
+
+let subscribers = 12;
+try {
+  subscribers += await countSubscribers(getDb());
+} catch {
+  subscribers = 12;
+}
 
 const configuredUrl = import.meta.env.PUBLIC_SITE_URL;
 const siteUrl = configuredUrl && !String(configuredUrl).includes('localhost')
@@ -71,7 +79,7 @@ const imageUrl = `${siteUrl}/favicon-192.png`;
     })} />
   </head>
   <body class="text-ink antialiased flex flex-col min-h-screen">
-    <Header active={active} />
+    <Header active={active} subscribers={subscribers} />
     <main class={isHome ? 'home-main' : 'page-main'}>
       {isHome ? <slot /> : <div class="page-inner"><slot /><button type="button" class="to-top">Subir →</button></div>}
     </main>
