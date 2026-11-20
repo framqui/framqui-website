@@ -1,65 +1,52 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import MarkdownContent from '../components/MarkdownContent.astro';
-import { marked } from 'marked';
-
-const md = `# Políticas de Privacidad
-
-Última actualización: 18 de noviembre de 2026
-
-Framqui es el sitio personal de Andres Ramos. Aquí se indica qué datos personales se tratan, con qué fin y cómo puedes oponerte o pedir su eliminación.
-
-## Responsable
-
-Andres Ramos. Correo: andfera201@gmail.com.
-
-## Datos que se tratan
-
-Solo los que tú envías:
-
-- En el formulario de contacto: nombre, correo, asunto y mensaje.
-- En la suscripción: el correo electrónico.
-
-No se usan cookies de seguimiento.
-
-## Finalidad
-
-- El mensaje de contacto se usa para responderte.
-- El correo de suscripción se usa para enviarte avisos cuando haya una publicación nueva o un cambio relevante en el sitio. La suscripción empieza cuando confirmas el enlace que recibes. Puedes darte de baja en cualquier momento.
-
-No se usan para publicidad ni para fines distintos de los anteriores. No se venden ni se ceden.
-
-## Conservación
-
-El correo de suscripción se conserva mientras la suscripción esté activa y se elimina cuando te das de baja o lo solicitas. Los mensajes de contacto se conservan el tiempo necesario para responderlos.
-
-## Encargados
-
-Para prestar el sitio intervienen estos servicios. Cada uno trata los datos según su propia política:
-
-- **Resend**, que envía los correos de suscripción y los avisos.
-- **FormSubmit**, que recibe los mensajes de contacto.
-- **Giscus**, a través de GitHub, para los comentarios. Comentar requiere una cuenta de GitHub.
-
-## Comentarios
-
-Deben tratar sobre lo publicado. No se admiten insultos, ataques personales, spam, publicidad ni debates de política o religión. El autor puede eliminar los que no cumplan esto. Para borrar el tuyo, hazlo desde [GitHub Discussions](https://github.com/framqui/framqui-website/discussions).
-
-## Tus derechos
-
-Puedes darte de baja en la página de suscripción. Para acceder a tus datos, corregirlos o pedir que se eliminen, escribe a andfera201@gmail.com con el asunto FRAMQUI.NOTIFICACIÓN.
-
-## Cambios
-
-Cualquier cambio de esta política se publicará en esta página, con la fecha de actualización.
-
-## Contacto
-
-Para preguntas sobre esta política: andfera201@gmail.com o el formulario de contacto del sitio.`;
-
-const htmlContent = marked.parse(md, { gfm: true });
 ---
 
 <BaseLayout active="politicas" title="Políticas de privacidad - Framqui" description="Políticas de privacidad, uso de datos y normas de comentarios del sitio Framqui.">
-  <MarkdownContent htmlContent={htmlContent} />
+  <h1>Políticas de Privacidad</h1>
+  <div class="copy">
+  <p class=" text-muted">Última actualización: 18 de noviembre de 2026</p>
+  <p class="mt-3 ">Framqui es el sitio personal de Andres Ramos. Aquí se indica qué datos personales se tratan, con qué fin y cómo puedes oponerte o pedir su eliminación.</p>
+
+  <h2>Responsable</h2>
+  <p class="">Andres Ramos. Correo: andfera201@gmail.com.</p>
+
+  <h2>Datos que se tratan</h2>
+  <p class="">Solo los que tú envías:</p>
+  <ul class="mt-3 list-disc space-y-2 pl-5 ">
+    <li>En el formulario de contacto: nombre, correo, asunto y mensaje.</li>
+    <li>En la suscripción: el correo electrónico.</li>
+  </ul>
+  <p class="mt-3 ">No se usan cookies de seguimiento.</p>
+
+  <h2>Finalidad</h2>
+  <ul class="mt-3 list-disc space-y-2 pl-5 ">
+    <li>El mensaje de contacto se usa para responderte.</li>
+    <li>El correo de suscripción se usa para enviarte avisos cuando haya una publicación nueva o un cambio relevante en el sitio. La suscripción empieza cuando confirmas el enlace que recibes. Puedes darte de baja en cualquier momento.</li>
+  </ul>
+  <p class="mt-3 ">No se usan para publicidad ni para fines distintos de los anteriores. No se venden ni se ceden.</p>
+
+  <h2>Conservación</h2>
+  <p class="">El correo de suscripción se conserva mientras la suscripción esté activa y se elimina cuando te das de baja o lo solicitas. Los mensajes de contacto se conservan el tiempo necesario para responderlos.</p>
+
+  <h2>Encargados</h2>
+  <p class="">Para prestar el sitio intervienen estos servicios. Cada uno trata los datos según su propia política:</p>
+  <ul class="mt-3 list-disc space-y-2 pl-5 ">
+    <li><span class="font-semibold text-ink">Resend</span>, que envía los correos de suscripción y los avisos.</li>
+    <li><span class="font-semibold text-ink">FormSubmit</span>, que recibe los mensajes de contacto.</li>
+    <li><span class="font-semibold text-ink">Giscus</span>, a través de GitHub, para los comentarios. Comentar requiere una cuenta de GitHub.</li>
+  </ul>
+
+  <h2>Comentarios</h2>
+  <p class="">Deben tratar sobre lo publicado. No se admiten insultos, ataques personales, spam, publicidad ni debates de política o religión. El autor puede eliminar los que no cumplan esto. Para borrar el tuyo, hazlo desde <a href="https://github.com/framqui/framqui-website/discussions" class="text-accent underline underline-offset-4">GitHub Discussions</a>.</p>
+
+  <h2>Tus derechos</h2>
+  <p class="">Puedes darte de baja en la página de suscripción. Para acceder a tus datos, corregirlos o pedir que se eliminen, escribe a andfera201@gmail.com con el asunto FRAMQUI.NOTIFICACIÓN.</p>
+
+  <h2>Cambios</h2>
+  <p class="">Cualquier cambio de esta política se publicará en esta página, con la fecha de actualización.</p>
+
+  <h2>Contacto</h2>
+  <p class="">Para preguntas sobre esta política: andfera201@gmail.com o el formulario de contacto del sitio.</p>
+  </div>
 </BaseLayout>

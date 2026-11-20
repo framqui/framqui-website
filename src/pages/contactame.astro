@@ -1,14 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import MarkdownContent from '../components/MarkdownContent.astro';
-import { marked } from 'marked';
-
-const md = `# Contáctame`;
-const htmlContent = marked.parse(md, { gfm: true });
 ---
 
 <BaseLayout active="contactame" title="Contáctame - Framqui" description="Envíame un mensaje sobre proyectos, propuestas, ideas, tecnología o cualquier consulta.">
-  <MarkdownContent htmlContent={htmlContent} />
+  <h1>Contáctame</h1>
   <p class="text-sm text-muted">Si quieres hablar de una idea o un proyecto, invitarme a un café, proponer una charla o escribirme por cualquier otro motivo.</p>
   <form id="contact-form" class="mt-3 grid gap-3" method="POST" action="https://formsubmit.co/andfera201@gmail.com">
     <input type="hidden" name="_template" value="table" />

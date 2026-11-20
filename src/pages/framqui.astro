@@ -23,12 +23,13 @@ const stack = [
 ---
 
 <BaseLayout active="framqui" title="Framqui" description="Tecnologías y decisiones con las que se construyó el sitio de Andres Ramos.">
-  <h1 class="text-4xl !mb-4">Framqui</h1>
-  <p class="text-sm leading-relaxed text-muted">
+  <h1>Framqui</h1>
+  <div class="copy">
+  <p class=" text-muted">
     Descubre las tecnologías con las que se construyó este sitio de Andres Ramos, y un poco más sobre Framqui.
   </p>
 
-  <section class="mt-12 flex w-full flex-col items-center text-center">
+  <section class="mt-8 flex w-full flex-col items-center text-center">
     <button type="button" id="chicken" class="cursor-pointer border-0 bg-transparent p-0" aria-label="Conoce a Framqui el pollo">
     <svg
       viewBox="0 0 320 185"
@@ -76,32 +77,33 @@ const stack = [
       </g>
     </svg>
     </button>
-    <p id="chicken-hint" class="mt-6 max-w-md text-sm leading-relaxed text-accent">Picoteando código con Framqui el «Pollo»</p>
+    <p id="chicken-hint" class="mt-6 max-w-md  text-accent">Picoteando código con Framqui el «Pollo»</p>
     <div id="chicken-code" class="hidden mt-6 max-w-md" hidden>
       <p id="chicken-bits" class="break-all font-mono text-[0.65rem] leading-relaxed text-muted"></p>
       <button type="button" id="chicken-close" class="mt-4 cursor-pointer border-0 bg-transparent font-mono text-xs text-muted underline underline-offset-4">Cerrar</button>
     </div>
   </section>
 
-  <section class="mt-14">
-    <h2 class="font-serif text-3xl font-medium">Cómo está hecho</h2>
-    <p class="mt-6 text-base leading-7">
+  <section class="mt-8">
+    <h2>Cómo está hecho</h2>
+    <p class="mt-3 ">
       Framqui es un sitio pequeño a propósito. El contenido vive en archivos Markdown, las páginas las sirve Astro y el estilo es Tailwind. Así puedo publicar sin montar un panel de administración, y el sitio sigue siendo fácil de leer.
     </p>
-    <p class="mt-4 text-base leading-7">
+    <p class="mt-3 ">
       Cada pieza cubre una sola función, para no llenar el proyecto de servicios.
     </p>
-    <ul class="mt-8 space-y-3">
+    <ul class="mt-4 space-y-2">
       {stack.map(([name, detail]) => (
-        <li class="leading-7">
-          <span class="text-accent">{name}.</span> <span class="text-muted">{detail}</span>
+        <li class="">
+          <span class="font-semibold text-ink">{name}.</span> {detail}
         </li>
       ))}
     </ul>
-    <p class="mt-8 text-base leading-7">
+    <p class="mt-4 ">
       Algunas partes de este sitio se construyeron con ayuda de Cursor, un agente de inteligencia artificial. Sirvió para avanzar en el código y en las decisiones de implementación. El sitio, el contenido y el criterio siguen siendo de Andres Ramos.
     </p>
   </section>
+  </div>
 </BaseLayout>
 
 <script>

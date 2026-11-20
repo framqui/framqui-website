@@ -1,10 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import MarkdownContent from '../components/MarkdownContent.astro';
-import { marked } from 'marked';
-
-const md = `# Suscríbete`;
-const htmlContent = marked.parse(md, { gfm: true });
 
 const url = new URL(Astro.url);
 const status = url.searchParams.get('status');
@@ -26,7 +21,7 @@ const unsubMessages = {
 ---
 
 <BaseLayout active="suscribite" title="Suscríbete - Framqui" description="Suscríbete para recibir notificaciones cuando se publique un nuevo artículo o práctica.">
-  <MarkdownContent htmlContent={htmlContent} />
+  <h1>Suscríbete</h1>
 
   <p class="text-sm text-muted">Recibe notificaciones en tu correo cuando algo nuevo se publique. Envío bajo Resend.</p>
   <form action="/api/subscribe" method="POST" class="mt-3 flex flex-col gap-3">

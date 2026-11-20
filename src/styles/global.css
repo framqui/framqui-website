@@ -15,6 +15,11 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -119,6 +124,7 @@ body {
 }
 
 .page-inner {
+  box-sizing: border-box;
   width: min(1180px, 100%);
   margin: 0 auto;
   padding: 2.5rem 4vw 4rem;
@@ -275,8 +281,9 @@ body {
     padding: 1.5rem 1.15rem 3rem;
   }
 
-  .page-main h1 {
-    font-size: 2rem;
+  .page-main h1,
+  .page-main .prose h1 {
+    font-size: 1.85rem;
   }
 }
 
@@ -284,8 +291,10 @@ body {
 .page-main .prose h1 {
   font-family: var(--font-serif);
   font-weight: 500;
+  font-size: 2.25rem;
+  line-height: 1.2;
   letter-spacing: -0.01em;
-  color: var(--color-ink);
+  color: var(--color-muted);
   margin-bottom: 3.5rem;
 }
 
@@ -309,9 +318,74 @@ body {
   max-width: none;
 }
 
-.prose :where(h2, h3) {
+.page-main h2,
+.page-main .prose h2,
+.page-main .prose h3 {
   font-family: var(--font-serif);
   font-weight: 500;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  color: var(--color-muted);
+  margin-top: 2.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.page-main .copy h2 {
+  color: var(--color-accent);
+  font-size: 1.65rem;
+}
+
+.page-main .copy p,
+.page-main .copy li {
+  color: var(--color-ink);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.page-main .copy strong,
+.page-main .copy .font-semibold {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.page-main .copy li::marker {
+  color: var(--color-accent);
+}
+
+.page-main p + p,
+.page-main ul + p,
+.page-main p + ul {
+  margin-top: 0.9rem;
+}
+
+.page-main ul {
+  margin-top: 0.9rem;
+  padding-left: 1.25rem;
+}
+
+.page-main li + li {
+  margin-top: 0.45rem;
+}
+
+.page-main .prose > * {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+.page-main .prose h1 {
+  margin-top: 0;
+  margin-bottom: 3.5rem;
+}
+
+.prose :where(p, li) {
+  font-size: 0.875rem;
+  line-height: 1.625;
+  color: var(--color-muted);
+}
+
+.prose :where(strong) {
+  color: var(--color-ink);
+  font-weight: 600;
 }
 
 .prose a {
